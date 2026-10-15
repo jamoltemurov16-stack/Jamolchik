@@ -117,6 +117,32 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .quiz-fb.ok{display:block;background:var(--ok-bg);color:var(--ok);}
 .quiz-fb.no{display:block;background:var(--err-bg);color:var(--err);}
 
+/* irregular verbs table */
+.vtable{width:100%;border-collapse:collapse;font-size:14px;}
+.vtable th{background:var(--bg3);padding:9px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);position:sticky;top:0;}
+.vtable td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text);}
+.vtable tr:hover td{background:var(--bg3);}
+.vtable .base{font-weight:700;}
+.vtable .uzc{color:var(--text3);font-size:12.5px;}
+.vtable .vplay{width:28px;height:28px;border-radius:7px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:12px;}
+.vtable .vplay:hover{background:var(--primary2);}
+.vsearch{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;
+  font-size:14px;color:var(--text);background:var(--bg2);outline:none;margin-bottom:14px;}
+.vsearch:focus{border-color:var(--primary);}
+
+/* books */
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.book{background:var(--bg3);border:1px solid var(--border);border-radius:13px;padding:16px;display:flex;flex-direction:column;gap:6px;}
+.book .bemoji{font-size:34px;}
+.book .btitle{font-size:15px;font-weight:700;line-height:1.25;}
+.book .bauthor{font-size:12.5px;color:var(--text3);}
+.book .bdesc{font-size:12.5px;color:var(--text2);line-height:1.5;flex:1;margin:4px 0;}
+.book .blevel{display:inline-block;font-size:10.5px;font-weight:700;color:var(--accent);background:var(--accent-bg);padding:2px 9px;border-radius:20px;align-self:flex-start;}
+.book .bopen{margin-top:8px;text-align:center;padding:10px;background:var(--primary);color:#fff;border-radius:9px;
+  font-size:13px;font-weight:700;text-decoration:none;display:block;}
+.book .bopen:hover{background:var(--primary2);}
+
 /* nav buttons */
 .lnav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;}
 .btn{padding:12px 22px;border-radius:11px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;border:none;
@@ -450,6 +476,162 @@ const LESSONS = [
       Q("'Isming nima?' savoli qaysi?", ["Who are you?","What is your name?","Where are you?","How are you?"], 1, "What is your name? = Isming nima?"),
       Q("'Nega' inglizchada?", ["How","Why","When","What"], 1, "Why = nega.")
     ]
+  },
+  {
+    level: "A2 · Lug'at",
+    title: "11-dars. Oila va qarindoshlik (to'liq)",
+    goal: "Oila va qarindosh-urug'chilik bilan bog'liq barcha so'zlarni o'rganamiz.",
+    explain: `Bu darsda oila va qarindoshlikka oid <b>keng lug'at</b> keltirilgan.
+      So'zlarni guruhlab yodlang: avval yaqin oila (ota, ona, aka...), keyin uzoqroq qarindoshlar
+      (amaki, xola, jiyan...), so'ngra oilaviy tushunchalar (to'y, avlod, meros...).
+      <span class="tip">💡 Har bir so'zni 🔊 bosib eshiting va 2-3 marta ovoz chiqarib takrorlang.</span>`,
+    vocab: [
+      V("Family","femili","oila"), V("Parents","perents","ota-ona"),
+      V("Father","fazer","ota"), V("Mother","mazer","ona"),
+      V("Sister","sister","opa, singil"), V("Brother","brazer","aka, uka"),
+      V("Son","san","o'g'il"), V("Daughter","doter","qiz"),
+      V("Grandfather","grendfazer","bobo"), V("Grandmother","grendmazer","buvi"),
+      V("Grandchildren","grendchildren","nabiralar"), V("Grandson","grendsan","nabira (o'g'il)"),
+      V("Granddaughter","grenddoter","nabira (qiz)"), V("Uncle","ankl","amaki, tog'a"),
+      V("Aunt","ant","xola, amma"), V("Nephew","nefyu","jiyan (o'g'il)"),
+      V("Niece","niis","jiyan (qiz)"), V("Bridegroom","braydgrum","kuyov"),
+      V("Bride","brayd","kelin"), V("Husband","hazbend","er"),
+      V("Wife","wayf","xotin"), V("To adopt","tu edopt","o'g'il qilib olmoq"),
+      V("Adopted child","edoptid chayld","asrandi bola"), V("Aged","eyjd","keksa"),
+      V("Ancestor","ensestor","ota-bobo, ajdod"), V("Baby","beybi","chaqaloq"),
+      V("Birth","börs","tug'ilish"), V("To bring up","tu bring ap","tarbiyalamoq"),
+      V("Childhood","chayldhud","bolalik"), V("Domestic","domestik","oilaviy"),
+      V("First-born","först-born","to'ng'ich"), V("Generation","jenereyshn","avlod"),
+      V("To give birth to","giv börs","tug'moq"), V("Guardian","gardian","vasiy"),
+      V("Heir","eer","merosxo'r"), V("Honeymoon","hanimun","asal oyi"),
+      V("Host","houst","uy egasi"), V("Hostess","houstes","uy bekasi"),
+      V("Orphan","orfan","yetim"), V("Pet","pet","erka"),
+      V("Relative","relativ","qarindosh"), V("Stepdaughter","stepdoter","o'gay qiz"),
+      V("Stepson","stepsan","o'gay o'g'il"), V("Stepfather","stepfazer","o'gay ota"),
+      V("Stepmother","stepmazer","o'gay ona"), V("Twins","twinz","egizaklar"),
+      V("Wedding","weding","to'y")
+    ],
+    examples: [
+      E("I have one sister and two brothers.", "Mening bitta opam va ikkita akam bor."),
+      E("My grandfather is very old.", "Mening bobom juda keksa."),
+      E("They have a big wedding.", "Ularning katta to'yi bor."),
+      E("She is my aunt.", "U mening xolam.")
+    ],
+    quiz: [
+      Q("'Uncle' kim?", ["xola","amaki/tog'a","jiyan","nabira"], 1, "Uncle = amaki yoki tog'a."),
+      Q("'Nabira (qiz)' inglizchada?", ["Grandson","Granddaughter","Niece","Daughter"], 1, "Granddaughter = nabira (qiz)."),
+      Q("'Twins' nima degani?", ["egizaklar","nabiralar","ota-bobo","yetim"], 0, "Twins = egizaklar."),
+      Q("'To'y' inglizchada?", ["Birth","Honeymoon","Wedding","Family"], 2, "Wedding = to'y.")
+    ]
+  },
+  {
+    level: "A2 · Lug'at",
+    title: "12-dars. Muhim so'zlar (Essential Words)",
+    goal: "Kundalik hayotda ko'p uchraydigan muhim so'zlar (4000 Essential Words).",
+    explain: `Bu so'zlar matnlarda va suhbatda juda tez-tez uchraydi. Ularni yodlab olsangiz,
+      kitob o'qish va gapirish ancha osonlashadi.
+      <span class="tip">💡 Har kuni 5 tadan so'z yodlang — bir haftada 35 ta so'z bo'ladi!</span>`,
+    vocab: [
+      V("benefit","benifit","foyda, ustun jihat"), V("certain","sörtin","ishonchi komil"),
+      V("chance","chens","imkoniyat"), V("effect","ifekt","ta'sir, samara"),
+      V("essential","isenshl","juda muhim, zarur"), V("far","far","uzoq, olis"),
+      V("focus","foukus","diqqatini qaratmoq"), V("function","fankshn","funksiya, vazifa"),
+      V("grass","gras","maysa, o't"), V("guard","gard","qo'riqlamoq"),
+      V("image","imij","rasm, ko'rinish"), V("immediate","imidiet","tezkor"),
+      V("primary","praymeri","asosiy, birinchi darajali"), V("proud","praud","faxrlanmoq"),
+      V("remain","rimeyn","qolmoq"), V("rest","rest","dam olmoq"),
+      V("separate","seperet","alohida, ajralgan"), V("site","sayt","joy"),
+      V("tail","teyl","dum"), V("trouble","trabl","muammo, qiyinchilik")
+    ],
+    examples: [
+      E("This book is essential for students.", "Bu kitob o'quvchilar uchun juda muhim."),
+      E("I am proud of you.", "Men sendan faxrlanaman."),
+      E("Let's take a rest.", "Keling, dam olaylik."),
+      E("He had a chance to win.", "Uning yutish imkoniyati bor edi.")
+    ],
+    quiz: [
+      Q("'benefit' nima degani?", ["muammo","foyda","imkoniyat","joy"], 1, "benefit = foyda, ustun jihat."),
+      Q("'essential' nima degani?", ["uzoq","alohida","juda muhim","tezkor"], 2, "essential = juda muhim, zarur."),
+      Q("'proud' nima degani?", ["qolmoq","faxrlanmoq","dam olmoq","qo'riqlamoq"], 1, "proud = faxrlanmoq.")
+    ]
+  },
+  {
+    level: "A2 · Grammatika",
+    title: "13-dars. Noto'g'ri fe'llar (Irregular Verbs)",
+    goal: "O'tgan zamonda qoidaga bo'ysunmaydigan fe'llarni o'rganamiz.",
+    customType: "verbs",
+    explain: `Ko'p fe'llar o'tgan zamonda oxiriga <code>-ed</code> oladi (work → worked).
+      Lekin ba'zi fe'llar <b>butunlay o'zgaradi</b> — bular <b>noto'g'ri fe'llar</b> (irregular verbs).
+      Ularni yodlab olish shart, chunki qoida yo'q.
+      <br><br>Jadvalda 3 shakl bor:
+      <b>1-shakl</b> (hozirgi) → <b>2-shakl</b> (o'tgan, Past Simple) → <b>3-shakl</b> (Past Participle, "have" bilan).
+      <span class="tip">💡 🔊 tugmasini bosib har uchala shaklni eshitishingiz mumkin. Masalan: go → went → gone.</span>`,
+    verbs: [
+      ["be","was/were","been","bo'lmoq"],["become","became","become","aylanmoq"],
+      ["begin","began","begun","boshlamoq"],["bite","bit","bitten","tishlamoq"],
+      ["blow","blew","blown","puflamoq"],["break","broke","broken","sindirmoq"],
+      ["bring","brought","brought","olib kelmoq"],["build","built","built","qurmoq"],
+      ["buy","bought","bought","sotib olmoq"],["catch","caught","caught","ushlamoq"],
+      ["choose","chose","chosen","tanlamoq"],["come","came","come","kelmoq"],
+      ["cost","cost","cost","turmoq (narx)"],["cut","cut","cut","kesmoq"],
+      ["do","did","done","qilmoq"],["draw","drew","drawn","chizmoq"],
+      ["drink","drank","drunk","ichmoq"],["drive","drove","driven","haydamoq"],
+      ["eat","ate","eaten","yemoq"],["fall","fell","fallen","yiqilmoq"],
+      ["feel","felt","felt","his qilmoq"],["fight","fought","fought","urushmoq"],
+      ["find","found","found","topmoq"],["fly","flew","flown","uchmoq"],
+      ["forget","forgot","forgotten","unutmoq"],["get","got","got","olmoq"],
+      ["give","gave","given","bermoq"],["go","went","gone","bormoq"],
+      ["grow","grew","grown","o'smoq"],["hang","hung","hung","osmoq"],
+      ["have","had","had","ega bo'lmoq"],["hear","heard","heard","eshitmoq"],
+      ["hit","hit","hit","urmoq"],["hold","held","held","ushlab turmoq"],
+      ["hurt","hurt","hurt","og'ritmoq"],["keep","kept","kept","saqlamoq"],
+      ["know","knew","known","bilmoq"],["leave","left","left","ketmoq"],
+      ["lend","lent","lent","qarz bermoq"],["let","let","let","ruxsat bermoq"],
+      ["lie","lay","lain","yotmoq"],["lose","lost","lost","yo'qotmoq"],
+      ["make","made","made","yasamoq"],["mean","meant","meant","anglatmoq"],
+      ["meet","met","met","uchrashmoq"],["pay","paid","paid","to'lamoq"],
+      ["put","put","put","qo'ymoq"],["read","read","read","o'qimoq"],
+      ["ride","rode","ridden","minmoq"],["ring","rang","rung","jiringlamoq"],
+      ["rise","rose","risen","ko'tarilmoq"],["run","ran","run","yugurmoq"],
+      ["say","said","said","aytmoq"],["see","saw","seen","ko'rmoq"],
+      ["sell","sold","sold","sotmoq"],["send","sent","sent","jo'natmoq"],
+      ["shine","shone","shone","porlamoq"],["shoot","shot","shot","otmoq"],
+      ["show","showed","shown","ko'rsatmoq"],["shut","shut","shut","yopmoq"],
+      ["sing","sang","sung","kuylamoq"],["sit","sat","sat","o'tirmoq"],
+      ["sleep","slept","slept","uxlamoq"],["speak","spoke","spoken","gapirmoq"],
+      ["spend","spent","spent","sarflamoq"],["stand","stood","stood","turmoq"],
+      ["steal","stole","stolen","o'g'irlamoq"],["swim","swam","swum","suzmoq"],
+      ["take","took","taken","olmoq"],["teach","taught","taught","o'rgatmoq"],
+      ["tell","told","told","aytmoq"],["think","thought","thought","o'ylamoq"],
+      ["throw","threw","thrown","uloqtirmoq"],["understand","understood","understood","tushunmoq"],
+      ["wake","woke","woken","uyg'onmoq"],["wear","wore","worn","kiymoq"],
+      ["win","won","won","yutmoq"],["write","wrote","written","yozmoq"]
+    ],
+    quiz: [
+      Q("'go' fe'lining 2-shakli (o'tgan zamon)?", ["goed","went","gone","goes"], 1, "go → went → gone."),
+      Q("'eat' fe'lining 3-shakli (Past Participle)?", ["eated","ate","eaten","eating"], 2, "eat → ate → eaten."),
+      Q("'buy' fe'lining o'tgan zamoni?", ["buyed","bought","buy","buys"], 1, "buy → bought → bought."),
+      Q("'write' fe'lining 3-shakli?", ["writed","wrote","written","writing"], 2, "write → wrote → written.")
+    ]
+  },
+  {
+    level: "📚 Kutubxona",
+    title: "14-dars. Kutubxona — Kitoblar (Books)",
+    goal: "Ingliz tilini kitob o'qib mustahkamlang. Kitoblarni oching va o'qing.",
+    customType: "books",
+    explain: `O'qish — so'z boyligini oshirishning eng yaxshi yo'li. Quyidagi kitoblarni
+      oching (yoki yuklab oling) va darajangizga mos birini tanlab o'qing.
+      <br><br>Avval oson kitobni (adaptatsiya qilingan "graded reader") tanlang,
+      notanish so'zlarni lug'atdan qarab boring.
+      <span class="tip">💡 Har bir kitobdagi yangi so'zlarni daftaringizga yozib boring.</span>`,
+    books: [
+      {title:"4000 Essential English Words 2", author:"Answer Key", file:"books/4000_Essential_English_Words_2.pdf", desc:"Muhim so'zlarni o'rganish uchun mashqlar javoblari.", level:"A1–A2", emoji:"📗"},
+      {title:"The Red Badge of Courage", author:"Stephen Crane", file:"books/The_Red_Badge_of_Courage.pdf", desc:"Yosh askar haqidagi klassik roman (soddalashtirilgan).", level:"A2–B1", emoji:"📕"},
+      {title:"The Horse Whisperer", author:"Nicholas Evans", file:"books/The_Horse_Whisperer.pdf", desc:"Ot va insonlar haqidagi ta'sirli hikoya.", level:"B1", emoji:"📙"},
+      {title:"Hamlet", author:"William Shakespeare", file:"books/Hamlet.pdf", desc:"Shekspirning mashhur tragediyasi.", level:"B1–B2", emoji:"📘"},
+      {title:"Wisdom Dictionary (ilova)", author:"Online", file:"http://onelink.to/wisdomdictionary", desc:"Ko'proq kitoblar uchun ilovani yuklab oling.", level:"—", emoji:"🔗", external:true}
+    ],
+    quiz: []
   }
 ];
 
@@ -510,6 +692,38 @@ function openLesson(i){
     </div>
     <div class="card"><h3>📖 Tushuntirish</h3><div class="explain">${les.explain}</div></div>`;
 
+  // Irregular verbs table
+  if(les.customType === 'verbs' && les.verbs){
+    html += `<div class="card"><h3>🔁 Noto'g'ri fe'llar jadvali <span style="font-size:12px;font-weight:500;color:var(--text3);">(${les.verbs.length} ta)</span></h3>
+      <input class="vsearch" id="verb-search" placeholder="🔍 Fe'lni qidiring... (masalan: go, eat)" oninput="filterVerbs(this.value)">
+      <div class="tw" style="overflow-x:auto;"><table class="vtable">
+        <thead><tr><th>🔊</th><th>1-shakl</th><th>2-shakl (o'tgan)</th><th>3-shakl (V3)</th><th>Tarjima</th></tr></thead>
+        <tbody id="verbs-body">`;
+    les.verbs.forEach(v => {
+      const say = `${v[0]}, ${v[1]}, ${v[2]}`.replace(/'/g,"\\'");
+      html += `<tr><td><button class="vplay" onclick="speak('${say}')">🔊</button></td>
+        <td class="base">${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td><td class="uzc">${v[3]||''}</td></tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+
+  // Books / Library
+  if(les.customType === 'books' && les.books){
+    html += `<div class="card"><h3>📚 Kitoblar</h3><div class="books">`;
+    les.books.forEach(b => {
+      const target = b.external ? 'target="_blank" rel="noopener"' : 'target="_blank"';
+      html += `<div class="book">
+        <div class="bemoji">${b.emoji||'📖'}</div>
+        <div class="btitle">${b.title}</div>
+        <div class="bauthor">${b.author}</div>
+        <div class="bdesc">${b.desc||''}</div>
+        <span class="blevel">${b.level||''}</span>
+        <a class="bopen" href="${b.file}" ${target}>${b.external?'🔗 Ilovaga kirish':'📖 Ochish / yuklash'}</a>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
   // Vocabulary
   if(les.vocab && les.vocab.length){
     html += `<div class="card"><h3>🔤 So'zlar <span style="font-size:12px;font-weight:500;color:var(--text3);">(🔊 bosib eshiting)</span></h3><div class="vocab">`;
@@ -556,6 +770,15 @@ function openLesson(i){
   // mobil sidebar yopish
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('ovl').classList.remove('show');
+}
+
+/* ===================== FE'LLARNI QIDIRISH ===================== */
+function filterVerbs(q){
+  q = (q||'').trim().toLowerCase();
+  const rows = document.querySelectorAll('#verbs-body tr');
+  rows.forEach(tr => {
+    tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
 }
 
 /* ===================== TEST ===================== */
