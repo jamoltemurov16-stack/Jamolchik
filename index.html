@@ -603,7 +603,7 @@ body.dark #toast{background:#2a3a50;}
           <div class="card">
             <div class="ch">
               <div><h3 id="class-detail-title">Sinf o'quvchilari</h3><p class="sub" id="class-detail-sub"></p></div>
-              <button class="btn btn-blue" onclick="showModal('add-student-modal')">+ <span data-t="addStudent">O'quvchi qo'shish</span></button>
+              <button class="btn btn-blue" onclick="openAddStudent()">+ <span data-t="addStudent">O'quvchi qo'shish</span></button>
             </div>
             <div class="cb">
               <div class="tw"><table class="dt">
@@ -619,7 +619,7 @@ body.dark #toast{background:#2a3a50;}
       <div id="page-students" class="page">
         <div class="flex ic jb mb5">
           <h3 style="font-size:15px;font-weight:700;" data-t="studentsList">O'quvchilar ro'yxati</h3>
-          <button class="btn btn-blue" onclick="showModal('add-student-modal')">+ <span data-t="addStudent">O'quvchi qo'shish</span></button>
+          <button class="btn btn-blue" onclick="openAddStudent()">+ <span data-t="addStudent">O'quvchi qo'shish</span></button>
         </div>
         <div class="card">
           <div class="cb">
@@ -1043,19 +1043,19 @@ body.dark #toast{background:#2a3a50;}
 <!-- Add Student -->
 <div class="mo" id="add-student-modal">
   <div class="md">
-    <div class="mh"><h3 data-t="addStudent">O'quvchi qo'shish</h3><button class="close-x" onclick="closeModal('add-student-modal')">✕</button></div>
+    <div class="mh"><h3 id="student-modal-title" data-t="addStudent">O'quvchi qo'shish</h3><button class="close-x" onclick="closeModal('add-student-modal')">✕</button></div>
     <div class="mb2">
-      <div class="al al-ok">ℹ️ AD raqami avtomatik beriladi</div>
+      <div class="al al-ok" id="student-modal-hint">ℹ️ AD raqami bo'sh qoldirilsa avtomatik beriladi</div>
       <div class="fr mb3">
-        <div class="fg2"><label data-t="lastName">Familiya</label><input type="text" class="fi" placeholder="Nazarova" /></div>
-        <div class="fg2"><label data-t="firstName">Ism</label><input type="text" class="fi" placeholder="Zulfiya" /></div>
+        <div class="fg2"><label data-t="lastName">Familiya</label><input type="text" class="fi" id="st-last" placeholder="Nazarova" /></div>
+        <div class="fg2"><label data-t="firstName">Ism</label><input type="text" class="fi" id="st-first" placeholder="Zulfiya" /></div>
       </div>
       <div class="fr mb3">
-        <div class="fg2"><label data-t="class">Sinf</label><select class="fs"><option>9-sinf</option><option>10-sinf</option><option>11-sinf</option></select></div>
-        <div class="fg2"><label data-t="gender">Jins</label><select class="fs"><option data-t="female">Qiz ♀</option><option data-t="male">O'g'il ♂</option></select></div>
+        <div class="fg2"><label data-t="class">Sinf</label><select class="fs" id="st-class"><option value="1">1-sinf</option><option value="2">2-sinf</option><option value="3">3-sinf</option><option value="4">4-sinf</option><option value="5">5-sinf</option><option value="6">6-sinf</option><option value="7">7-sinf</option><option value="8">8-sinf</option><option value="9" selected>9-sinf</option><option value="10">10-sinf</option><option value="11">11-sinf</option></select></div>
+        <div class="fg2"><label data-t="gender">Jins</label><select class="fs" id="st-gender"><option value="♀" data-t="female">Qiz ♀</option><option value="♂" data-t="male">O'g'il ♂</option></select></div>
       </div>
-      <div class="fg2"><label>AD (Shaxsiy ID)</label><input type="text" class="fi" placeholder="UZ-2025-..." /></div>
-      <div class="fg2"><label data-t="parentPhone">Ota-ona telefoni</label><input type="tel" class="fi" placeholder="+998 90 000 00 00" /></div>
+      <div class="fg2"><label>AD (Shaxsiy ID)</label><input type="text" class="fi" id="st-ad" placeholder="UZ-2025-... (ixtiyoriy)" /></div>
+      <div class="fg2"><label data-t="parentPhone">Ota-ona telefoni</label><input type="tel" class="fi" id="st-phone" placeholder="+998 90 000 00 00" /></div>
     </div>
     <div class="mf">
       <button class="btn btn-out" onclick="closeModal('add-student-modal')" data-t="cancel">Bekor</button>
@@ -1133,7 +1133,7 @@ const CLASS_DATA = {
   11: { teacher:'Aliyev A.',     color:'#1d9950', count:30, boys:16, girls:14, subject:'Matematika' }
 };
 
-const STUDENTS = [
+const DEFAULT_STUDENTS = [
   {id:1, ad:'UZ-2025-001', name:'Zulfiya Nazarova',  gender:'♀', cls:'9', avg:4.8, att:'98%'},
   {id:2, ad:'UZ-2025-002', name:'Alisher Jurayev',   gender:'♂', cls:'9', avg:3.5, att:'78%'},
   {id:3, ad:'UZ-2025-003', name:'Feruza Sultonova',  gender:'♀', cls:'9', avg:4.1, att:'91%'},
@@ -1145,6 +1145,22 @@ const STUDENTS = [
   {id:9, ad:'UZ-2025-009', name:'Nargiza Xasanova',  gender:'♀', cls:'11', avg:4.5, att:'94%'},
   {id:10,ad:'UZ-2025-010', name:'Davron Qodirov',    gender:'♂', cls:'11', avg:4.2, att:'87%'},
 ];
+
+/* localStorage'dan yuklash yoki standart ro'yxat */
+let STUDENTS = loadStudents();
+let editingStudentId = null;   // tahrir rejimi uchun
+let currentOpenClass = null;   // ochilgan sinf raqami
+
+function loadStudents(){
+  try{
+    const raw = localStorage.getItem('emaktab_students');
+    if(raw){ const arr = JSON.parse(raw); if(Array.isArray(arr) && arr.length) return arr; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_STUDENTS));
+}
+function saveStudents(){
+  try{ localStorage.setItem('emaktab_students', JSON.stringify(STUDENTS)); }catch(e){}
+}
 
 /* ===== TRANSLATIONS ===== */
 const T = {
@@ -1486,18 +1502,21 @@ function buildClassesGrid() {
   for(let n = 1; n <= 11; n++) {
     const d = CLASS_DATA[n];
     const initials = d.teacher.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const realCount = STUDENTS.filter(s => s.cls == n).length;
+    const count = realCount > 0 ? realCount : d.count;
     grid.innerHTML += `
       <div class="cc" onclick="openClass(${n})">
         <div class="cnum">${n}</div>
         <div class="clbl">${T[currentLang].class || 'Sinf'}</div>
         <div class="t-mini" style="background:${d.color};">${initials}</div>
         <div class="cmeta">${d.teacher}</div>
-        <div class="cmeta">${d.count} ta o'quvchi</div>
+        <div class="cmeta">${count} ta o'quvchi</div>
       </div>`;
   }
 }
 
 function openClass(num) {
+  currentOpenClass = num;
   const d = CLASS_DATA[num];
   const detail = document.getElementById('class-detail');
   detail.classList.remove('hidden');
@@ -1523,12 +1542,19 @@ function openClass(num) {
   body.innerHTML = '';
   // Filter students by class
   const classStudents = STUDENTS.filter(s => s.cls == num);
-  const allStudents = classStudents.length > 0 ? classStudents : genDemoStudents(num, Math.min(d.count, 6));
+  const isReal = classStudents.length > 0;
+  const allStudents = isReal ? classStudents : genDemoStudents(num, Math.min(d.count, 6));
   if(allStudents.length === 0){
     body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:24px;">Bu sinfda hali o'quvchi qo'shilmagan</td></tr>`;
   }
   allStudents.forEach((s,i) => {
     const gc = s.avg >= 4.5 ? 'g5' : s.avg >= 4 ? 'g4' : s.avg >= 3.5 ? 'g3' : 'g2';
+    const actions = isReal
+      ? `<div class="flex gap2">
+           <button class="btn btn-out" style="padding:3px 8px;font-size:11px;" onclick="editStudent(${s.id})" data-t="edit">Tahrir</button>
+           <button class="btn btn-red" style="padding:3px 8px;font-size:11px;" onclick="deleteStudent(${s.id})">🗑️</button>
+         </div>`
+      : `<button class="btn btn-out" style="padding:3px 8px;font-size:11px;" onclick="showToast('Namuna ma\\'lumot — tahrirlab bo\\'lmaydi')">👁️ Namuna</button>`;
     body.innerHTML += `<tr>
       <td>${i+1}</td>
       <td><span class="ad-badge">${s.ad}</span></td>
@@ -1536,7 +1562,7 @@ function openClass(num) {
       <td>${s.gender === '♀' ? '♀ Qiz' : "♂ O'g'il"}</td>
       <td><span class="gb ${gc}">${s.avg}</span></td>
       <td>${s.att}</td>
-      <td><button class="btn btn-out" style="padding:3px 8px;font-size:11px;" onclick="showToast('${s.name} profili')">Ko\'rish</button></td>
+      <td>${actions}</td>
     </tr>`;
   });
 
@@ -1580,7 +1606,10 @@ function buildStudentTables() {
         <td>${s.cls}-sinf</td>
         <td><span class="gb ${gc}">${s.avg}</span></td>
         <td>${s.att}</td>
-        <td><button class="btn btn-out" style="padding:3px 8px;font-size:11px;" data-t="edit">Tahrir</button></td>
+        <td><div class="flex gap2">
+          <button class="btn btn-out" style="padding:3px 8px;font-size:11px;" onclick="editStudent(${s.id})" data-t="edit">Tahrir</button>
+          <button class="btn btn-red" style="padding:3px 8px;font-size:11px;" onclick="deleteStudent(${s.id})">🗑️</button>
+        </div></td>
       </tr>`;
     });
   }
@@ -1597,7 +1626,10 @@ function buildStudentTables() {
         <td><b>${s.name}</b></td>
         <td><span class="gb ${gc}">${s.avg}</span></td>
         <td>${s.att}</td>
-        <td><button class="btn btn-out" style="padding:3px 8px;font-size:11px;" data-t="edit">Tahrir</button></td>
+        <td><div class="flex gap2">
+          <button class="btn btn-out" style="padding:3px 8px;font-size:11px;" onclick="editStudent(${s.id})" data-t="edit">Tahrir</button>
+          <button class="btn btn-red" style="padding:3px 8px;font-size:11px;" onclick="deleteStudent(${s.id})">🗑️</button>
+        </div></td>
       </tr>`;
     });
   }
@@ -1671,9 +1703,96 @@ function sendTelegram(name) {
   showToast(`📱 ${name} ota-onasiga Telegram xabar yuborildi`);
 }
 
+/* Keyingi avtomatik AD raqamini hosil qilish */
+function nextAd(){
+  let max = 0;
+  STUDENTS.forEach(s => {
+    const m = /UZ-2025-(\d+)/.exec(s.ad || '');
+    if(m) max = Math.max(max, +m[1]);
+  });
+  return 'UZ-2025-' + String(max + 1).padStart(3, '0');
+}
+
+/* Qo'shish uchun modalni ochish (bo'sh holat) */
+function openAddStudent(){
+  editingStudentId = null;
+  document.getElementById('student-modal-title').textContent = T[currentLang].addStudent || "O'quvchi qo'shish";
+  document.getElementById('st-last').value = '';
+  document.getElementById('st-first').value = '';
+  document.getElementById('st-class').value = '9';
+  document.getElementById('st-gender').value = '♀';
+  document.getElementById('st-ad').value = '';
+  document.getElementById('st-phone').value = '';
+  showModal('add-student-modal');
+}
+
+/* Tahrirlash uchun modalni ochish (to'ldirilgan holat) */
+function editStudent(id){
+  const s = STUDENTS.find(x => x.id === id);
+  if(!s) return;
+  editingStudentId = id;
+  document.getElementById('student-modal-title').textContent = (T[currentLang].edit || 'Tahrir') + " — " + s.name;
+  const parts = s.name.trim().split(' ');
+  document.getElementById('st-last').value = parts[0] || '';
+  document.getElementById('st-first').value = parts.slice(1).join(' ') || '';
+  document.getElementById('st-class').value = s.cls;
+  document.getElementById('st-gender').value = s.gender;
+  document.getElementById('st-ad').value = s.ad;
+  document.getElementById('st-phone').value = s.phone || '';
+  showModal('add-student-modal');
+}
+
+/* Saqlash — ham qo'shish, ham tahrirlash */
 function saveStudent() {
+  const last = document.getElementById('st-last').value.trim();
+  const first = document.getElementById('st-first').value.trim();
+  const cls = document.getElementById('st-class').value;
+  const gender = document.getElementById('st-gender').value;
+  let ad = document.getElementById('st-ad').value.trim();
+  const phone = document.getElementById('st-phone').value.trim();
+
+  if(!last && !first){ showToast('⚠️ Ism va familiyani kiriting'); return; }
+  const name = (last + ' ' + first).trim();
+
+  if(editingStudentId){
+    // Tahrirlash
+    const s = STUDENTS.find(x => x.id === editingStudentId);
+    if(s){ s.name = name; s.cls = cls; s.gender = gender; if(ad) s.ad = ad; s.phone = phone; }
+    showToast(`✓ ${name} ma'lumotlari yangilandi`);
+  } else {
+    // Qo'shish
+    if(!ad) ad = nextAd();
+    const newId = STUDENTS.reduce((m,s)=>Math.max(m,s.id),0) + 1;
+    STUDENTS.push({ id:newId, ad, name, gender, cls, avg:0, att:'100%', phone });
+    showToast(`✓ ${name} qo'shildi · AD: ${ad}`);
+  }
+  editingStudentId = null;
+  saveStudents();
   closeModal('add-student-modal');
-  showToast("O'quvchi qo'shildi ✓ · AD raqami berildi");
+  refreshAll();
+}
+
+/* O'chirish */
+function deleteStudent(id){
+  const s = STUDENTS.find(x => x.id === id);
+  if(!s) return;
+  if(!confirm(`"${s.name}" o'quvchini o'chirishni tasdiqlaysizmi?`)) return;
+  STUDENTS = STUDENTS.filter(x => x.id !== id);
+  saveStudents();
+  refreshAll();
+  showToast(`🗑️ ${s.name} o'chirildi`);
+}
+
+/* Barcha ko'rinishlarni yangilash */
+function refreshAll(){
+  buildStudentTables();
+  buildClassesGrid();
+  buildAttendanceTables();
+  if(currentOpenClass != null){
+    const detail = document.getElementById('class-detail');
+    if(detail && !detail.classList.contains('hidden')) openClass(currentOpenClass);
+  }
+  setLang(currentLang);
 }
 
 /* ===== MODALS ===== */
