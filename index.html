@@ -299,6 +299,13 @@ select.fs:focus,input.fi:focus,textarea.ft:focus{border-color:var(--primary);box
 /* Missed lesson in schedule */
 .li.missed-lesson{border-left-color:var(--danger);background:var(--danger-bg);}
 .li.missed-lesson .ln{color:var(--danger);}
+/* Schedule editing controls */
+.li{position:relative;}
+.li .li-del{position:absolute;top:4px;right:4px;width:18px;height:18px;border:none;border-radius:5px;background:var(--danger-bg);color:var(--danger);font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1;}
+.li:hover .li-del{display:flex;}
+.li:hover{box-shadow:0 0 0 2px rgba(21,87,160,0.18);}
+.sch-add{width:100%;padding:6px;border:1.5px dashed var(--border);background:transparent;border-radius:6px;color:var(--text3);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.sch-add:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-bg);}
 
 /* ===== UTILS ===== */
 .flex{display:flex;}.ic{align-items:center;}.jb{justify-content:space-between;}
@@ -1067,6 +1074,33 @@ body.dark #toast{background:#2a3a50;}
   </div>
 </div>
 
+<!-- Add / Edit Lesson -->
+<div class="mo" id="add-lesson-modal">
+  <div class="md">
+    <div class="mh"><h3 id="lesson-modal-title">Dars qo'shish</h3><button class="close-x" onclick="closeModal('add-lesson-modal')">✕</button></div>
+    <div class="mb2">
+      <div class="fr mb3">
+        <div class="fg2"><label>Kun</label><select class="fs" id="ls-day">
+          <option value="0">Dushanba</option><option value="1">Seshanba</option><option value="2">Chorshanba</option><option value="3">Payshanba</option><option value="4">Juma</option>
+        </select></div>
+        <div class="fg2"><label>Vaqt</label><input type="text" class="fi" id="ls-time" placeholder="08:00" /></div>
+      </div>
+      <div class="fg2"><label>Fan</label><select class="fs" id="ls-subject">
+        <option>Matematika</option><option>Ingliz tili</option><option>Fizika</option><option>Kimyo</option><option>Biologiya</option><option>Informatika</option><option>Tarix</option><option>Ona tili</option><option>Geografiya</option>
+      </select></div>
+      <div class="fr mb3">
+        <div class="fg2"><label>O'qituvchi</label><input type="text" class="fi" id="ls-teacher" placeholder="Aliyev A." /></div>
+        <div class="fg2"><label>Xona</label><input type="text" class="fi" id="ls-room" placeholder="201" /></div>
+      </div>
+      <div class="fg2"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" id="ls-missed" style="width:auto;" /> ❌ Sababsiz qoldirilgan dars</label></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-out" onclick="closeModal('add-lesson-modal')">Bekor qilish</button>
+      <button class="btn btn-blue" onclick="saveLesson()">Saqlash</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -1431,6 +1465,7 @@ function doLogin() {
   buildStudentTables();
   buildTeachers();
   fillClassTeacherOptions();
+  fillScheduleClassOptions();
   renderSchedule('9');
   // Apply language
   setLang(currentLang);
@@ -1928,6 +1963,7 @@ function saveClass(){
   saveClasses();
   closeModal('add-class-modal');
   buildClassesGrid();
+  fillScheduleClassOptions();
   showToast(`✓ ${key}-sinf qo'shildi`);
 }
 
@@ -1950,7 +1986,7 @@ const SUBJ_COLOR = {
   'Tarix':'#e53e3e','Ona tili':'#0d9488','Geografiya':'#ca8a04'
 };
 const L = (subj, teacher, room, time, missed) => ({subj, teacher, room, time, missed:!!missed});
-const SCHEDULE = {
+const DEFAULT_SCHEDULE = {
   '9': [
     [L('Matematika','Aliyev A.','201','08:00'), L('Ingliz tili','Karimova M.','105','09:00'), L('Fizika','Toshmatov B.','302','10:00'), L('Kimyo','Nazarova Z.','204','11:00',true), L('Informatika','Yusupov J.','115','12:00')],
     [L('Fizika','Toshmatov B.','302','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Tarix','Rahimov K.','106','10:00'), L('Biologiya','Xoliqova S.','301','11:00')],
@@ -1974,23 +2010,133 @@ const SCHEDULE = {
   ],
 };
 
+let SCHEDULE = loadSchedule();
+function loadSchedule(){
+  try{
+    const raw = localStorage.getItem('emaktab_schedule');
+    if(raw){ const o = JSON.parse(raw); if(o && Object.keys(o).length) return o; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+}
+function saveSchedule(){
+  try{ localStorage.setItem('emaktab_schedule', JSON.stringify(SCHEDULE)); }catch(e){}
+}
+
+/* Bo'sh hafta (5 kun) */
+function emptyWeek(){ return [[],[],[],[],[]]; }
+
+let editingLesson = null; // {cls, di, li}  (li=null => yangi dars)
+
 function renderSchedule(cls){
   const grid = document.getElementById('sch-grid');
   if(!grid) return;
   cls = String(cls || '9');
-  // Mavjud bo'lmagan sinf uchun 9-sinf namunasini ko'rsatamiz
-  const week = SCHEDULE[cls] || SCHEDULE['9'];
+  // Agar bu sinf uchun jadval yo'q bo'lsa — bo'sh hafta yaratamiz (tahrirlash mumkin)
+  if(!SCHEDULE[cls]) SCHEDULE[cls] = emptyWeek();
+  const week = SCHEDULE[cls];
+  const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'teacher');
   grid.innerHTML = '';
   DAYS.forEach((day,di) => {
-    const lessons = (week[di] || []).map(ls => {
+    const lessons = (week[di] || []).map((ls,li) => {
+      const delBtn = canEdit ? `<button class="li-del" onclick="event.stopPropagation();deleteLesson('${cls}',${di},${li})" title="O'chirish">✕</button>` : '';
       if(ls.missed){
-        return `<div class="li missed-lesson"><div class="lt">${ls.time}</div><div class="ln">❌ ${ls.subj}</div><div class="lte">Sababsiz qoldirildi</div></div>`;
+        return `<div class="li missed-lesson" ${canEdit?`onclick="editLesson('${cls}',${di},${li})" style="cursor:pointer;"`:''}>${delBtn}<div class="lt">${ls.time}</div><div class="ln">❌ ${ls.subj}</div><div class="lte">Sababsiz qoldirildi</div></div>`;
       }
       const c = SUBJ_COLOR[ls.subj] || '#1557a0';
-      return `<div class="li" style="border-left-color:${c}"><div class="lt">${ls.time}</div><div class="ln">${ls.subj}</div><div class="lte">${ls.teacher} · ${ls.room}</div></div>`;
+      return `<div class="li" style="border-left-color:${c};${canEdit?'cursor:pointer;':''}" ${canEdit?`onclick="editLesson('${cls}',${di},${li})"`:''}>${delBtn}<div class="lt">${ls.time}</div><div class="ln">${ls.subj}</div><div class="lte">${ls.teacher} · ${ls.room}</div></div>`;
     }).join('');
-    grid.innerHTML += `<div class="sch-day"><div class="sch-dh" data-t="${day.key}">${T[currentLang][day.key] || day.label}</div><div class="sch-lessons">${lessons}</div></div>`;
+    const addBtn = canEdit ? `<button class="sch-add" onclick="openAddLesson('${cls}',${di})">+ dars</button>` : '';
+    grid.innerHTML += `<div class="sch-day"><div class="sch-dh" data-t="${day.key}">${T[currentLang][day.key] || day.label}</div><div class="sch-lessons">${lessons}${addBtn}</div></div>`;
   });
+}
+
+/* ===== SCHEDULE EDITING ===== */
+let lessonCls = '9', lessonDi = 0;
+
+function openAddLesson(cls, di){
+  editingLesson = { cls:String(cls), di, li:null };
+  document.getElementById('lesson-modal-title').textContent = "Dars qo'shish";
+  document.getElementById('ls-day').value = di;
+  document.getElementById('ls-time').value = '';
+  document.getElementById('ls-subject').selectedIndex = 0;
+  document.getElementById('ls-teacher').value = '';
+  document.getElementById('ls-room').value = '';
+  document.getElementById('ls-missed').checked = false;
+  showModal('add-lesson-modal');
+}
+
+function editLesson(cls, di, li){
+  cls = String(cls);
+  const ls = SCHEDULE[cls] && SCHEDULE[cls][di] && SCHEDULE[cls][di][li];
+  if(!ls) return;
+  editingLesson = { cls, di, li };
+  document.getElementById('lesson-modal-title').textContent = "Darsni tahrirlash";
+  document.getElementById('ls-day').value = di;
+  document.getElementById('ls-time').value = ls.time || '';
+  document.getElementById('ls-subject').value = ls.subj || 'Matematika';
+  document.getElementById('ls-teacher').value = ls.teacher || '';
+  document.getElementById('ls-room').value = ls.room || '';
+  document.getElementById('ls-missed').checked = !!ls.missed;
+  showModal('add-lesson-modal');
+}
+
+function saveLesson(){
+  if(!editingLesson) return;
+  const cls = editingLesson.cls;
+  const newDi = +document.getElementById('ls-day').value;
+  const time = document.getElementById('ls-time').value.trim() || '08:00';
+  const subj = document.getElementById('ls-subject').value;
+  const teacher = document.getElementById('ls-teacher').value.trim() || '—';
+  const room = document.getElementById('ls-room').value.trim() || '—';
+  const missed = document.getElementById('ls-missed').checked;
+
+  if(!SCHEDULE[cls]) SCHEDULE[cls] = emptyWeek();
+  const lesson = { subj, teacher, room, time, missed };
+
+  if(editingLesson.li === null){
+    // yangi dars
+    SCHEDULE[cls][newDi].push(lesson);
+  } else {
+    // tahrir — kun o'zgargan bo'lsa ko'chiramiz
+    if(newDi !== editingLesson.di){
+      SCHEDULE[cls][editingLesson.di].splice(editingLesson.li, 1);
+      SCHEDULE[cls][newDi].push(lesson);
+    } else {
+      SCHEDULE[cls][editingLesson.di][editingLesson.li] = lesson;
+    }
+  }
+  // vaqt bo'yicha tartiblash
+  SCHEDULE[cls][newDi].sort((a,b)=> (a.time||'').localeCompare(b.time||''));
+  saveSchedule();
+  editingLesson = null;
+  closeModal('add-lesson-modal');
+  renderSchedule(cls);
+  setLang(currentLang);
+  showToast('✓ Dars jadvali yangilandi');
+}
+
+function deleteLesson(cls, di, li){
+  cls = String(cls);
+  if(!SCHEDULE[cls] || !SCHEDULE[cls][di]) return;
+  if(!confirm("Bu darsni jadvaldan o'chirasizmi?")) return;
+  SCHEDULE[cls][di].splice(li, 1);
+  saveSchedule();
+  renderSchedule(cls);
+  setLang(currentLang);
+  showToast('🗑️ Dars o\'chirildi');
+}
+
+/* Dars jadvali sinf ro'yxatini (select) CLASS_DATA bo'yicha to'ldirish */
+function fillScheduleClassOptions(){
+  const sel = document.getElementById('sch-class-select');
+  if(!sel) return;
+  const cur = sel.value;
+  const keys = Object.keys(CLASS_DATA).sort((a,b)=>{
+    const na=parseFloat(a), nb=parseFloat(b);
+    if(na!==nb) return na-nb; return a.localeCompare(b);
+  });
+  sel.innerHTML = keys.map(k => `<option value="${k}">${(CLASS_DATA[k].label||k)}-sinf</option>`).join('');
+  if(keys.includes(cur)) sel.value = cur;
 }
 
 /* ===== MODALS ===== */
