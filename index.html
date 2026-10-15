@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Maktab — Elektron maktab tizimi</title>
+<meta name="description" content="e-Maktab — O'zbekiston Respublikasi maktablarining elektron boshqaruv tizimi. Baholar, davomat, dars jadvali.">
+<meta name="keywords" content="e-maktab, emaktab, elektron kundalik, maktab tizimi, uzbekistan">
+<meta property="og:title" content="e-Maktab — Elektron maktab tizimi">
+<meta property="og:description" content="O'zbekiston Respublikasi maktablarining rasmiy elektron tizimi">
+<link rel="manifest" href="manifest.json" id="pwa-manifest">
+<meta name="theme-color" content="#0d2d5e">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== DARK/LIGHT MODE VARS ===== */
+:root {
+  --bg: #f0f4f8;
+  --bg2: #ffffff;
+  --bg3: #f8fafc;
+  --border: #dee2e8;
+  --border2: #e8ecf0;
+  --text: #1a2332;
+  --text2: #4a5568;
+  --text3: #8a97a8;
+  --primary: #1557a0;
+  --primary2: #0d4080;
+  --primary-bg: #e8f0fb;
+  --primary-light: #dbeafe;
+  --accent: #2ecc71;
+  --accent-bg: #e8faf0;
+  --danger: #e53e3e;
+  --danger-bg: #fff5f5;
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --success: #2d9748;
+  --success-bg: #f0fff4;
+  --sidebar-bg: #0d2d5e;
+  --sidebar-text: rgba(255,255,255,0.75);
+  --sidebar-active: rgba(255,255,255,0.12);
+  --sidebar-hover: rgba(255,255,255,0.06);
+  --shadow: 0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+  --radius: 10px;
+  --radius-sm: 7px;
+  --sidebar-w: 255px;
+  --topbar-h: 58px;
+}
+body.dark {
+  --bg: #0f1923;
+  --bg2: #1a2535;
+  --bg3: #1e2c3d;
+  --border: #2a3a4e;
+  --border2: #243040;
+  --text: #e8edf5;
+  --text2: #9ab0c8;
+  --text3: #5a7090;
+  --primary-bg: #1a2d4a;
+  --primary-light: #1a2d4a;
+  --accent-bg: #0d2d1e;
+  --danger-bg: #2d1a1a;
+  --warning-bg: #2d230a;
+  --success-bg: #0d2d1a;
+  --sidebar-bg: #0a1520;
+  --shadow: 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background 0.3s,color 0.3s;}
+
+/* ===== LOGIN ===== */
+#login-page{min-height:100vh;display:flex;align-items:stretch;}
+
+.login-left{
+  width:50%;
+  background:linear-gradient(150deg,#0a1f45 0%,#1557a0 55%,#0d8a4e 100%);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:60px;position:relative;overflow:hidden;
+}
+.login-left::before{content:'';position:absolute;width:480px;height:480px;border-radius:50%;background:rgba(255,255,255,0.04);top:-160px;right:-120px;}
+.login-left::after{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,0.05);bottom:-80px;left:-80px;}
+
+.ll-logo{position:relative;z-index:2;text-align:center;}
+.ll-emblem{width:82px;height:82px;margin:0 auto 20px;background:rgba(255,255,255,0.15);border-radius:50%;border:3px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:38px;backdrop-filter:blur(8px);}
+.ll-logo h1{font-size:42px;font-weight:800;color:#fff;letter-spacing:-1px;}
+.ll-logo h1 span{color:#5de8a0;}
+.ll-logo p{font-size:15px;color:rgba(255,255,255,0.65);margin-top:10px;line-height:1.5;max-width:300px;}
+.ll-stats{display:flex;gap:36px;margin-top:44px;}
+.ll-stat{text-align:center;color:#fff;}
+.ll-stat .n{font-size:28px;font-weight:800;display:block;}
+.ll-stat .l{font-size:12px;opacity:0.6;margin-top:2px;}
+.ll-divider{width:1px;background:rgba(255,255,255,0.2);margin:0 4px;}
+
+.login-right{width:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;padding:50px 44px;}
+.lf-wrap{width:100%;max-width:400px;}
+.lf-wrap h2{font-size:26px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.lf-wrap .sub{font-size:14px;color:var(--text3);margin-bottom:30px;}
+
+.lang-strip{display:flex;gap:6px;margin-bottom:22px;}
+.lang-btn{padding:5px 14px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--text2);transition:all 0.2s;font-family:inherit;}
+.lang-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+
+.role-tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--bg3);padding:4px;border-radius:9px;}
+.role-tab{flex:1;padding:7px;text-align:center;font-size:12px;font-weight:600;cursor:pointer;border-radius:7px;transition:all 0.2s;color:var(--text3);font-family:inherit;border:none;background:transparent;}
+.role-tab.active{background:var(--bg2);color:var(--primary);box-shadow:var(--shadow);}
+
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:12.5px;font-weight:600;color:var(--text2);margin-bottom:6px;}
+.iw{position:relative;}
+.iw input{padding-left:40px;}
+.ii{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:15px;}
+.fg input,.fg select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;color:var(--text);background:var(--bg2);transition:border-color 0.2s;outline:none;}
+.fg input:focus,.fg select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(21,87,160,0.1);}
+
+.btn-login{width:100%;padding:11px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.2s;margin-top:6px;}
+.btn-login:hover{background:var(--primary2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(21,87,160,0.35);}
+
+.divider{text-align:center;color:var(--text3);font-size:12px;margin:18px 0;position:relative;}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:var(--border);}
+.divider::before{left:0;}.divider::after{right:0;}
+
+.demo-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px;font-size:12px;}
+.demo-box .dt{font-weight:700;color:var(--text2);margin-bottom:8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;}
+.demo-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;color:var(--text2);}
+.demo-row .code{font-family:monospace;font-size:11.5px;background:var(--bg2);padding:2px 8px;border-radius:5px;border:1px solid var(--border);}
+.rbadge{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:700;}
+.rb-admin{background:#fde8d8;color:#c2410c;}.rb-teacher{background:#dbeafe;color:#1d4ed8;}
+.rb-student{background:#d1fae5;color:#065f46;}.rb-parent{background:#ede9fe;color:#6d28d9;}
+.alert-err{background:var(--danger-bg);color:var(--danger);border:1px solid #fecaca;border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* ===== APP LAYOUT ===== */
+#app{display:none;min-height:100vh;}
+.sidebar{
+  width:var(--sidebar-w);height:100vh;
+  background:var(--sidebar-bg);
+  position:fixed;top:0;left:0;
+  display:flex;flex-direction:column;
+  z-index:100;transition:transform 0.3s;
+}
+.sb-head{padding:18px 16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.sb-logo{display:flex;align-items:center;gap:10px;}
+.sb-logo .ic{width:34px;height:34px;background:linear-gradient(135deg,#2563eb,#1d9950);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.sb-logo .nm{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+.sb-logo .nm span{color:#5de8a0;}
+.sb-logo .sub{font-size:10px;color:rgba(255,255,255,0.45);display:block;margin-top:-1px;}
+
+.sb-scroll{flex:1;overflow-y:auto;padding:6px 0;}
+.sb-scroll::-webkit-scrollbar{width:3px;}.sb-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:3px;}
+
+.sb-section{padding:10px 10px 0;}
+.sb-sect-title{font-size:9.5px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;padding:0 8px;margin-bottom:3px;}
+.sb-nav{list-style:none;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--sidebar-text);font-size:13.5px;font-weight:500;transition:all 0.15s;margin-bottom:1px;}
+.nav-item:hover{background:var(--sidebar-hover);color:#fff;}
+.nav-item.active{background:var(--sidebar-active);color:#fff;}
+.nav-item .ic{font-size:15px;width:18px;text-align:center;flex-shrink:0;}
+.nav-badge{margin-left:auto;background:var(--danger);color:#fff;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:20px;min-width:18px;text-align:center;}
+
+.sb-user{padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:10px;cursor:pointer;}
+.sb-user:hover{background:var(--sidebar-hover);}
+.u-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;}
+.u-info .nm{font-size:12.5px;font-weight:600;color:#fff;}
+.u-info .rl{font-size:11px;color:rgba(255,255,255,0.45);}
+
+/* ===== TOPBAR ===== */
+.main{margin-left:var(--sidebar-w);min-height:100vh;display:flex;flex-direction:column;}
+.topbar{height:var(--topbar-h);background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50;}
+.tb-left h2{font-size:17px;font-weight:700;color:var(--text);}
+.tb-left p{font-size:12px;color:var(--text3);margin-top:1px;}
+.tb-right{display:flex;align-items:center;gap:8px;}
+.ic-btn{width:34px;height:34px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text2);transition:all 0.15s;position:relative;}
+.ic-btn:hover{background:var(--bg3);}
+.ndot{position:absolute;top:4px;right:4px;width:7px;height:7px;background:var(--danger);border-radius:50%;border:2px solid var(--bg2);}
+.search-b{display:flex;align-items:center;gap:7px;background:var(--bg3);border:1.5px solid var(--border);border-radius:7px;padding:6px 11px;width:220px;}
+.search-b input{border:none;background:transparent;font-family:inherit;font-size:13px;outline:none;color:var(--text);width:100%;}
+.search-b input::placeholder{color:var(--text3);}
+
+/* ===== CONTENT ===== */
+.pc{padding:24px;flex:1;}
+.page{display:none;}.page.active{display:block;}
+
+/* ===== STATS GRID ===== */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:10px;}
+.sc .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.sc .ib{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;}
+.sc .num{font-size:30px;font-weight:800;color:var(--text);letter-spacing:-1px;}
+.sc .lbl{font-size:12.5px;color:var(--text3);font-weight:500;}
+.sc .trend{font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:3px;}
+.tu{color:var(--success);}.td{color:var(--danger);}
+
+/* ===== CARD ===== */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.ch{padding:16px 20px;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;}
+.ch h3{font-size:14.5px;font-weight:700;color:var(--text);}
+.ch .sub{font-size:12px;color:var(--text3);margin-top:2px;}
+.cb{padding:18px 20px;}
+
+/* ===== TEACHER HEADER IN CLASS ===== */
+.class-teacher-banner{
+  background:linear-gradient(135deg,var(--primary) 0%,#2563eb 100%);
+  border-radius:var(--radius);padding:18px 22px;
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:18px;color:#fff;
+}
+.ct-photo{
+  width:62px;height:62px;border-radius:50%;
+  background:rgba(255,255,255,0.2);border:3px solid rgba(255,255,255,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;flex-shrink:0;overflow:hidden;
+}
+.ct-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.ct-info h3{font-size:17px;font-weight:700;margin-bottom:3px;}
+.ct-info .meta{font-size:13px;opacity:0.75;}
+.ct-badge{margin-left:auto;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,0.3);}
+
+/* ===== TABLE ===== */
+.tw{overflow-x:auto;}
+table.dt{width:100%;border-collapse:collapse;font-size:13.5px;}
+table.dt th{background:var(--bg3);padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);}
+table.dt td{padding:12px 14px;border-bottom:1px solid var(--border2);color:var(--text2);vertical-align:middle;}
+table.dt tr:last-child td{border-bottom:none;}
+table.dt tr:hover td{background:var(--bg3);}
+/* RED ROW for missed lessons */
+table.dt tr.missed td{background:#fff5f5;color:#991b1b;}
+body.dark table.dt tr.missed td{background:#2d1a1a;color:#f87171;}
+table.dt tr.missed{border-left:3px solid var(--danger);}
+
+.gb{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:7px;font-weight:700;font-size:13.5px;}
+.g5{background:#d1fae5;color:#065f46;}.g4{background:#dbeafe;color:#1d4ed8;}
+.g3{background:#fef3c7;color:#92400e;}.g2{background:#fee2e2;color:#991b1b;}
+
+/* ===== ATTENDANCE STATUS ===== */
+.att-row-missed td{background:var(--danger-bg)!important;}
+.att-row-missed td:first-child{border-left:3px solid var(--danger);}
+.sp{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;}
+.sp-ok{background:#d1fae5;color:#065f46;}
+.sp-late{background:#fef3c7;color:#92400e;}
+.sp-miss{background:#fee2e2;color:#991b1b;}
+
+/* ===== STUDENT AD BADGE ===== */
+.ad-badge{display:inline-block;font-size:11px;font-weight:700;font-family:monospace;background:var(--primary-bg);color:var(--primary);padding:2px 8px;border-radius:5px;border:1px solid rgba(21,87,160,0.2);}
+
+/* ===== PROFILE ===== */
+.prof-header{background:linear-gradient(135deg,#0a1f45,#1557a0);border-radius:var(--radius);padding:26px;color:#fff;display:flex;align-items:center;gap:20px;margin-bottom:18px;}
+.prof-av{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;border:3px solid rgba(255,255,255,0.35);flex-shrink:0;}
+.prof-header h2{font-size:20px;font-weight:700;margin-bottom:4px;}
+.prof-header .meta{font-size:13px;opacity:0.7;}
+.prof-id{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:700;font-family:monospace;margin-top:6px;}
+
+/* ===== CLASSES GRID ===== */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:22px;}
+.cc{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.cc:hover{border-color:var(--primary);box-shadow:0 0 0 3px rgba(21,87,160,0.08);transform:translateY(-2px);}
+.cc .cnum{font-size:28px;font-weight:800;color:var(--primary);line-height:1;}
+.cc .clbl{font-size:12px;color:var(--text3);margin-top:3px;}
+.cc .cmeta{font-size:11px;color:var(--text2);margin-top:7px;}
+/* Teacher mini photo in class card */
+.cc .t-mini{width:32px;height:32px;border-radius:50%;margin:8px auto 0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;}
+
+/* ===== MODAL ===== */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
+.mo.show{display:flex;}
+.md{background:var(--bg2);border-radius:13px;width:480px;max-width:94vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
+.mh{padding:16px 20px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
+.mh h3{font-size:15px;font-weight:700;color:var(--text);}
+.mb2{padding:20px;}
+.mf{padding:12px 20px;border-top:1px solid var(--border2);display:flex;gap:10px;justify-content:flex-end;}
+.close-x{width:28px;height:28px;border:none;background:var(--bg3);border-radius:7px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--text2);}
+
+/* ===== FORMS ===== */
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn{padding:8px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.15s;border:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-blue{background:var(--primary);color:#fff;}.btn-blue:hover{background:var(--primary2);}
+.btn-green{background:#059669;color:#fff;}.btn-green:hover{background:#047857;}
+.btn-red{background:var(--danger);color:#fff;}
+.btn-out{background:var(--bg2);border:1.5px solid var(--border);color:var(--text2);}.btn-out:hover{background:var(--bg3);}
+select.fs,input.fi,textarea.ft{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg2);outline:none;transition:border-color 0.2s;}
+select.fs:focus,input.fi:focus,textarea.ft:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(21,87,160,0.08);}
+.fg2{margin-bottom:14px;}
+.fg2 label{display:block;font-size:12.5px;font-weight:600;color:var(--text2);margin-bottom:6px;}
+
+/* ===== ALERTS ===== */
+.al{padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.al-ok{background:var(--success-bg);color:var(--success);border:1px solid #a7f3d0;}
+.al-err2{background:var(--danger-bg);color:var(--danger);border:1px solid #fecaca;}
+
+/* ===== SCHEDULE ===== */
+.sch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;}
+.sch-day{background:var(--bg3);border-radius:var(--radius-sm);overflow:hidden;}
+.sch-dh{background:var(--primary);color:#fff;text-align:center;padding:7px;font-size:11.5px;font-weight:700;}
+.sch-lessons{padding:7px;}
+.li{background:var(--bg2);border-radius:6px;padding:7px 9px;margin-bottom:5px;border-left:3px solid var(--primary);}
+.li .lt{font-size:9.5px;color:var(--text3);font-weight:600;}
+.li .ln{font-size:12px;font-weight:600;color:var(--text);}
+.li .lte{font-size:10.5px;color:var(--text3);}
+/* Missed lesson in schedule */
+.li.missed-lesson{border-left-color:var(--danger);background:var(--danger-bg);}
+.li.missed-lesson .ln{color:var(--danger);}
+
+/* ===== UTILS ===== */
+.flex{display:flex;}.ic{align-items:center;}.jb{justify-content:space-between;}
+.gap2{gap:8px;}.gap3{gap:12px;}.gap4{gap:16px;}
+.mb3{margin-bottom:12px;}.mb4{margin-bottom:16px;}.mb5{margin-bottom:20px;}.mb6{margin-bottom:24px;}
+.g2c{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.g3c{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.tsm{font-size:12.5px;}.tgr{color:var(--text3);}.fw7{font-weight:700;}
+.hidden{display:none!important;}
+
+/* ===== TOAST ===== */
+#toast{position:fixed;bottom:22px;right:22px;background:#1a2332;color:#fff;padding:11px 18px;border-radius:9px;font-size:13.5px;font-weight:500;z-index:999;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;max-width:340px;}
+body.dark #toast{background:#2a3a50;}
+#toast.visible{opacity:1;transform:translateY(0);}
+
+/* ===== NOTIFICATION ===== */
+.ni{display:flex;gap:11px;padding:12px 0;border-bottom:1px solid var(--border2);}
+.ni:last-child{border-bottom:none;}
+.n-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.n-title{font-size:13px;font-weight:600;color:var(--text);}
+.n-det{font-size:11.5px;color:var(--text3);margin-top:2px;}
+
+/* ===== RED LIST ===== */
+.rli{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--border2);}
+.rli:last-child{border-bottom:none;}
+.r-av{width:34px;height:34px;background:#fee2e2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#991b1b;flex-shrink:0;}
+.r-nm{font-size:13.5px;font-weight:600;color:var(--text);}
+.r-det{font-size:11.5px;color:var(--text3);}
+.kc{margin-left:auto;background:#fee2e2;color:#991b1b;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+/* ===== GRADE BARS ===== */
+.gb-item{margin-bottom:9px;}
+.gb-lbl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--text2);margin-bottom:3px;}
+.gb-track{height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.gb-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--primary),#2563eb);transition:width .8s ease;}
+
+/* ===== TELEGRAM ===== */
+.tg-card{background:linear-gradient(135deg,#0088cc,#229ed9);border-radius:var(--radius);padding:22px;color:#fff;display:flex;align-items:center;gap:18px;margin-bottom:14px;}
+.tg-ic{width:52px;height:52px;background:rgba(255,255,255,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;}
+.tg-card h3{font-size:17px;font-weight:700;margin-bottom:4px;}
+.tg-card p{font-size:13px;opacity:0.85;line-height:1.5;}
+.btn-wh{margin-top:10px;background:#fff;color:#0088cc;padding:7px 18px;border-radius:7px;font-weight:700;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.btn-wh:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .login-left{display:none;}.login-right{width:100%;}
+  .sidebar{transform:translateX(-100%);}.sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}.sg{grid-template-columns:repeat(2,1fr);}
+  .sch-grid{grid-template-columns:1fr;}.g2c,.g3c{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="login-page">
+  <div class="login-left">
+    <div class="ll-logo">
+      <div class="ll-emblem">🏫</div>
+      <h1>e-<span>Maktab</span></h1>
+      <p>O'zbekiston Respublikasi maktablarining elektron boshqaruv tizimi</p>
+      <div class="ll-stats">
+        <div class="ll-stat"><span class="n">11</span><span class="l">Sinflar</span></div>
+        <div class="ll-divider"></div>
+        <div class="ll-stat"><span class="n">480+</span><span class="l">O'quvchilar</span></div>
+        <div class="ll-divider"></div>
+        <div class="ll-stat"><span class="n">42</span><span class="l">O'qituvchilar</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="lf-wrap">
+      <!-- Lang selector -->
+      <div class="lang-strip">
+        <button class="lang-btn active" onclick="setLang('uz')">🇺🇿 O'zbek</button>
+        <button class="lang-btn" onclick="setLang('en')">🇬🇧 English</button>
+        <button class="lang-btn" onclick="setLang('ru')">🇷🇺 Русский</button>
+      </div>
+
+      <h2 data-t="welcome">Xush kelibsiz 👋</h2>
+      <p class="sub" data-t="enterCreds">Email va parolni kiriting</p>
+
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="selectRole('admin')">👑 <span data-t="admin">Admin</span></button>
+        <button class="role-tab" onclick="selectRole('teacher')">👨‍🏫 <span data-t="teacher">O'qituvchi</span></button>
+        <button class="role-tab" onclick="selectRole('student')">🎓 <span data-t="student">O'quvchi</span></button>
+        <button class="role-tab" onclick="selectRole('parent')">👨‍👩‍👧 <span data-t="parent">Ota-ona</span></button>
+      </div>
+
+      <div id="login-alert" class="alert-err hidden">❌ <span data-t="wrongCreds">Email yoki parol noto'g'ri!</span></div>
+
+      <div class="fg">
+        <label data-t="emailLabel">Email manzil</label>
+        <div class="iw"><span class="ii">📧</span><input type="email" id="login-email" placeholder="email@maktab.uz" /></div>
+      </div>
+      <div class="fg">
+        <label data-t="passLabel">Parol</label>
+        <div class="iw"><span class="ii">🔒</span><input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" /></div>
+      </div>
+      <button class="btn-login" onclick="doLogin()"><span data-t="loginBtn">Kirish</span> →</button>
+
+      <div class="divider" data-t="demoAccounts">Demo hisoblar</div>
+      <div class="demo-box">
+        <div class="dt" data-t="quickAccess">Tezkor kirish:</div>
+        <div class="demo-row"><span class="code">admin@maktab.uz / admin123</span><span class="rbadge rb-admin">Admin</span></div>
+        <div class="demo-row"><span class="code">teacher@maktab.uz / teacher123</span><span class="rbadge rb-teacher" data-t="teacher">O'qituvchi</span></div>
+        <div class="demo-row"><span class="code">student@maktab.uz / student123</span><span class="rbadge rb-student" data-t="student">O'quvchi</span></div>
+        <div class="demo-row"><span class="code">parent@maktab.uz / parent123</span><span class="rbadge rb-parent" data-t="parent">Ota-ona</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <div class="sb-logo">
+        <div class="ic">🏫</div>
+        <div>
+          <div class="nm">e-<span>Maktab</span></div>
+          <span class="sub">1-Yagona Maktab</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-scroll">
+      <!-- ADMIN NAV -->
+      <div id="admin-nav">
+        <div class="sb-section">
+          <div class="sb-sect-title" data-t="main">Asosiy</div>
+          <ul class="sb-nav">
+            <li class="nav-item active" onclick="showPage('dashboard',this)"><span class="ic">🏠</span><span data-t="dashboard">Dashboard</span></li>
+            <li class="nav-item" onclick="showPage('classes',this)"><span class="ic">🏫</span><span data-t="classes">Sinflar</span></li>
+            <li class="nav-item" onclick="showPage('students',this)"><span class="ic">👨‍🎓</span><span data-t="students">O'quvchilar</span></li>
+            <li class="nav-item" onclick="showPage('teachers',this)"><span class="ic">👨‍🏫</span><span data-t="teachers">O'qituvchilar</span></li>
+          </ul>
+        </div>
+        <div class="sb-section">
+          <div class="sb-sect-title" data-t="management">Boshqaruv</div>
+          <ul class="sb-nav">
+            <li class="nav-item" onclick="showPage('grades',this)"><span class="ic">📊</span><span data-t="grades">Baholar</span></li>
+            <li class="nav-item" onclick="showPage('attendance',this)"><span class="ic">📅</span><span data-t="attendance">Davomat</span></li>
+            <li class="nav-item" onclick="showPage('schedule',this)"><span class="ic">🗓️</span><span data-t="schedule">Dars jadvali</span></li>
+            <li class="nav-item" onclick="showPage('redlist',this)"><span class="ic">🔴</span><span data-t="redList">Qizil ro'yxat</span><span class="nav-badge">3</span></li>
+          </ul>
+        </div>
+        <div class="sb-section">
+          <div class="sb-sect-title" data-t="settings">Sozlamalar</div>
+          <ul class="sb-nav">
+            <li class="nav-item" onclick="showPage('telegram',this)"><span class="ic">📱</span><span>Telegram Bot</span></li>
+            <li class="nav-item" onclick="showPage('settings',this)"><span class="ic">⚙️</span><span data-t="settings">Sozlamalar</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TEACHER NAV -->
+      <div id="teacher-nav" class="hidden">
+        <div class="sb-section">
+          <ul class="sb-nav">
+            <li class="nav-item active" onclick="showPage('teacher-dashboard',this)"><span class="ic">🏠</span><span data-t="dashboard">Dashboard</span></li>
+            <li class="nav-item" onclick="showPage('my-class',this)"><span class="ic">👨‍🎓</span><span data-t="myClass">Mening sinfim</span></li>
+            <li class="nav-item" onclick="showPage('add-grades',this)"><span class="ic">📊</span><span data-t="addGrade">Baho qo'shish</span></li>
+            <li class="nav-item" onclick="showPage('take-attendance',this)"><span class="ic">📅</span><span data-t="attendance">Davomat</span></li>
+            <li class="nav-item" onclick="showPage('schedule',this)"><span class="ic">🗓️</span><span data-t="schedule">Dars jadvali</span></li>
+            <li class="nav-item" onclick="showPage('redlist',this)"><span class="ic">🔴</span><span data-t="redList">Qizil ro'yxat</span><span class="nav-badge">3</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STUDENT NAV -->
+      <div id="student-nav" class="hidden">
+        <div class="sb-section">
+          <ul class="sb-nav">
+            <li class="nav-item active" onclick="showPage('student-profile',this)"><span class="ic">🏠</span><span data-t="myProfile">Profilim</span></li>
+            <li class="nav-item" onclick="showPage('my-grades',this)"><span class="ic">📊</span><span data-t="myGrades">Baholarim</span></li>
+            <li class="nav-item" onclick="showPage('my-attendance',this)"><span class="ic">📅</span><span data-t="myAttendance">Davomatim</span></li>
+            <li class="nav-item" onclick="showPage('schedule',this)"><span class="ic">🗓️</span><span data-t="schedule">Dars jadvali</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PARENT NAV -->
+      <div id="parent-nav" class="hidden">
+        <div class="sb-section">
+          <ul class="sb-nav">
+            <li class="nav-item active" onclick="showPage('parent-dashboard',this)"><span class="ic">🏠</span><span data-t="dashboard">Dashboard</span></li>
+            <li class="nav-item" onclick="showPage('child-grades',this)"><span class="ic">📊</span><span data-t="childGrades">Farzand baholari</span></li>
+            <li class="nav-item" onclick="showPage('child-attendance',this)"><span class="ic">📅</span><span data-t="childAttendance">Farzand davomati</span></li>
+            <li class="nav-item" onclick="showPage('telegram',this)"><span class="ic">📱</span>Telegram</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-user" onclick="doLogout()">
+      <div class="u-av" id="sidebar-avatar" style="background:#dbeafe;color:#1d4ed8;">AD</div>
+      <div class="u-info">
+        <div class="nm" id="sidebar-name">Administrator</div>
+        <div class="rl" id="sidebar-role">admin@maktab.uz</div>
+      </div>
+      <span style="margin-left:auto;font-size:13px;color:rgba(255,255,255,0.4);">↩</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-left">
+        <h2 id="page-title">Dashboard</h2>
+        <p id="page-sub">Bugun: <span id="today-date"></span></p>
+      </div>
+      <div class="tb-right">
+        <div class="search-b"><span>🔍</span><input type="text" placeholder="Qidirish..." id="search-input" /></div>
+        <button class="ic-btn" onclick="toggleTheme()" title="Rejim almashish" id="theme-btn">🌙</button>
+        <button class="ic-btn" onclick="cycleLang()" title="Til" id="lang-icon-btn" style="font-size:13px;font-weight:700;">UZ</button>
+        <button class="ic-btn" onclick="showPage('notifications',null)">🔔<span class="ndot"></span></button>
+        <div class="ic-btn" id="top-avatar" style="font-weight:700;font-size:12px;color:var(--primary);">AD</div>
+      </div>
+    </header>
+
+    <div class="pc">
+
+      <!-- ===== ADMIN DASHBOARD ===== -->
+      <div id="page-dashboard" class="page active">
+        <div class="sg">
+          <div class="sc">
+            <div class="top"><div><div class="num">480</div><div class="lbl" data-t="totalStudents">Jami o'quvchilar</div></div><div class="ib" style="background:#dbeafe;">👨‍🎓</div></div>
+            <div class="trend tu">↑ 12 <span data-t="thisMonth">bu oy yangi</span></div>
+          </div>
+          <div class="sc">
+            <div class="top"><div><div class="num">42</div><div class="lbl" data-t="teachers">O'qituvchilar</div></div><div class="ib" style="background:#d1fae5;">👨‍🏫</div></div>
+            <div class="trend tu">↑ 3 yangi</div>
+          </div>
+          <div class="sc">
+            <div class="top"><div><div class="num">93%</div><div class="lbl" data-t="attendance">Davomat</div></div><div class="ib" style="background:#fef3c7;">📅</div></div>
+            <div class="trend td">↓ 2% <span data-t="prevWeek">oldingi hafta</span></div>
+          </div>
+          <div class="sc">
+            <div class="top"><div><div class="num">4.2</div><div class="lbl" data-t="avgGrade">O'rtacha baho</div></div><div class="ib" style="background:#ede9fe;">📊</div></div>
+            <div class="trend tu">↑ <span data-t="goodResult">yaxshi</span></div>
+          </div>
+        </div>
+
+        <div class="g2c mb5">
+          <div class="card">
+            <div class="ch"><div><h3>🔴 <span data-t="lateToday">Kech kelganlar (bugun)</span></h3><p class="sub">3 ta o'quvchi</p></div><button class="btn btn-out" style="font-size:12px;" onclick="showPage('redlist',null)"><span data-t="all">Barchasi</span> →</button></div>
+            <div class="cb">
+              <div class="rli"><div class="r-av">AJ</div><div><div class="r-nm">Alisher Jurayev</div><div class="r-det">9-sinf · 08:25 (25 min kech)</div></div><span class="kc">3×</span></div>
+              <div class="rli"><div class="r-av">MK</div><div><div class="r-nm">Malika Karimova</div><div class="r-det">7-sinf · 08:40 (40 min kech)</div></div><span class="kc">5×</span></div>
+              <div class="rli"><div class="r-av">SS</div><div><div class="r-nm">Sardor Sobirov</div><div class="r-det">11-sinf · 09:00 (60 min kech)</div></div><span class="kc">2×</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3>📊 <span data-t="recentGrades">So'nggi baholar</span></h3></div>
+            <div class="cb">
+              <div class="tw"><table class="dt">
+                <thead><tr><th data-t="student">O'quvchi</th><th data-t="subject">Fan</th><th data-t="grade">Baho</th><th data-t="class">Sinf</th></tr></thead>
+                <tbody>
+                  <tr><td>Dilnoza R.</td><td>Matematika</td><td><span class="gb g5">5</span></td><td>11</td></tr>
+                  <tr><td>Bobur T.</td><td>Ingliz tili</td><td><span class="gb g4">4</span></td><td>10</td></tr>
+                  <tr><td>Zulfiya N.</td><td>Fizika</td><td><span class="gb g5">5</span></td><td>9</td></tr>
+                  <tr><td>Jasur U.</td><td>Kimyo</td><td><span class="gb g3">3</span></td><td>8</td></tr>
+                  <tr><td>Feruza S.</td><td>Biologiya</td><td><span class="gb g4">4</span></td><td>7</td></tr>
+                </tbody>
+              </table></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><h3>🗓️ <span data-t="todaySchedule">Bugungi dars jadvali</span></h3><button class="btn btn-out" style="font-size:12px;" onclick="showPage('schedule',null)"><span data-t="fullSchedule">To'liq jadval</span> →</button></div>
+          <div class="cb">
+            <div class="tw"><table class="dt">
+              <thead><tr><th data-t="time">Vaqt</th><th data-t="subject">Fan</th><th data-t="class">Sinf</th><th data-t="teacher">O'qituvchi</th><th data-t="room">Xona</th></tr></thead>
+              <tbody>
+                <tr><td>08:00–08:45</td><td>Matematika</td><td>11</td><td>Aliyev A.</td><td>201</td></tr>
+                <tr><td>09:00–09:45</td><td>Ingliz tili</td><td>10</td><td>Karimova M.</td><td>105</td></tr>
+                <tr><td>10:00–10:45</td><td>Fizika</td><td>9</td><td>Toshmatov B.</td><td>302</td></tr>
+                <tr><td>11:00–11:45</td><td>Kimyo</td><td>8</td><td>Nazarova Z.</td><td>204</td></tr>
+                <tr><td>12:00–12:45</td><td>Informatika</td><td>7</td><td>Yusupov J.</td><td>115</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CLASSES ===== -->
+      <div id="page-classes" class="page">
+        <div class="flex ic jb mb5">
+          <div><h3 style="font-size:15px;font-weight:700;color:var(--text);" data-t="allClasses">Barcha sinflar (1–11)</h3><p class="tsm tgr" style="margin-top:3px;" data-t="clickClass">Sinf ma'lumotlarini ko'rish uchun bosing</p></div>
+          <button class="btn btn-blue" onclick="showModal('add-class-modal')">+ <span data-t="addClass">Sinf qo'shish</span></button>
+        </div>
+        <div class="cg" id="classes-grid"></div>
+        <!-- Class detail (teacher first) -->
+        <div id="class-detail" class="hidden">
+          <!-- Teacher banner goes here (injected by JS) -->
+          <div id="class-teacher-banner-area"></div>
+          <div class="card">
+            <div class="ch">
+              <div><h3 id="class-detail-title">Sinf o'quvchilari</h3><p class="sub" id="class-detail-sub"></p></div>
+              <button class="btn btn-blue" onclick="showModal('add-student-modal')">+ <span data-t="addStudent">O'quvchi qo'shish</span></button>
+            </div>
+            <div class="cb">
+              <div class="tw"><table class="dt">
+                <thead><tr><th>#</th><th>AD</th><th data-t="fullName">Ism Familiya</th><th data-t="gender">Jins</th><th data-t="avgGrade">O'rt. baho</th><th data-t="attendance">Davomat</th><th data-t="actions">Amal</th></tr></thead>
+                <tbody id="class-students-body"></tbody>
+              </table></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STUDENTS ===== -->
+      <div id="page-students" class="page">
+        <div class="flex ic jb mb5">
+          <h3 style="font-size:15px;font-weight:700;" data-t="studentsList">O'quvchilar ro'yxati</h3>
+          <button class="btn btn-blue" onclick="showModal('add-student-modal')">+ <span data-t="addStudent">O'quvchi qo'shish</span></button>
+        </div>
+        <div class="card">
+          <div class="cb">
+            <div class="tw"><table class="dt">
+              <thead><tr><th>#</th><th>AD</th><th data-t="fullName">Ism Familiya</th><th data-t="class">Sinf</th><th data-t="avgGrade">O'rt. baho</th><th data-t="attendance">Davomat</th><th data-t="actions">Amal</th></tr></thead>
+              <tbody id="all-students-body"></tbody>
+            </table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== GRADES ===== -->
+      <div id="page-grades" class="page">
+        <div class="g2c mb5">
+          <div class="card">
+            <div class="ch"><h3>📊 <span data-t="addGrade">Baho qo'shish</span></h3></div>
+            <div class="cb">
+              <div class="fg2"><label data-t="student">O'quvchi</label>
+                <select class="fs" id="grade-student"><option>Zulfiya Nazarova (UZ-2025-001)</option><option>Alisher Jurayev (UZ-2025-002)</option><option>Feruza Sultonova (UZ-2025-003)</option><option>Jasur Usmonov (UZ-2025-004)</option></select>
+              </div>
+              <div class="fg2"><label data-t="subject">Fan</label>
+                <select class="fs" id="grade-subject"><option>Matematika</option><option>Ingliz tili</option><option>Fizika</option><option>Kimyo</option><option>Biologiya</option><option>Informatika</option><option>Tarix</option></select>
+              </div>
+              <div class="fr">
+                <div class="fg2"><label data-t="grade">Baho</label>
+                  <select class="fs" id="grade-value"><option>5</option><option>4</option><option>3</option><option>2</option></select>
+                </div>
+                <div class="fg2"><label data-t="date">Sana</label><input type="date" class="fi" id="grade-date"/></div>
+              </div>
+              <div class="fg2"><label data-t="note">Izoh</label><input type="text" class="fi" id="grade-note" placeholder="Ixtiyoriy..." /></div>
+              <button class="btn btn-blue" onclick="addGrade()" style="width:100%;justify-content:center;">✓ <span data-t="save">Saqlash</span></button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3 data-t="recentGrades">So'nggi baholar</h3></div>
+            <div class="cb">
+              <div class="tw"><table class="dt">
+                <thead><tr><th data-t="student">O'quvchi</th><th>AD</th><th data-t="subject">Fan</th><th data-t="grade">Baho</th><th data-t="date">Sana</th></tr></thead>
+                <tbody id="grades-tbody">
+                  <tr><td>Dilnoza R.</td><td><span class="ad-badge">UZ-2025-005</span></td><td>Matematika</td><td><span class="gb g5">5</span></td><td>Bugun</td></tr>
+                  <tr><td>Bobur T.</td><td><span class="ad-badge">UZ-2025-006</span></td><td>Ingliz tili</td><td><span class="gb g4">4</span></td><td>Kecha</td></tr>
+                  <tr><td>Zulfiya N.</td><td><span class="ad-badge">UZ-2025-001</span></td><td>Fizika</td><td><span class="gb g5">5</span></td><td>Kecha</td></tr>
+                </tbody>
+              </table></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ATTENDANCE ===== -->
+      <div id="page-attendance" class="page">
+        <div class="card">
+          <div class="ch">
+            <div><h3>📅 <span data-t="markAttendance">Davomat belgilash</span></h3><p class="sub" id="att-date"></p></div>
+            <div class="flex gap2">
+              <select class="fs" id="att-class-select" onchange="buildAttendanceTables()" style="width:auto;padding:7px 12px;font-size:13px;"><option value="9">9-sinf</option><option value="10">10-sinf</option><option value="11">11-sinf</option></select>
+              <button class="btn btn-green" onclick="saveAttendance()">✓ <span data-t="save">Saqlash</span></button>
+            </div>
+          </div>
+          <div class="cb">
+            <div class="tw"><table class="dt">
+              <thead><tr><th>#</th><th>AD</th><th data-t="fullName">Ism Familiya</th><th data-t="present">Keldi</th><th data-t="late">Kech keldi</th><th data-t="absent">Kelmadi</th></tr></thead>
+              <tbody id="attendance-tbody"></tbody>
+            </table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCHEDULE ===== -->
+      <div id="page-schedule" class="page">
+        <div class="card mb5">
+          <div class="ch"><h3>🗓️ <span data-t="weekSchedule">Haftalik dars jadvali</span></h3>
+            <div class="flex gap2">
+              <select class="fs" id="sch-class-select" onchange="showToast(this.value+'-sinf jadvali ko\'rsatildi')" style="width:auto;padding:7px 12px;font-size:13px;"><option value="9">9-sinf</option><option value="10">10-sinf</option><option value="11">11-sinf</option></select>
+            </div>
+          </div>
+          <div class="cb">
+            <div class="sch-grid">
+              <div class="sch-day"><div class="sch-dh" data-t="monday">Dushanba</div><div class="sch-lessons">
+                <div class="li"><div class="lt">08:00–08:45</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
+                <div class="li" style="border-left-color:#0694a2"><div class="lt">09:00–09:45</div><div class="ln">Ingliz tili</div><div class="lte">Karimova M. · 105</div></div>
+                <div class="li" style="border-left-color:#7c3aed"><div class="lt">10:00–10:45</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
+                <div class="li missed-lesson"><div class="lt">11:00–11:45</div><div class="ln">❌ Kimyo</div><div class="lte">Sababsiz qoldirildi</div></div>
+                <div class="li" style="border-left-color:#059669"><div class="lt">12:00–12:45</div><div class="ln">Informatika</div><div class="lte">Yusupov J. · 115</div></div>
+              </div></div>
+              <div class="sch-day"><div class="sch-dh" data-t="tuesday">Seshanba</div><div class="sch-lessons">
+                <div class="li" style="border-left-color:#7c3aed"><div class="lt">08:00</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
+                <div class="li"><div class="lt">09:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
+                <div class="li" style="border-left-color:#d97706"><div class="lt">10:00</div><div class="ln">Tarix</div><div class="lte">Rahimov K. · 106</div></div>
+                <div class="li" style="border-left-color:#059669"><div class="lt">11:00</div><div class="ln">Biologiya</div><div class="lte">Xoliqova S. · 301</div></div>
+              </div></div>
+              <div class="sch-day"><div class="sch-dh" data-t="wednesday">Chorshanba</div><div class="sch-lessons">
+                <div class="li" style="border-left-color:#0694a2"><div class="lt">08:00</div><div class="ln">Ingliz tili</div><div class="lte">Karimova M. · 105</div></div>
+                <div class="li missed-lesson"><div class="lt">09:00</div><div class="ln">❌ Kimyo</div><div class="lte">Sababsiz qoldirildi</div></div>
+                <div class="li"><div class="lt">10:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
+                <div class="li" style="border-left-color:#059669"><div class="lt">11:00</div><div class="ln">Informatika</div><div class="lte">Yusupov J. · 115</div></div>
+              </div></div>
+              <div class="sch-day"><div class="sch-dh" data-t="thursday">Payshanba</div><div class="sch-lessons">
+                <div class="li"><div class="lt">08:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
+                <div class="li" style="border-left-color:#7c3aed"><div class="lt">09:00</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
+                <div class="li" style="border-left-color:#d97706"><div class="lt">10:00</div><div class="ln">Tarix</div><div class="lte">Rahimov K. · 106</div></div>
+                <div class="li" style="border-left-color:#0694a2"><div class="lt">11:00</div><div class="ln">Ingliz tili</div><div class="lte">Karimova M. · 105</div></div>
+              </div></div>
+              <div class="sch-day"><div class="sch-dh" data-t="friday">Juma</div><div class="sch-lessons">
+                <div class="li" style="border-left-color:#059669"><div class="lt">08:00</div><div class="ln">Biologiya</div><div class="lte">Xoliqova S. · 301</div></div>
+                <div class="li"><div class="lt">09:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
+                <div class="li" style="border-left-color:#7c3aed"><div class="lt">10:00</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RED LIST ===== -->
+      <div id="page-redlist" class="page">
+        <div class="card">
+          <div class="ch"><div><h3>🔴 <span data-t="redListTitle">Qizil ro'yxat — Kech kelganlar</span></h3><p class="sub" data-t="redListSub">3 marta va undan ko'p kech qolgan o'quvchilar</p></div></div>
+          <div class="cb">
+            <div class="tw"><table class="dt">
+              <thead><tr><th data-t="student">O'quvchi</th><th>AD</th><th data-t="class">Sinf</th><th data-t="lateCount">Kech soni</th><th data-t="lastTime">So'nggi</th><th data-t="parentNotif">Ota-ona xabardormi</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="flex ic gap2"><div class="r-av" style="width:30px;height:30px;font-size:11px;">MK</div><b>Malika Karimova</b></div></td>
+                  <td><span class="ad-badge">UZ-2025-010</span></td><td>7-sinf</td>
+                  <td><span style="background:#fee2e2;color:#991b1b;padding:2px 9px;border-radius:20px;font-weight:700;font-size:12.5px;">5×</span></td>
+                  <td>Bugun, 08:40</td>
+                  <td><button class="btn btn-blue" style="padding:4px 12px;font-size:12px;" onclick="sendTelegram('Malika Karimova')">📱 Telegram</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex ic gap2"><div class="r-av" style="width:30px;height:30px;font-size:11px;">AJ</div><b>Alisher Jurayev</b></div></td>
+                  <td><span class="ad-badge">UZ-2025-002</span></td><td>9-sinf</td>
+                  <td><span style="background:#fee2e2;color:#991b1b;padding:2px 9px;border-radius:20px;font-weight:700;font-size:12.5px;">3×</span></td>
+                  <td>Bugun, 08:25</td>
+                  <td><button class="btn btn-blue" style="padding:4px 12px;font-size:12px;" onclick="sendTelegram('Alisher Jurayev')">📱 Telegram</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex ic gap2"><div class="r-av" style="width:30px;height:30px;font-size:11px;">SS</div><b>Sardor Sobirov</b></div></td>
+                  <td><span class="ad-badge">UZ-2025-015</span></td><td>11-sinf</td>
+                  <td><span style="background:#fee2e2;color:#991b1b;padding:2px 9px;border-radius:20px;font-weight:700;font-size:12.5px;">2×</span></td>
+                  <td>Bugun, 09:00</td>
+                  <td><button class="btn btn-blue" style="padding:4px 12px;font-size:12px;" onclick="sendTelegram('Sardor Sobirov')">📱 Telegram</button></td>
+                </tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TEACHERS ===== -->
+      <div id="page-teachers" class="page">
+        <div class="flex ic jb mb5">
+          <h3 style="font-size:15px;font-weight:700;" data-t="teachersList">O'qituvchilar ro'yxati</h3>
+          <button class="btn btn-blue" onclick="showModal('add-teacher-modal')">+ <span data-t="addTeacher">O'qituvchi qo'shish</span></button>
+        </div>
+        <div class="card"><div class="cb"><div class="tw"><table class="dt">
+          <thead><tr><th>#</th><th data-t="fullName">Ism Familiya</th><th data-t="subject">Fan</th><th data-t="classTeacher">Sinf rahbar</th><th>Email</th><th data-t="actions">Amal</th></tr></thead>
+          <tbody id="teachers-body">
+            <tr><td>1</td><td><b>Aliyev Anvar</b></td><td>Matematika</td><td>11-sinf</td><td>aliyev@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
+            <tr><td>2</td><td><b>Karimova Mohira</b></td><td>Ingliz tili</td><td>10-sinf</td><td>karimova@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
+            <tr><td>3</td><td><b>Toshmatov Bahodir</b></td><td>Fizika</td><td>9-sinf</td><td>toshmatov@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
+            <tr><td>4</td><td><b>Nazarova Zulfiya</b></td><td>Kimyo</td><td>8-sinf</td><td>nazarova@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
+            <tr><td>5</td><td><b>Yusupov Jamshid</b></td><td>Informatika</td><td>7-sinf</td><td>yusupov@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
+          </tbody>
+        </table></div></div></div>
+      </div>
+
+      <!-- ===== TELEGRAM ===== -->
+      <div id="page-telegram" class="page">
+        <div class="tg-card">
+          <div class="tg-ic">📱</div>
+          <div>
+            <h3 data-t="tgTitle">Telegram Bot ulash</h3>
+            <p data-t="tgDesc">Ota-onalar farzandlari haqida Telegram orqali real vaqtda xabar olishlari mumkin.</p>
+            <button class="btn-wh" onclick="showToast('@eMaktabUzBot ga o\'ting')">🤖 @eMaktabUzBot</button>
+          </div>
+        </div>
+        <div class="g2c">
+          <div class="card"><div class="ch"><h3 data-t="todayStats">Bugungi xabarlar</h3></div><div class="cb">
+            <div class="rli"><div class="r-av">📬</div><div><div class="r-nm">Malika K. ota-onasiga</div><div class="r-det">Kech keldi · 08:40</div></div><span class="kc">Yuborildi ✓</span></div>
+            <div class="rli"><div class="r-av">📬</div><div><div class="r-nm">Sardor S. ota-onasiga</div><div class="r-det">Baho: 5 (Matematika)</div></div><span class="kc">Yuborildi ✓</span></div>
+          </div></div>
+          <div class="card"><div class="ch"><h3 data-t="botStats">Bot statistikasi</h3></div><div class="cb">
+            <div class="rli"><div class="r-av" style="background:#dbeafe;color:#1d4ed8;">📊</div><div><div class="r-nm">Ulangan foydalanuvchilar</div><div class="r-det">Ota-onalar</div></div><span class="kc" style="background:#dbeafe;color:#1d4ed8;">312</span></div>
+            <div class="rli"><div class="r-av" style="background:#d1fae5;color:#065f46;">📩</div><div><div class="r-nm">Bugun yuborilgan</div><div class="r-det">Xabarlar soni</div></div><span class="kc" style="background:#d1fae5;color:#065f46;">48</span></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===== SETTINGS ===== -->
+      <div id="page-settings" class="page">
+        <div class="g2c">
+          <div class="card"><div class="ch"><h3 data-t="schoolInfo">Maktab ma'lumotlari</h3></div><div class="cb">
+            <div class="fg2"><label data-t="schoolName">Maktab nomi</label><input type="text" class="fi" value="1-Yagona Maktab" /></div>
+            <div class="fg2"><label data-t="region">Viloyat / Shahar</label><input type="text" class="fi" value="Toshkent shahri" /></div>
+            <div class="fg2"><label>MAKTAB ID</label><input type="text" class="fi" value="MKT-2025-001" /></div>
+            <div class="fg2"><label data-t="director">Direktor</label><input type="text" class="fi" value="Umarov Behruz" /></div>
+            <button class="btn btn-blue" onclick="showToast('Saqlandi ✓')" style="width:100%;justify-content:center;"><span data-t="save">Saqlash</span></button>
+          </div></div>
+          <div class="card"><div class="ch"><h3 data-t="systemSettings">Tizim sozlamalari</h3></div><div class="cb">
+            <div class="fg2"><label data-t="language">Til</label>
+              <select class="fs" onchange="setLang(this.value)" id="lang-select">
+                <option value="uz">🇺🇿 O'zbek tili</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="ru">🇷🇺 Русский язык</option>
+              </select>
+            </div>
+            <div class="fg2"><label data-t="theme">Interfeys rejimi</label>
+              <select class="fs" onchange="setTheme(this.value)" id="theme-select">
+                <option value="light" data-t="lightTheme">Kunduzgi (yorug')</option>
+                <option value="dark" data-t="darkTheme">Tungi (qorong'i)</option>
+              </select>
+            </div>
+            <div class="fg2"><label data-t="telegramToken">Telegram Bot Token</label><input type="text" class="fi" placeholder="1234567890:AAE..." /></div>
+            <button class="btn btn-blue" onclick="showToast('Saqlandi ✓')" style="width:100%;justify-content:center;"><span data-t="save">Saqlash</span></button>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===== NOTIFICATIONS ===== -->
+      <div id="page-notifications" class="page">
+        <div class="card"><div class="ch"><h3>🔔 <span data-t="notifications">Bildirishnomalar</span></h3></div><div class="cb">
+          <div class="ni"><div class="n-ic" style="background:#dbeafe;">📊</div><div><div class="n-title">Dilnoza Raximova — 5 baho (Matematika)</div><div class="n-det">5 daqiqa oldin · 11-sinf</div></div></div>
+          <div class="ni"><div class="n-ic" style="background:#fee2e2;">⏰</div><div><div class="n-title" data-t="late">Malika Karimova kech keldi</div><div class="n-det">08:40 · 7-sinf</div></div></div>
+          <div class="ni"><div class="n-ic" style="background:#fef3c7;">📅</div><div><div class="n-title">Sardor Sobirov — davomat sababsiz</div><div class="n-det">Kecha · 11-sinf · Kimyo darsida</div></div></div>
+          <div class="ni"><div class="n-ic" style="background:#d1fae5;">✅</div><div><div class="n-title">9-sinf davomati saqlandi</div><div class="n-det">Toshmatov B. tomonidan · 10:05</div></div></div>
+        </div></div>
+      </div>
+
+      <!-- ===== TEACHER DASHBOARD ===== -->
+      <div id="page-teacher-dashboard" class="page">
+        <div class="class-teacher-banner" style="background:linear-gradient(135deg,#0d4080,#1557a0);">
+          <div class="ct-photo">TA</div>
+          <div class="ct-info">
+            <h3>Toshmatov Bahodir Abrorovich</h3>
+            <div class="meta">📚 Fizika o'qituvchisi · 9-sinf rahbari</div>
+            <div class="meta" style="margin-top:4px;">📧 toshmatov@maktab.uz</div>
+          </div>
+          <div class="ct-badge">9-sinf rahbari</div>
+        </div>
+        <div class="sg">
+          <div class="sc"><div class="top"><div><div class="num">38</div><div class="lbl" data-t="students">O'quvchilar</div></div><div class="ib" style="background:#dbeafe;">👨‍🎓</div></div><div class="trend tu">9-sinf</div></div>
+          <div class="sc"><div class="top"><div><div class="num">91%</div><div class="lbl" data-t="attendance">Davomat</div></div><div class="ib" style="background:#d1fae5;">📅</div></div><div class="trend tu">↑ yaxshi</div></div>
+          <div class="sc"><div class="top"><div><div class="num">4.1</div><div class="lbl" data-t="avgGrade">O'rtacha baho</div></div><div class="ib" style="background:#ede9fe;">📊</div></div><div class="trend tu">↑</div></div>
+          <div class="sc"><div class="top"><div><div class="num">2</div><div class="lbl" data-t="late">Kech keldi</div></div><div class="ib" style="background:#fee2e2;">⚠️</div></div><div class="trend td">Bugun</div></div>
+        </div>
+      </div>
+
+      <!-- ===== MY CLASS (TEACHER) ===== -->
+      <div id="page-my-class" class="page">
+        <div class="class-teacher-banner">
+          <div class="ct-photo">TA</div>
+          <div class="ct-info"><h3>9-sinf · Mening sinfim</h3><div class="meta">Sinf rahbar: Toshmatov Bahodir · 38 o'quvchi</div></div>
+          <div class="ct-badge">9-sinf</div>
+        </div>
+        <div class="card"><div class="ch"><h3 data-t="studentsList">O'quvchilar ro'yxati</h3></div><div class="cb">
+          <div class="tw"><table class="dt">
+            <thead><tr><th>#</th><th>AD</th><th data-t="fullName">Ism Familiya</th><th data-t="avgGrade">O'rt. baho</th><th data-t="attendance">Davomat</th><th data-t="actions">Amal</th></tr></thead>
+            <tbody id="teacher-class-body"></tbody>
+          </table></div>
+        </div></div>
+      </div>
+
+      <!-- ===== ADD GRADES (TEACHER) ===== -->
+      <div id="page-add-grades" class="page">
+        <div class="class-teacher-banner">
+          <div class="ct-photo">TA</div>
+          <div class="ct-info"><h3>Baho qo'shish · 9-sinf</h3><div class="meta">Toshmatov Bahodir — Fizika</div></div>
+        </div>
+        <div class="g2c">
+          <div class="card"><div class="ch"><h3 data-t="addGrade">Baho qo'shish</h3></div><div class="cb">
+            <div class="fg2"><label data-t="student">O'quvchi</label>
+              <select class="fs"><option>Zulfiya Nazarova (UZ-2025-001)</option><option>Alisher Jurayev (UZ-2025-002)</option><option>Feruza Sultonova (UZ-2025-003)</option></select>
+            </div>
+            <div class="fg2"><label data-t="subject">Fan</label><input type="text" class="fi" value="Fizika" readonly /></div>
+            <div class="fr">
+              <div class="fg2"><label data-t="grade">Baho</label><select class="fs"><option>5</option><option>4</option><option>3</option><option>2</option></select></div>
+              <div class="fg2"><label data-t="date">Sana</label><input type="date" class="fi" /></div>
+            </div>
+            <button class="btn btn-blue" onclick="addGrade()" style="width:100%;justify-content:center;"><span data-t="save">Saqlash</span></button>
+          </div></div>
+          <div class="card"><div class="ch"><h3 data-t="recentGrades">So'nggi baholar</h3></div><div class="cb">
+            <div class="tw"><table class="dt">
+              <thead><tr><th>AD</th><th data-t="student">O'quvchi</th><th data-t="grade">Baho</th><th data-t="date">Sana</th></tr></thead>
+              <tbody id="teacher-grades-tbody">
+                <tr><td><span class="ad-badge">UZ-2025-001</span></td><td>Zulfiya N.</td><td><span class="gb g5">5</span></td><td>Bugun</td></tr>
+                <tr><td><span class="ad-badge">UZ-2025-002</span></td><td>Alisher J.</td><td><span class="gb g4">4</span></td><td>Kecha</td></tr>
+              </tbody>
+            </table></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===== TAKE ATTENDANCE (TEACHER) ===== -->
+      <div id="page-take-attendance" class="page">
+        <div class="class-teacher-banner">
+          <div class="ct-photo">TA</div>
+          <div class="ct-info"><h3>Davomat belgilash · 9-sinf</h3><div class="meta">Toshmatov Bahodir</div></div>
+        </div>
+        <div class="card"><div class="ch"><div><h3 data-t="markAttendance">Davomat belgilash</h3><p class="sub" id="teacher-att-date"></p></div>
+          <button class="btn btn-green" onclick="saveAttendance()">✓ <span data-t="save">Saqlash</span></button>
+        </div><div class="cb">
+          <div class="tw"><table class="dt">
+            <thead><tr><th>#</th><th>AD</th><th data-t="fullName">Ism Familiya</th><th data-t="present">Keldi ✓</th><th data-t="late">Kech ⏰</th><th data-t="absent">Kelmadi ✗</th></tr></thead>
+            <tbody id="teacher-attendance-tbody"></tbody>
+          </table></div>
+        </div></div>
+      </div>
+
+      <!-- ===== STUDENT PROFILE ===== -->
+      <div id="page-student-profile" class="page">
+        <div class="prof-header">
+          <div class="prof-av" id="prof-av">ZN</div>
+          <div>
+            <h2 id="prof-name">Zulfiya Nazarova</h2>
+            <div class="meta">10-sinf · O'quvchi</div>
+            <div class="meta">📧 zulfiya.nazarova@maktab.uz</div>
+            <div class="prof-id" id="prof-id">AD: UZ-2025-001</div>
+          </div>
+        </div>
+        <div class="g2c">
+          <div class="card"><div class="ch"><h3 data-t="myGrades">Fanlar bo'yicha baholar</h3></div><div class="cb">
+            <div class="gb-item"><div class="gb-lbl"><span>Matematika</span><span class="fw7">4.8</span></div><div class="gb-track"><div class="gb-fill" style="width:96%"></div></div></div>
+            <div class="gb-item"><div class="gb-lbl"><span>Fizika</span><span class="fw7">4.5</span></div><div class="gb-track"><div class="gb-fill" style="width:90%;background:linear-gradient(90deg,#7c3aed,#a855f7)"></div></div></div>
+            <div class="gb-item"><div class="gb-lbl"><span>Ingliz tili</span><span class="fw7">4.3</span></div><div class="gb-track"><div class="gb-fill" style="width:86%;background:linear-gradient(90deg,#0694a2,#06b6d4)"></div></div></div>
+            <div class="gb-item"><div class="gb-lbl"><span>Kimyo</span><span class="fw7">3.9</span></div><div class="gb-track"><div class="gb-fill" style="width:78%;background:linear-gradient(90deg,#d97706,#f59e0b)"></div></div></div>
+            <div class="gb-item"><div class="gb-lbl"><span>Biologiya</span><span class="fw7">4.6</span></div><div class="gb-track"><div class="gb-fill" style="width:92%;background:linear-gradient(90deg,#059669,#10b981)"></div></div></div>
+          </div></div>
+          <div class="card"><div class="ch"><h3>📅 <span data-t="thisWeek">Bu haftadagi davomat</span></h3></div><div class="cb">
+            <div class="rli"><div class="n-ic" style="background:#d1fae5;border-radius:9px;">✅</div><div><div class="r-nm">Dushanba</div><div class="r-det">Barcha darslarda bo'ldi</div></div></div>
+            <div class="rli"><div class="n-ic" style="background:#d1fae5;border-radius:9px;">✅</div><div><div class="r-nm">Seshanba</div><div class="r-det">Barcha darslarda bo'ldi</div></div></div>
+            <div class="rli"><div class="n-ic" style="background:#fee2e2;border-radius:9px;">❌</div><div><div class="r-nm">Chorshanba</div><div class="r-det">Kimyo — sababsiz qoldirdi</div></div></div>
+            <div class="rli"><div class="n-ic" style="background:#d1fae5;border-radius:9px;">✅</div><div><div class="r-nm">Payshanba</div><div class="r-det">Barcha darslarda bo'ldi</div></div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===== MY GRADES (STUDENT) ===== -->
+      <div id="page-my-grades" class="page">
+        <div class="card"><div class="ch"><h3>📊 <span data-t="myGrades">Baholarim</span></h3><p class="sub" id="my-grades-sub">10-sinf</p></div><div class="cb">
+          <div class="tw"><table class="dt">
+            <thead><tr><th data-t="subject">Fan</th><th>2</th><th>3</th><th>4</th><th>5</th><th data-t="avgGrade">O'rtacha</th></tr></thead>
+            <tbody>
+              <tr><td><b>Matematika</b></td><td></td><td></td><td><span class="gb g4">4</span></td><td><span class="gb g5">5</span></td><td><b>4.8</b></td></tr>
+              <tr><td><b>Fizika</b></td><td></td><td></td><td><span class="gb g4">4</span></td><td><span class="gb g5">5</span></td><td><b>4.5</b></td></tr>
+              <tr><td><b>Ingliz tili</b></td><td></td><td><span class="gb g3">3</span></td><td><span class="gb g4">4</span></td><td></td><td><b>4.3</b></td></tr>
+              <tr><td><b>Kimyo</b></td><td></td><td><span class="gb g3">3</span></td><td><span class="gb g4">4</span></td><td></td><td><b>3.9</b></td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+
+      <!-- ===== MY ATTENDANCE (STUDENT) ===== -->
+      <div id="page-my-attendance" class="page">
+        <div class="card"><div class="ch"><h3>📅 <span data-t="myAttendance">Davomatim</span></h3></div><div class="cb">
+          <div class="tw"><table class="dt">
+            <thead><tr><th data-t="date">Sana</th><th data-t="subject">Fan</th><th data-t="status">Holat</th><th data-t="note">Izoh</th></tr></thead>
+            <tbody>
+              <tr><td>2025-05-14</td><td>Matematika</td><td><span class="sp sp-ok">✓ Keldi</span></td><td>—</td></tr>
+              <tr><td>2025-05-14</td><td>Fizika</td><td><span class="sp sp-ok">✓ Keldi</span></td><td>—</td></tr>
+              <tr class="att-row-missed"><td>2025-05-15</td><td>Kimyo</td><td><span class="sp sp-miss">✗ Kelmadi</span></td><td>Sababsiz</td></tr>
+              <tr><td>2025-05-16</td><td>Ingliz tili</td><td><span class="sp sp-late">⏰ Kech</span></td><td>10 daqiqa</td></tr>
+              <tr><td>2025-05-16</td><td>Matematika</td><td><span class="sp sp-ok">✓ Keldi</span></td><td>—</td></tr>
+              <tr class="att-row-missed"><td>2025-05-17</td><td>Biologiya</td><td><span class="sp sp-miss">✗ Kelmadi</span></td><td>Kasal</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+
+      <!-- ===== PARENT DASHBOARD ===== -->
+      <div id="page-parent-dashboard" class="page">
+        <div class="prof-header" style="background:linear-gradient(135deg,#0a1f45,#1d9950);">
+          <div class="prof-av">DN</div>
+          <div>
+            <h2>Demo O'quvchi</h2>
+            <div class="meta">Farzand: 10-sinf</div>
+            <div class="prof-id">AD: UZ-2025-007</div>
+          </div>
+        </div>
+        <div class="sg" style="grid-template-columns:repeat(3,1fr);">
+          <div class="sc"><div class="top"><div><div class="num">4.2</div><div class="lbl" data-t="avgGrade">O'rtacha baho</div></div><div class="ib" style="background:#dbeafe;">📊</div></div><div class="trend tu">↑</div></div>
+          <div class="sc"><div class="top"><div><div class="num">88%</div><div class="lbl" data-t="attendance">Davomat</div></div><div class="ib" style="background:#d1fae5;">📅</div></div><div class="trend td">↓ 2%</div></div>
+          <div class="sc"><div class="top"><div><div class="num">2</div><div class="lbl" data-t="absent">Qoldirildi</div></div><div class="ib" style="background:#fee2e2;">⚠️</div></div><div class="trend td">Bu oy</div></div>
+        </div>
+      </div>
+
+      <!-- ===== CHILD GRADES ===== -->
+      <div id="page-child-grades" class="page">
+        <div class="card"><div class="ch"><h3>📊 <span data-t="childGrades">Farzand baholari</span></h3><p class="sub">10-sinf · Demo O'quvchi (UZ-2025-007)</p></div><div class="cb">
+          <div class="tw"><table class="dt">
+            <thead><tr><th data-t="subject">Fan</th><th data-t="grade">Baholar</th><th data-t="avgGrade">O'rtacha</th></tr></thead>
+            <tbody>
+              <tr><td><b>Matematika</b></td><td><span class="gb g5">5</span> <span class="gb g4">4</span> <span class="gb g5">5</span></td><td><b>4.7</b></td></tr>
+              <tr><td><b>Ingliz tili</b></td><td><span class="gb g4">4</span> <span class="gb g3">3</span> <span class="gb g4">4</span></td><td><b>3.7</b></td></tr>
+              <tr><td><b>Fizika</b></td><td><span class="gb g4">4</span> <span class="gb g4">4</span></td><td><b>4.0</b></td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+
+      <!-- ===== CHILD ATTENDANCE ===== -->
+      <div id="page-child-attendance" class="page">
+        <div class="card"><div class="ch"><h3>📅 <span data-t="childAttendance">Farzand davomati</span></h3><p class="sub">10-sinf · UZ-2025-007</p></div><div class="cb">
+          <div class="tw"><table class="dt">
+            <thead><tr><th data-t="date">Sana</th><th data-t="subject">Fan</th><th data-t="status">Holat</th></tr></thead>
+            <tbody>
+              <tr><td>2025-05-15</td><td>Matematika</td><td><span class="sp sp-ok">✓ Keldi</span></td></tr>
+              <tr class="att-row-missed"><td>2025-05-15</td><td>Kimyo</td><td><span class="sp sp-miss">✗ Kelmadi</span></td></tr>
+              <tr><td>2025-05-16</td><td>Fizika</td><td><span class="sp sp-late">⏰ Kech</span></td></tr>
+              <tr class="att-row-missed"><td>2025-05-17</td><td>Biologiya</td><td><span class="sp sp-miss">✗ Kelmadi</span></td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+
+    </div><!-- /pc -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ===== MODALS ===== -->
+
+<!-- Add Student -->
+<div class="mo" id="add-student-modal">
+  <div class="md">
+    <div class="mh"><h3 data-t="addStudent">O'quvchi qo'shish</h3><button class="close-x" onclick="closeModal('add-student-modal')">✕</button></div>
+    <div class="mb2">
+      <div class="al al-ok">ℹ️ AD raqami avtomatik beriladi</div>
+      <div class="fr mb3">
+        <div class="fg2"><label data-t="lastName">Familiya</label><input type="text" class="fi" placeholder="Nazarova" /></div>
+        <div class="fg2"><label data-t="firstName">Ism</label><input type="text" class="fi" placeholder="Zulfiya" /></div>
+      </div>
+      <div class="fr mb3">
+        <div class="fg2"><label data-t="class">Sinf</label><select class="fs"><option>9-sinf</option><option>10-sinf</option><option>11-sinf</option></select></div>
+        <div class="fg2"><label data-t="gender">Jins</label><select class="fs"><option data-t="female">Qiz ♀</option><option data-t="male">O'g'il ♂</option></select></div>
+      </div>
+      <div class="fg2"><label>AD (Shaxsiy ID)</label><input type="text" class="fi" placeholder="UZ-2025-..." /></div>
+      <div class="fg2"><label data-t="parentPhone">Ota-ona telefoni</label><input type="tel" class="fi" placeholder="+998 90 000 00 00" /></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-out" onclick="closeModal('add-student-modal')" data-t="cancel">Bekor</button>
+      <button class="btn btn-blue" onclick="saveStudent()" data-t="save">Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Teacher -->
+<div class="mo" id="add-teacher-modal">
+  <div class="md">
+    <div class="mh"><h3 data-t="addTeacher">O'qituvchi qo'shish</h3><button class="close-x" onclick="closeModal('add-teacher-modal')">✕</button></div>
+    <div class="mb2">
+      <div class="fr mb3">
+        <div class="fg2"><label data-t="lastName">Familiya</label><input type="text" class="fi" /></div>
+        <div class="fg2"><label data-t="firstName">Ism</label><input type="text" class="fi" /></div>
+      </div>
+      <div class="fg2"><label data-t="subject">Fan</label><select class="fs"><option>Matematika</option><option>Ingliz tili</option><option>Fizika</option><option>Kimyo</option><option>Biologiya</option><option>Informatika</option></select></div>
+      <div class="fg2"><label data-t="classTeacher">Sinf rahbar (sinf)</label><select class="fs"><option>—</option><option>7-sinf</option><option>8-sinf</option><option>9-sinf</option><option>10-sinf</option><option>11-sinf</option></select></div>
+      <div class="fg2"><label>📷 <span data-t="photo">Rasm</span></label><input type="text" class="fi" placeholder="https://... yoki bo'sh qoldiring" /></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-out" onclick="closeModal('add-teacher-modal')" data-t="cancel">Bekor</button>
+      <button class="btn btn-blue" onclick="closeModal('add-teacher-modal');showToast('O\'qituvchi qo\'shildi ✓')" data-t="save">Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Class -->
+<div class="mo" id="add-class-modal">
+  <div class="md">
+    <div class="mh"><h3 data-t="addClass">Sinf qo'shish</h3><button class="close-x" onclick="closeModal('add-class-modal')">✕</button></div>
+    <div class="mb2">
+      <div class="fr mb3">
+        <div class="fg2"><label data-t="classNumber">Sinf raqami</label><select class="fs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select></div>
+        <div class="fg2"><label data-t="classLetter">Harf</label><select class="fs"><option>A</option><option>B</option><option>V</option></select></div>
+      </div>
+      <div class="fg2"><label data-t="classTeacher">Sinf rahbar</label>
+        <select class="fs">
+          <option>Aliyev Anvar (Matematika)</option>
+          <option>Karimova Mohira (Ingliz tili)</option>
+          <option>Toshmatov Bahodir (Fizika)</option>
+        </select>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-out" onclick="closeModal('add-class-modal')" data-t="cancel">Bekor</button>
+      <button class="btn btn-blue" onclick="closeModal('add-class-modal');showToast('Sinf qo\'shildi ✓')" data-t="save">Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ===== DATA ===== */
+const USERS = {
+  'admin@maktab.uz':   { password:'admin123',   role:'admin',   name:'Administrator',        initials:'AD', ad:'ADMIN-001' },
+  'teacher@maktab.uz': { password:'teacher123', role:'teacher', name:'Toshmatov Bahodir',    initials:'TA', ad:'TCH-9001', class:'9-sinf' },
+  'student@maktab.uz': { password:'student123', role:'student', name:'Zulfiya Nazarova',     initials:'ZN', ad:'UZ-2025-001', class:'10-sinf' },
+  'parent@maktab.uz':  { password:'parent123',  role:'parent',  name:'Demo Ota-ona',         initials:'DO', ad:'PAR-001', childName:'Demo O\'quvchi', childAd:'UZ-2025-007' }
+};
+
+const CLASS_DATA = {
+  1:  { teacher:'Hamidova N.',   color:'#1557a0', count:38, boys:21, girls:17, subject:'Boshlang\'ich' },
+  2:  { teacher:'Karimov S.',    color:'#1d9950', count:35, boys:18, girls:17, subject:'Boshlang\'ich' },
+  3:  { teacher:'Tosheva D.',    color:'#7c3aed', count:40, boys:22, girls:18, subject:'Boshlang\'ich' },
+  4:  { teacher:'Umarov F.',     color:'#0694a2', count:37, boys:20, girls:17, subject:'Boshlang\'ich' },
+  5:  { teacher:'Nazarov B.',    color:'#d97706', count:42, boys:23, girls:19, subject:'Tarix' },
+  6:  { teacher:'Sobirov X.',    color:'#e53e3e', count:39, boys:21, girls:18, subject:'Matematika' },
+  7:  { teacher:'Yusupov J.',    color:'#059669', count:44, boys:24, girls:20, subject:'Informatika' },
+  8:  { teacher:'Nazarova Z.',   color:'#9333ea', count:41, boys:22, girls:19, subject:'Kimyo' },
+  9:  { teacher:'Toshmatov B.',  color:'#1557a0', count:38, boys:20, girls:18, subject:'Fizika' },
+  10: { teacher:'Karimova M.',   color:'#0694a2', count:36, boys:19, girls:17, subject:'Ingliz tili' },
+  11: { teacher:'Aliyev A.',     color:'#1d9950', count:30, boys:16, girls:14, subject:'Matematika' }
+};
+
+const STUDENTS = [
+  {id:1, ad:'UZ-2025-001', name:'Zulfiya Nazarova',  gender:'♀', cls:'9', avg:4.8, att:'98%'},
+  {id:2, ad:'UZ-2025-002', name:'Alisher Jurayev',   gender:'♂', cls:'9', avg:3.5, att:'78%'},
+  {id:3, ad:'UZ-2025-003', name:'Feruza Sultonova',  gender:'♀', cls:'9', avg:4.1, att:'91%'},
+  {id:4, ad:'UZ-2025-004', name:'Jasur Usmonov',     gender:'♂', cls:'9', avg:4.0, att:'88%'},
+  {id:5, ad:'UZ-2025-005', name:'Dilnoza Raximova',  gender:'♀', cls:'9', avg:4.6, att:'96%'},
+  {id:6, ad:'UZ-2025-006', name:'Bobur Toshmatov',   gender:'♂', cls:'10', avg:3.9, att:'85%'},
+  {id:7, ad:'UZ-2025-007', name:'Sarvinoz Eshmatova',gender:'♀', cls:'10', avg:4.3, att:'93%'},
+  {id:8, ad:'UZ-2025-008', name:'Sherzod Mirzayev',  gender:'♂', cls:'10', avg:3.7, att:'80%'},
+  {id:9, ad:'UZ-2025-009', name:'Nargiza Xasanova',  gender:'♀', cls:'11', avg:4.5, att:'94%'},
+  {id:10,ad:'UZ-2025-010', name:'Davron Qodirov',    gender:'♂', cls:'11', avg:4.2, att:'87%'},
+];
+
+/* ===== TRANSLATIONS ===== */
+const T = {
+  uz: {
+    welcome:'Xush kelibsiz 👋', enterCreds:'Email va parolni kiriting',
+    admin:'Admin', teacher:"O'qituvchi", student:"O'quvchi", parent:'Ota-ona',
+    emailLabel:'Email manzil', passLabel:'Parol', loginBtn:'Kirish',
+    wrongCreds:'Email yoki parol noto\'g\'ri!',
+    demoAccounts:'Demo hisoblar', quickAccess:'Tezkor kirish:',
+    dashboard:'Dashboard', classes:'Sinflar', students:"O'quvchilar",
+    teachers:"O'qituvchilar", grades:'Baholar', attendance:'Davomat',
+    schedule:'Dars jadvali', redList:'Qizil ro\'yxat', settings:'Sozlamalar',
+    management:'Boshqaruv', main:'Asosiy',
+    myClass:'Mening sinfim', addGrade:'Baho qo\'shish', myProfile:'Profilim',
+    myGrades:'Baholarim', myAttendance:'Davomatim',
+    childGrades:'Farzand baholari', childAttendance:'Farzand davomati',
+    totalStudents:'Jami o\'quvchilar', thisMonth:'bu oy yangi',
+    prevWeek:'oldingi hafta', avgGrade:'O\'rtacha baho', goodResult:'yaxshi',
+    lateToday:'Kech kelganlar (bugun)', all:'Barchasi',
+    recentGrades:'So\'nggi baholar', todaySchedule:'Bugungi dars jadvali',
+    fullSchedule:'To\'liq jadval', allClasses:'Barcha sinflar (1–11)',
+    clickClass:'Sinf ma\'lumotlarini ko\'rish uchun bosing',
+    addClass:'Sinf qo\'shish', addStudent:"O'quvchi qo'shish",
+    addTeacher:"O'qituvchi qo'shish", studentsList:"O'quvchilar ro'yxati",
+    teachersList:"O'qituvchilar ro'yxati", redListTitle:'Qizil ro\'yxat — Kech kelganlar',
+    redListSub:'3 marta va undan ko\'p kech qolgan o\'quvchilar',
+    markAttendance:'Davomat belgilash', save:'Saqlash', cancel:'Bekor qilish',
+    fullName:'Ism Familiya', gender:'Jins', class:'Sinf', subject:'Fan', grade:'Baho',
+    date:'Sana', time:'Vaqt', room:'Xona', actions:'Amal', note:'Izoh',
+    present:'Keldi ✓', late:'Kech ⏰', absent:'Kelmadi ✗',
+    classTeacher:'Sinf rahbar', firstName:'Ism', lastName:'Familiya',
+    classNumber:'Sinf raqami', classLetter:'Harf',
+    parentPhone:'Ota-ona telefoni', photo:'Rasm',
+    female:'Qiz ♀', male:"O'g'il ♂",
+    monday:'Dushanba', tuesday:'Seshanba', wednesday:'Chorshanba',
+    thursday:'Payshanba', friday:'Juma',
+    status:'Holat', weekSchedule:'Haftalik dars jadvali',
+    schoolInfo:'Maktab ma\'lumotlari', schoolName:'Maktab nomi',
+    region:'Viloyat / Shahar', director:'Direktor',
+    systemSettings:'Tizim sozlamalari', language:'Til', theme:'Interfeys rejimi',
+    lightTheme:'Kunduzgi (yorug\')', darkTheme:'Tungi (qorong\'i)',
+    telegramToken:'Telegram Bot Token', notifications:'Bildirishnomalar',
+    tgTitle:'Telegram Bot ulash', tgDesc:'Ota-onalar farzandlari haqida Telegram orqali real vaqtda xabar olishlari mumkin.',
+    todayStats:'Bugungi xabarlar', botStats:'Bot statistikasi',
+    thisWeek:'Bu haftadagi davomat', schoolId:'Maktab ID',
+    parentNotif:'Ota-ona xabardormi', lateCount:'Kech soni', lastTime:'So\'nggi',
+    edit:'Tahrir', myProfile2:'Mening profilim',
+  },
+  en: {
+    welcome:'Welcome 👋', enterCreds:'Enter your email and password',
+    admin:'Admin', teacher:'Teacher', student:'Student', parent:'Parent',
+    emailLabel:'Email address', passLabel:'Password', loginBtn:'Login',
+    wrongCreds:'Incorrect email or password!',
+    demoAccounts:'Demo accounts', quickAccess:'Quick access:',
+    dashboard:'Dashboard', classes:'Classes', students:'Students',
+    teachers:'Teachers', grades:'Grades', attendance:'Attendance',
+    schedule:'Schedule', redList:'Red List', settings:'Settings',
+    management:'Management', main:'Main',
+    myClass:'My Class', addGrade:'Add Grade', myProfile:'My Profile',
+    myGrades:'My Grades', myAttendance:'My Attendance',
+    childGrades:'Child Grades', childAttendance:'Child Attendance',
+    totalStudents:'Total Students', thisMonth:'new this month',
+    prevWeek:'vs last week', avgGrade:'Average Grade', goodResult:'good',
+    lateToday:'Late today', all:'All',
+    recentGrades:'Recent Grades', todaySchedule:"Today's Schedule",
+    fullSchedule:'Full Schedule', allClasses:'All Classes (1–11)',
+    clickClass:'Click to view class details',
+    addClass:'Add Class', addStudent:'Add Student',
+    addTeacher:'Add Teacher', studentsList:'Student List',
+    teachersList:'Teacher List', redListTitle:'Red List — Late Arrivals',
+    redListSub:'Students late 3 or more times',
+    markAttendance:'Mark Attendance', save:'Save', cancel:'Cancel',
+    fullName:'Full Name', gender:'Gender', class:'Class', subject:'Subject', grade:'Grade',
+    date:'Date', time:'Time', room:'Room', actions:'Actions', note:'Note',
+    present:'Present ✓', late:'Late ⏰', absent:'Absent ✗',
+    classTeacher:'Class Teacher', firstName:'First Name', lastName:'Last Name',
+    classNumber:'Class Number', classLetter:'Letter',
+    parentPhone:'Parent Phone', photo:'Photo',
+    female:'Girl ♀', male:'Boy ♂',
+    monday:'Monday', tuesday:'Tuesday', wednesday:'Wednesday',
+    thursday:'Thursday', friday:'Friday',
+    status:'Status', weekSchedule:'Weekly Schedule',
+    schoolInfo:'School Information', schoolName:'School Name',
+    region:'Region / City', director:'Director',
+    systemSettings:'System Settings', language:'Language', theme:'Theme',
+    lightTheme:'Light Mode', darkTheme:'Dark Mode',
+    telegramToken:'Telegram Bot Token', notifications:'Notifications',
+    tgTitle:'Connect Telegram Bot', tgDesc:'Parents can receive real-time notifications via Telegram.',
+    todayStats:"Today's Messages", botStats:'Bot Statistics',
+    thisWeek:'This Week Attendance', schoolId:'School ID',
+    parentNotif:'Parent Notified', lateCount:'Late Count', lastTime:'Last Time',
+    edit:'Edit', myProfile2:'My Profile',
+  },
+  ru: {
+    welcome:'Добро пожаловать 👋', enterCreds:'Введите email и пароль',
+    admin:'Администратор', teacher:'Учитель', student:'Ученик', parent:'Родитель',
+    emailLabel:'Email адрес', passLabel:'Пароль', loginBtn:'Войти',
+    wrongCreds:'Неверный email или пароль!',
+    demoAccounts:'Демо-аккаунты', quickAccess:'Быстрый вход:',
+    dashboard:'Панель', classes:'Классы', students:'Ученики',
+    teachers:'Учителя', grades:'Оценки', attendance:'Посещаемость',
+    schedule:'Расписание', redList:'Красный список', settings:'Настройки',
+    management:'Управление', main:'Главное',
+    myClass:'Мой класс', addGrade:'Добавить оценку', myProfile:'Мой профиль',
+    myGrades:'Мои оценки', myAttendance:'Моя посещаемость',
+    childGrades:'Оценки ребёнка', childAttendance:'Посещаемость ребёнка',
+    totalStudents:'Всего учеников', thisMonth:'новых в этом месяце',
+    prevWeek:'с прошлой недели', avgGrade:'Средняя оценка', goodResult:'хорошо',
+    lateToday:'Опоздали сегодня', all:'Все',
+    recentGrades:'Последние оценки', todaySchedule:'Расписание на сегодня',
+    fullSchedule:'Полное расписание', allClasses:'Все классы (1–11)',
+    clickClass:'Нажмите для просмотра класса',
+    addClass:'Добавить класс', addStudent:'Добавить ученика',
+    addTeacher:'Добавить учителя', studentsList:'Список учеников',
+    teachersList:'Список учителей', redListTitle:'Красный список — Опоздавшие',
+    redListSub:'Ученики опоздавшие 3 и более раз',
+    markAttendance:'Отметить посещаемость', save:'Сохранить', cancel:'Отмена',
+    fullName:'Полное имя', gender:'Пол', class:'Класс', subject:'Предмет', grade:'Оценка',
+    date:'Дата', time:'Время', room:'Кабинет', actions:'Действия', note:'Примечание',
+    present:'Присутствует ✓', late:'Опоздал ⏰', absent:'Отсутствует ✗',
+    classTeacher:'Классный руководитель', firstName:'Имя', lastName:'Фамилия',
+    classNumber:'Номер класса', classLetter:'Буква',
+    parentPhone:'Телефон родителя', photo:'Фото',
+    female:'Девочка ♀', male:'Мальчик ♂',
+    monday:'Понедельник', tuesday:'Вторник', wednesday:'Среда',
+    thursday:'Четверг', friday:'Пятница',
+    status:'Статус', weekSchedule:'Недельное расписание',
+    schoolInfo:'Данные школы', schoolName:'Название школы',
+    region:'Регион / Город', director:'Директор',
+    systemSettings:'Системные настройки', language:'Язык', theme:'Тема',
+    lightTheme:'Дневной режим', darkTheme:'Ночной режим',
+    telegramToken:'Telegram Bot Token', notifications:'Уведомления',
+    tgTitle:'Подключить Telegram Bot', tgDesc:'Родители могут получать уведомления в реальном времени через Telegram.',
+    todayStats:'Сегодняшние сообщения', botStats:'Статистика бота',
+    thisWeek:'Посещаемость на неделе', schoolId:'ID школы',
+    parentNotif:'Родитель уведомлён', lateCount:'Кол-во опозданий', lastTime:'Последний раз',
+    edit:'Редактировать', myProfile2:'Мой профиль',
+  }
+};
+
+/* ===== STATE ===== */
+let currentLang = 'uz';
+let currentTheme = 'light';
+let currentRole = 'admin';
+let currentUser = null;
+
+/* ===== DATE ===== */
+const today = new Date();
+const dateStr = today.toLocaleDateString('uz-UZ', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+document.querySelectorAll('#today-date').forEach(e => e && (e.textContent = dateStr));
+const attDate = document.getElementById('att-date');
+if(attDate) attDate.textContent = dateStr;
+const tattDate = document.getElementById('teacher-att-date');
+if(tattDate) tattDate.textContent = dateStr;
+const gd = document.getElementById('grade-date');
+if(gd) gd.valueAsDate = today;
+
+/* ===== LANGUAGE ===== */
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const map = {uz:0,en:1,ru:2};
+  document.querySelectorAll('.lang-btn')[map[lang]]?.classList.add('active');
+  const langSelect = document.getElementById('lang-select');
+  if(langSelect) langSelect.value = lang;
+  const langIconBtn = document.getElementById('lang-icon-btn');
+  if(langIconBtn) langIconBtn.textContent = lang.toUpperCase();
+  // Update html lang
+  document.documentElement.lang = lang;
+  // Translate all data-t elements
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    if(T[lang][key]) el.textContent = T[lang][key];
+  });
+  // Update title
+  const titles = {uz:'e-Maktab — Elektron maktab tizimi', en:'e-Maktab — Electronic School System', ru:'e-Maktab — Электронная школьная система'};
+  document.title = titles[lang];
+}
+
+function cycleLang() {
+  const langs = ['uz','en','ru'];
+  const idx = langs.indexOf(currentLang);
+  setLang(langs[(idx+1) % 3]);
+}
+
+/* ===== THEME ===== */
+function toggleTheme() {
+  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+  setTheme(currentTheme);
+}
+
+function setTheme(theme) {
+  currentTheme = theme;
+  document.body.classList.toggle('dark', theme === 'dark');
+  const btn = document.getElementById('theme-btn');
+  if(btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  const sel = document.getElementById('theme-select');
+  if(sel) sel.value = theme;
+}
+
+/* ===== ROLES ===== */
+const roleColors = {
+  admin:   {bg:'#fde8d8', text:'#c2410c'},
+  teacher: {bg:'#dbeafe', text:'#1d4ed8'},
+  student: {bg:'#d1fae5', text:'#065f46'},
+  parent:  {bg:'#ede9fe', text:'#6d28d9'}
+};
+
+function selectRole(role) {
+  currentRole = role;
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  const roles = ['admin','teacher','student','parent'];
+  document.querySelectorAll('.role-tab')[roles.indexOf(role)]?.classList.add('active');
+  // Fill demo credentials
+  const creds = {
+    admin:   'admin@maktab.uz',
+    teacher: 'teacher@maktab.uz',
+    student: 'student@maktab.uz',
+    parent:  'parent@maktab.uz'
+  };
+  const pw = {admin:'admin123',teacher:'teacher123',student:'student123',parent:'parent123'};
+  document.getElementById('login-email').value = creds[role];
+  document.getElementById('login-password').value = pw[role];
+}
+
+/* ===== LOGIN ===== */
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const alertEl = document.getElementById('login-alert');
+  const user = USERS[email];
+  if (!user || user.password !== password) {
+    alertEl.classList.remove('hidden');
+    return;
+  }
+  alertEl.classList.add('hidden');
+  currentUser = {...user, email};
+
+  // Setup sidebar user
+  document.getElementById('sidebar-name').textContent = user.name;
+  document.getElementById('sidebar-role').textContent = email;
+  document.getElementById('sidebar-avatar').textContent = user.initials;
+  document.getElementById('top-avatar').textContent = user.initials;
+
+  const rc = roleColors[user.role];
+  ['sidebar-avatar','top-avatar'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) { el.style.background = rc.bg; el.style.color = rc.text; }
+  });
+
+  // Hide all navs, show correct one
+  ['admin','teacher','student','parent'].forEach(r => {
+    const nav = document.getElementById(r + '-nav');
+    if(nav) nav.classList.toggle('hidden', r !== user.role);
+  });
+
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+
+  // Update student profile if student
+  if(user.role === 'student') {
+    const pa = document.getElementById('prof-av');
+    const pn = document.getElementById('prof-name');
+    const pi = document.getElementById('prof-id');
+    if(pa) pa.textContent = user.initials;
+    if(pn) pn.textContent = user.name;
+    if(pi) pi.textContent = 'AD: ' + user.ad;
+  }
+
+  const firstPage = {admin:'dashboard', teacher:'teacher-dashboard', student:'student-profile', parent:'parent-dashboard'};
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  showPage(firstPage[user.role], null);
+  buildAttendanceTables();
+  buildClassesGrid();
+  buildStudentTables();
+  // Apply language
+  setLang(currentLang);
+}
+
+function doLogout() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+  currentUser = null;
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+}
+
+/* ===== NAVIGATION ===== */
+function showPage(pageId, navItem) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if(page) page.classList.add('active');
+
+  const titles = {
+    'dashboard':['Dashboard',''],
+    'classes':['Sinflar','1 – 11'],
+    'students':["O'quvchilar",''],
+    'teachers':["O'qituvchilar",''],
+    'grades':['Baholar',''],
+    'attendance':['Davomat',''],
+    'schedule':['Dars jadvali',''],
+    'redlist':['Qizil ro\'yxat',''],
+    'telegram':['Telegram Bot',''],
+    'settings':['Sozlamalar',''],
+    'notifications':['Bildirishnomalar',''],
+    'teacher-dashboard':['Dashboard',''],
+    'my-class':['Mening sinfim','9-sinf'],
+    'add-grades':['Baho qo\'shish',''],
+    'take-attendance':['Davomat','9-sinf'],
+    'student-profile':['Profilim',''],
+    'my-grades':['Baholarim',''],
+    'my-attendance':['Davomatim',''],
+    'parent-dashboard':['Dashboard',''],
+    'child-grades':['Farzand baholari',''],
+    'child-attendance':['Farzand davomati',''],
+  };
+  const info = titles[pageId] || [pageId, ''];
+  document.getElementById('page-title').textContent = info[0];
+  document.getElementById('page-sub').innerHTML = (info[1] ? info[1] + ' &nbsp;·&nbsp; ' : '') + dateStr;
+
+  if(navItem) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    navItem.classList.add('active');
+  }
+
+  // Qidiruvni tozalash
+  const si = document.getElementById('search-input');
+  if(si && si.value){ si.value = ''; }
+  document.querySelectorAll('table.dt tbody tr').forEach(tr => tr.style.display = '');
+  document.querySelectorAll('.search-empty').forEach(e => e.style.display = 'none');
+}
+
+/* ===== BUILD CLASSES GRID ===== */
+function buildClassesGrid() {
+  const grid = document.getElementById('classes-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  for(let n = 1; n <= 11; n++) {
+    const d = CLASS_DATA[n];
+    const initials = d.teacher.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    grid.innerHTML += `
+      <div class="cc" onclick="openClass(${n})">
+        <div class="cnum">${n}</div>
+        <div class="clbl">${T[currentLang].class || 'Sinf'}</div>
+        <div class="t-mini" style="background:${d.color};">${initials}</div>
+        <div class="cmeta">${d.teacher}</div>
+        <div class="cmeta">${d.count} ta o'quvchi</div>
+      </div>`;
+  }
+}
+
+function openClass(num) {
+  const d = CLASS_DATA[num];
+  const detail = document.getElementById('class-detail');
+  detail.classList.remove('hidden');
+
+  // Teacher banner
+  const bannerArea = document.getElementById('class-teacher-banner-area');
+  const initials = d.teacher.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  bannerArea.innerHTML = `
+    <div class="class-teacher-banner" style="background:linear-gradient(135deg,${d.color}cc,${d.color});">
+      <div class="ct-photo" style="font-size:20px;">${initials}</div>
+      <div class="ct-info">
+        <h3>${d.teacher}</h3>
+        <div class="meta">${num}-sinf rahbari · ${d.subject} o'qituvchisi</div>
+        <div class="meta" style="margin-top:4px;">👨‍🎓 ${d.count} ta o'quvchi · ${d.boys} ♂  ${d.girls} ♀</div>
+      </div>
+      <div class="ct-badge">${num}-sinf</div>
+    </div>`;
+
+  document.getElementById('class-detail-title').textContent = `${num}-sinf o'quvchilari`;
+  document.getElementById('class-detail-sub').textContent = `Sinf rahbar: ${d.teacher}`;
+
+  const body = document.getElementById('class-students-body');
+  body.innerHTML = '';
+  // Filter students by class
+  const classStudents = STUDENTS.filter(s => s.cls == num);
+  const allStudents = classStudents.length > 0 ? classStudents : genDemoStudents(num, Math.min(d.count, 6));
+  if(allStudents.length === 0){
+    body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:24px;">Bu sinfda hali o'quvchi qo'shilmagan</td></tr>`;
+  }
+  allStudents.forEach((s,i) => {
+    const gc = s.avg >= 4.5 ? 'g5' : s.avg >= 4 ? 'g4' : s.avg >= 3.5 ? 'g3' : 'g2';
+    body.innerHTML += `<tr>
+      <td>${i+1}</td>
+      <td><span class="ad-badge">${s.ad}</span></td>
+      <td><b>${s.name}</b></td>
+      <td>${s.gender === '♀' ? '♀ Qiz' : "♂ O'g'il"}</td>
+      <td><span class="gb ${gc}">${s.avg}</span></td>
+      <td>${s.att}</td>
+      <td><button class="btn btn-out" style="padding:3px 8px;font-size:11px;" onclick="showToast('${s.name} profili')">Ko\'rish</button></td>
+    </tr>`;
+  });
+
+  detail.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ===== DEMO STUDENTS GENERATOR (for classes without real data) ===== */
+const DEMO_FIRST = ['Aziz','Malika','Jasur','Nilufar','Bekzod','Sevara','Diyor','Madina','Otabek','Gulnoza','Sardor','Dilnoza'];
+const DEMO_LAST  = ['Qodirov','Yusupova','Ergashev','Rahimova','Tursunov','Olimova','Sobirov','Karimova','Hakimov','Umarova'];
+function genDemoStudents(num, count){
+  const out = [];
+  for(let i = 0; i < count; i++){
+    const fn = DEMO_FIRST[(num + i) % DEMO_FIRST.length];
+    const ln = DEMO_LAST[(num * 2 + i) % DEMO_LAST.length];
+    const avg = +(3.5 + ((num + i) % 15) / 10).toFixed(1);
+    out.push({
+      id: i + 1,
+      ad: `UZ-2025-${String(num * 100 + i + 1).padStart(4,'0')}`,
+      name: `${fn} ${ln}`,
+      gender: i % 2 === 0 ? '♀' : '♂',
+      cls: String(num),
+      avg: Math.min(avg, 5),
+      att: `${80 + ((num + i) % 18)}%`
+    });
+  }
+  return out;
+}
+
+/* ===== BUILD STUDENT TABLES ===== */
+function buildStudentTables() {
+  // All students table
+  const allBody = document.getElementById('all-students-body');
+  if(allBody) {
+    allBody.innerHTML = '';
+    STUDENTS.forEach(s => {
+      const gc = s.avg >= 4.5 ? 'g5' : s.avg >= 4 ? 'g4' : s.avg >= 3.5 ? 'g3' : 'g2';
+      allBody.innerHTML += `<tr>
+        <td>${s.id}</td>
+        <td><span class="ad-badge">${s.ad}</span></td>
+        <td><b>${s.name}</b></td>
+        <td>${s.cls}-sinf</td>
+        <td><span class="gb ${gc}">${s.avg}</span></td>
+        <td>${s.att}</td>
+        <td><button class="btn btn-out" style="padding:3px 8px;font-size:11px;" data-t="edit">Tahrir</button></td>
+      </tr>`;
+    });
+  }
+
+  // Teacher class body
+  const tcBody = document.getElementById('teacher-class-body');
+  if(tcBody) {
+    tcBody.innerHTML = '';
+    STUDENTS.filter(s => s.cls === '9').forEach((s,i) => {
+      const gc = s.avg >= 4.5 ? 'g5' : s.avg >= 4 ? 'g4' : s.avg >= 3.5 ? 'g3' : 'g2';
+      tcBody.innerHTML += `<tr>
+        <td>${i+1}</td>
+        <td><span class="ad-badge">${s.ad}</span></td>
+        <td><b>${s.name}</b></td>
+        <td><span class="gb ${gc}">${s.avg}</span></td>
+        <td>${s.att}</td>
+        <td><button class="btn btn-out" style="padding:3px 8px;font-size:11px;" data-t="edit">Tahrir</button></td>
+      </tr>`;
+    });
+  }
+}
+
+/* ===== ATTENDANCE TABLES ===== */
+function buildAttendanceTables() {
+  const sel = document.getElementById('att-class-select');
+  const cls = sel ? sel.value : '9';
+  ['attendance-tbody','teacher-attendance-tbody'].forEach(id => {
+    const tbody = document.getElementById(id);
+    if(!tbody) return;
+    tbody.innerHTML = '';
+    // admin jadvali tanlangan sinf bo'yicha, o'qituvchi jadvali doim 9-sinf
+    const targetCls = id === 'attendance-tbody' ? cls : '9';
+    let list = STUDENTS.filter(s => s.cls === targetCls);
+    if(list.length === 0) list = genDemoStudents(+targetCls, 5);
+    list.forEach((s,i) => {
+      tbody.innerHTML += `<tr id="att-row-${id}-${i}">
+        <td>${i+1}</td>
+        <td><span class="ad-badge">${s.ad}</span></td>
+        <td><b>${s.name}</b></td>
+        <td><input type="radio" name="att_${id}_${i}" value="keldi" checked onchange="updateAttRow('${id}',${i},this.value)" /></td>
+        <td><input type="radio" name="att_${id}_${i}" value="kech" onchange="updateAttRow('${id}',${i},this.value)" /></td>
+        <td><input type="radio" name="att_${id}_${i}" value="yoq" onchange="updateAttRow('${id}',${i},this.value)" /></td>
+      </tr>`;
+    });
+  });
+}
+
+function updateAttRow(tbodyId, idx, val) {
+  const row = document.getElementById(`att-row-${tbodyId}-${idx}`);
+  if(!row) return;
+  row.classList.remove('att-row-missed');
+  if(val === 'yoq') row.classList.add('att-row-missed');
+}
+
+/* ===== ACTIONS ===== */
+function saveAttendance() {
+  showToast('Davomat saqlandi ✓ · Kech kelganlarga Telegram yuborildi 📱');
+}
+
+function addGrade() {
+  // Forma qiymatlarini o'qish (admin sahifasida)
+  const stSel = document.getElementById('grade-student');
+  const subSel = document.getElementById('grade-subject');
+  const grSel = document.getElementById('grade-value');
+  const dtInp = document.getElementById('grade-date');
+
+  let name = 'Yangi o\'quvchi', ad = 'UZ-2025-NEW', subject = 'Tanlangan fan', grade = '5', dateTxt = 'Bugun';
+
+  if(stSel && stSel.value){
+    const m = stSel.value.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+    if(m){ name = m[1].trim(); ad = m[2].trim(); } else { name = stSel.value; }
+  }
+  if(subSel && subSel.value) subject = subSel.value;
+  if(grSel && grSel.value) grade = grSel.value;
+  if(dtInp && dtInp.value) dateTxt = dtInp.value;
+
+  const gc = grade === '5' ? 'g5' : grade === '4' ? 'g4' : grade === '3' ? 'g3' : 'g2';
+
+  const tbody = document.getElementById('grades-tbody');
+  if(tbody) {
+    tbody.insertAdjacentHTML('afterbegin',
+      `<tr><td>${name}</td><td><span class="ad-badge">${ad}</span></td><td>${subject}</td><td><span class="gb ${gc}">${grade}</span></td><td>${dateTxt}</td></tr>`);
+  }
+  showToast(`Baho qo'shildi ✓ (${name} — ${subject}: ${grade}) · Ota-onaga xabar yuborildi 📱`);
+}
+
+function sendTelegram(name) {
+  showToast(`📱 ${name} ota-onasiga Telegram xabar yuborildi`);
+}
+
+function saveStudent() {
+  closeModal('add-student-modal');
+  showToast("O'quvchi qo'shildi ✓ · AD raqami berildi");
+}
+
+/* ===== MODALS ===== */
+function showModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+document.querySelectorAll('.mo').forEach(o => {
+  o.addEventListener('click', e => { if(e.target === o) o.classList.remove('show'); });
+});
+
+/* ===== TOAST ===== */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('visible'), 3200);
+}
+
+/* ===== SEARCH (faol sahifadagi jadvallarni filtrlaydi) ===== */
+function runSearch(q) {
+  const query = (q || '').trim().toLowerCase();
+  const activePage = document.querySelector('.page.active');
+  if(!activePage) return;
+  const rows = activePage.querySelectorAll('table.dt tbody tr');
+  let shown = 0;
+  rows.forEach(tr => {
+    if(tr.querySelector('td[colspan]')) return; // "bo'sh" qatorni o'tkazib yuborish
+    const match = tr.textContent.toLowerCase().includes(query);
+    tr.style.display = match ? '' : 'none';
+    if(match) shown++;
+  });
+  // Natija topilmasa bildirish
+  activePage.querySelectorAll('table.dt tbody').forEach(tb => {
+    let empty = tb.querySelector('.search-empty');
+    const visible = Array.from(tb.querySelectorAll('tr')).some(r => r.style.display !== 'none' && !r.classList.contains('search-empty'));
+    if(query && !visible){
+      if(!empty){
+        empty = document.createElement('tr');
+        empty.className = 'search-empty';
+        const cols = (tb.closest('table').querySelectorAll('thead th').length) || 5;
+        empty.innerHTML = `<td colspan="${cols}" style="text-align:center;color:var(--text3);padding:20px;">🔍 "<b>${q}</b>" bo'yicha hech narsa topilmadi</td>`;
+        tb.appendChild(empty);
+      } else { empty.style.display=''; empty.querySelector('b').textContent = q; }
+    } else if(empty){ empty.style.display = 'none'; }
+  });
+}
+
+const searchInput = document.getElementById('search-input');
+if(searchInput){
+  searchInput.addEventListener('input', e => runSearch(e.target.value));
+}
+
+/* ===== INIT ===== */
+buildClassesGrid();
+setLang('uz');
+</script>
+</body>
+</html>
