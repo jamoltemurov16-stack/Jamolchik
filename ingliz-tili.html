@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingliz tili — 0 dan boshlab</title>
+<meta name="description" content="Ingliz tilini noldan o'rganish. O'zbek tilida tushuntirishlar, so'zlar talaffuzi, misollar va testlar.">
+<meta name="theme-color" content="#4f46e5">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f4f8; --bg2:#ffffff; --bg3:#f7f8fc;
+  --border:#e4e7ef; --text:#1a1d2b; --text2:#4b5168; --text3:#8a90a8;
+  --primary:#4f46e5; --primary2:#4338ca; --primary-bg:#eef0fe;
+  --accent:#0d9488; --accent-bg:#e6fbf7;
+  --ok:#16a34a; --ok-bg:#e9f8ee; --err:#dc2626; --err-bg:#fdecec;
+  --warn:#d97706; --warn-bg:#fff6e8;
+  --shadow:0 1px 3px rgba(0,0,0,.07); --shadow-lg:0 10px 40px rgba(0,0,0,.14);
+  --radius:14px; --radius-sm:9px; --sb:280px;
+}
+:root[data-theme="dark"]{
+  --bg:#0e1118; --bg2:#171b26; --bg3:#1d2230; --border:#2a3042;
+  --text:#eef1f8; --text2:#aab2cc; --text3:#6b7490; --primary-bg:#20233f;
+  --accent-bg:#0c2b27; --ok-bg:#0e2b1a; --err-bg:#2c1416; --warn-bg:#2b2109;
+  --shadow:0 1px 3px rgba(0,0,0,.4); --shadow-lg:0 10px 40px rgba(0,0,0,.6);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1118; --bg2:#171b26; --bg3:#1d2230; --border:#2a3042;
+  --text:#eef1f8; --text2:#aab2cc; --text3:#6b7490; --primary-bg:#20233f;
+  --accent-bg:#0c2b27; --ok-bg:#0e2b1a; --err-bg:#2c1416; --warn-bg:#2b2109;
+  --shadow:0 1px 3px rgba(0,0,0,.4); --shadow-lg:0 10px 40px rgba(0,0,0,.6);
+}}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ===== TOP BAR ===== */
+.top{position:sticky;top:0;z-index:40;background:var(--bg2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;}
+.brand{display:flex;align-items:center;gap:11px;}
+.brand .logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#4f46e5,#0d9488);
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.brand h1{font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1.1;}
+.brand p{font-size:11.5px;color:var(--text3);}
+.top-right{display:flex;align-items:center;gap:10px;}
+.prog-wrap{display:flex;align-items:center;gap:8px;min-width:150px;}
+.prog-track{flex:1;height:8px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;overflow:hidden;min-width:90px;}
+.prog-fill{height:100%;background:linear-gradient(90deg,#4f46e5,#0d9488);width:0;transition:width .5s;}
+.prog-txt{font-size:12px;font-weight:700;color:var(--text2);white-space:nowrap;}
+.icon-btn{width:38px;height:38px;border:1px solid var(--border);background:var(--bg2);border-radius:10px;
+  cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;color:var(--text2);}
+.icon-btn:hover{background:var(--bg3);}
+.menu-btn{display:none;}
+
+/* ===== LAYOUT ===== */
+.wrap{display:flex;align-items:flex-start;max-width:1200px;margin:0 auto;}
+.sidebar{width:var(--sb);flex-shrink:0;position:sticky;top:63px;height:calc(100vh - 63px);
+  overflow-y:auto;padding:16px 12px;border-right:1px solid var(--border);}
+.sb-title{font-size:10.5px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;padding:10px 12px 5px;}
+.les-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;
+  font-size:13.5px;font-weight:500;color:var(--text2);transition:all .15s;margin-bottom:2px;}
+.les-item:hover{background:var(--bg3);color:var(--text);}
+.les-item.active{background:var(--primary-bg);color:var(--primary);font-weight:700;}
+.les-num{width:26px;height:26px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:var(--text3);}
+.les-item.active .les-num{background:var(--primary);color:#fff;border-color:var(--primary);}
+.les-item.done .les-num{background:var(--ok);color:#fff;border-color:var(--ok);}
+.les-item .les-label{flex:1;line-height:1.25;}
+.les-item .les-sub{font-size:10.5px;color:var(--text3);font-weight:500;}
+
+/* ===== CONTENT ===== */
+.content{flex:1;min-width:0;padding:24px 28px 80px;}
+.lesson-head{margin-bottom:20px;}
+.level-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-bg);
+  padding:3px 11px;border-radius:20px;margin-bottom:10px;}
+.lesson-head h2{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.15;}
+.lesson-head .goal{font-size:14px;color:var(--text2);margin-top:6px;}
+
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:18px;box-shadow:var(--shadow);}
+.card h3{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.explain{font-size:14.5px;line-height:1.7;color:var(--text2);}
+.explain b{color:var(--text);}
+.explain .tip{display:block;background:var(--warn-bg);border-left:3px solid var(--warn);border-radius:8px;
+  padding:10px 14px;margin-top:12px;font-size:13.5px;color:var(--text2);}
+.explain code{background:var(--primary-bg);color:var(--primary);padding:1px 7px;border-radius:5px;font-size:13px;font-weight:600;}
+
+/* vocab */
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
+.word{display:flex;align-items:center;gap:11px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:11px;padding:11px 13px;}
+.word .play{width:34px;height:34px;border-radius:9px;background:var(--primary);color:#fff;border:none;cursor:pointer;
+  font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;}
+.word .play:hover{background:var(--primary2);}
+.word .play:active{transform:scale(.9);}
+.word .en{font-size:15px;font-weight:700;color:var(--text);line-height:1.2;}
+.word .ipa{font-size:11.5px;color:var(--text3);font-style:italic;}
+.word .uz{font-size:13px;color:var(--text2);margin-top:1px;}
+
+/* examples */
+.ex{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.ex:last-child{border-bottom:none;}
+.ex .play{width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ex .en{font-size:14.5px;font-weight:600;color:var(--text);}
+.ex .uz{font-size:13px;color:var(--text3);margin-top:1px;}
+
+/* quiz */
+.quiz-q{font-size:15px;font-weight:700;margin-bottom:12px;}
+.quiz-q .n{color:var(--primary);}
+.opts{display:grid;gap:9px;}
+.opt{text-align:left;padding:12px 15px;border:1.5px solid var(--border);background:var(--bg2);border-radius:11px;
+  font-size:14.5px;font-family:inherit;font-weight:500;color:var(--text);cursor:pointer;transition:all .15s;}
+.opt:hover{border-color:var(--primary);background:var(--primary-bg);}
+.opt.correct{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700;}
+.opt.wrong{border-color:var(--err);background:var(--err-bg);color:var(--err);font-weight:700;}
+.opt:disabled{cursor:default;}
+.quiz-fb{margin-top:12px;font-size:13.5px;font-weight:600;padding:10px 14px;border-radius:9px;display:none;}
+.quiz-fb.ok{display:block;background:var(--ok-bg);color:var(--ok);}
+.quiz-fb.no{display:block;background:var(--err-bg);color:var(--err);}
+
+/* nav buttons */
+.lnav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;}
+.btn{padding:12px 22px;border-radius:11px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;border:none;
+  display:inline-flex;align-items:center;gap:7px;transition:all .15s;}
+.btn-primary{background:var(--primary);color:#fff;}.btn-primary:hover{background:var(--primary2);transform:translateY(-1px);}
+.btn-out{background:var(--bg2);border:1.5px solid var(--border);color:var(--text2);}.btn-out:hover{background:var(--bg3);}
+.btn-ok{background:var(--ok);color:#fff;}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
+.done-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ok);
+  background:var(--ok-bg);padding:7px 14px;border-radius:20px;}
+
+/* overlay for mobile sidebar */
+.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:30;}
+.ovl.show{display:block;}
+
+@media(max-width:860px){
+  .menu-btn{display:flex;}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:35;background:var(--bg2);transform:translateX(-100%);
+    transition:transform .25s;box-shadow:var(--shadow-lg);padding-top:16px;}
+  .sidebar.open{transform:translateX(0);}
+  .content{padding:18px 16px 70px;}
+  .prog-wrap{min-width:110px;}
+  .lesson-head h2{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="icon-btn menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="brand">
+      <div class="logo">🇬🇧</div>
+      <div>
+        <h1>Ingliz tili — 0 dan</h1>
+        <p>O'zbek tilida tushuntirishlar bilan</p>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="prog-wrap">
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+      <span class="prog-txt" id="prog-txt">0%</span>
+    </div>
+    <button class="icon-btn" onclick="toggleTheme()" id="theme-btn" title="Rejim">🌙</button>
+  </div>
+</header>
+
+<div class="ovl" id="ovl" onclick="toggleSidebar()"></div>
+<div class="wrap">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-title">📚 Darslar</div>
+    <div id="lesson-list"></div>
+  </aside>
+  <main class="content" id="content"></main>
+</div>
+
+<script>
+/* ===================== DARSLAR MA'LUMOTI ===================== */
+const V = (en, ipa, uz) => ({en, ipa, uz});
+const E = (en, uz) => ({en, uz});
+const Q = (q, options, answer, uz) => ({q, options, answer, uz});
+
+const LESSONS = [
+  {
+    level: "A0 · Boshlang'ich",
+    title: "1-dars. Ingliz alifbosi (Alphabet)",
+    goal: "Ingliz alifbosidagi 26 ta harf va ularning o'qilishi bilan tanishamiz.",
+    explain: `Ingliz tilida <b>26 ta harf</b> bor. Ular lotin alifbosiga asoslangan, xuddi o'zbek lotin alifbosiga o'xshaydi, lekin <b>o'qilishi (talaffuzi)</b> boshqacha.
+      <br><br>Harflar <b>unli (vowel)</b> va <b>undosh (consonant)</b>ga bo'linadi. Unlilar: <code>A, E, I, O, U</code> (ba'zan Y ham). Qolganlari undosh.
+      <span class="tip">💡 Maslahat: har bir harf nomini 🔊 tugmasini bosib eshiting va ovoz chiqarib takrorlang. Bu talaffuzni rivojlantiradi.</span>`,
+    vocab: [
+      V("A a","ey","birinchi harf"), V("B b","bi",""), V("C c","si",""), V("D d","di",""),
+      V("E e","i",""), V("F f","ef",""), V("G g","ji",""), V("H h","eych",""),
+      V("I i","ay",""), V("J j","jey",""), V("K k","key",""), V("L l","el",""),
+      V("M m","em",""), V("N n","en",""), V("O o","ou",""), V("P p","pi",""),
+      V("Q q","kyu",""), V("R r","ar",""), V("S s","es",""), V("T t","ti",""),
+      V("U u","yu",""), V("V v","vi",""), V("W w","dabl-yu",""), V("X x","eks",""),
+      V("Y y","way",""), V("Z z","zed / zi","")
+    ],
+    examples: [],
+    quiz: [
+      Q("Ingliz alifbosida nechta harf bor?", ["24","25","26","28"], 2, "To'g'ri — 26 ta harf."),
+      Q("Qaysi harf UNLI (vowel)?", ["B","K","E","T"], 2, "E — unli harf. Unlilar: A, E, I, O, U."),
+      Q("'G' harfi qanday o'qiladi?", ["gi","ji","ge","ga"], 1, "G harfi 'ji' deb o'qiladi.")
+    ]
+  },
+  {
+    level: "A0 · Boshlang'ich",
+    title: "2-dars. Salomlashish (Greetings)",
+    goal: "Odamlar bilan salomlashish va xayrlashishni o'rganamiz.",
+    explain: `Ingliz tilida salomlashishning eng keng tarqalgan so'zi — <code>Hello</code> (salom).
+      Do'stona vaziyatda <code>Hi</code> ham ishlatiladi.
+      <br><br>Kun davomiga qarab salomlashish ham bor:
+      <b>Good morning</b> (xayrli tong), <b>Good afternoon</b> (xayrli kun), <b>Good evening</b> (xayrli kech).
+      Xayrlashganda esa <code>Goodbye</code> yoki qisqa <code>Bye</code> deyiladi.
+      <span class="tip">💡 "How are you?" — "Qalaysiz?" degani. Javobi: "I'm fine, thank you" (Yaxshiman, rahmat).</span>`,
+    vocab: [
+      V("Hello","hellou","Salom"), V("Hi","hay","Salom (do'stona)"),
+      V("Good morning","gud morning","Xayrli tong"), V("Good evening","gud ivning","Xayrli kech"),
+      V("Goodbye","gudbay","Xayr"), V("Bye","bay","Xayr (qisqa)"),
+      V("Please","pliiz","Iltimos"), V("Thank you","senk yu","Rahmat"),
+      V("Sorry","sorri","Kechirasiz"), V("Yes","yes","Ha"), V("No","nou","Yo'q")
+    ],
+    examples: [
+      E("Hello! How are you?", "Salom! Qalaysiz?"),
+      E("I'm fine, thank you.", "Yaxshiman, rahmat."),
+      E("Good morning, teacher!", "Xayrli tong, o'qituvchi!"),
+      E("Goodbye! See you tomorrow.", "Xayr! Ertaga ko'rishamiz.")
+    ],
+    quiz: [
+      Q("'Thank you' nima degani?", ["Salom","Rahmat","Xayr","Iltimos"], 1, "Thank you = Rahmat."),
+      Q("Ertalab qanday salomlashamiz?", ["Good evening","Good night","Good morning","Goodbye"], 2, "Good morning = Xayrli tong."),
+      Q("'Xayr' qanday aytiladi?", ["Hello","Please","Sorry","Goodbye"], 3, "Goodbye = Xayr.")
+    ]
+  },
+  {
+    level: "A1 · Elementar",
+    title: "3-dars. Kishilik olmoshlari (Pronouns)",
+    goal: "I, you, he, she, it, we, they olmoshlarini o'rganamiz.",
+    explain: `Olmosh — bu ism o'rniga ishlatiladigan so'z. Ingliz tilida asosiy olmoshlar:
+      <br><br>
+      <b>I</b> — men &nbsp;|&nbsp; <b>you</b> — sen/siz &nbsp;|&nbsp; <b>he</b> — u (erkak)<br>
+      <b>she</b> — u (ayol) &nbsp;|&nbsp; <b>it</b> — u (narsa/hayvon)<br>
+      <b>we</b> — biz &nbsp;|&nbsp; <b>they</b> — ular
+      <span class="tip">⚠️ Muhim: <code>I</code> (men) har doim <b>katta harf</b> bilan yoziladi, gap o'rtasida bo'lsa ham!</span>`,
+    vocab: [
+      V("I","ay","men"), V("You","yu","sen / siz"), V("He","hi","u (erkak)"),
+      V("She","shi","u (ayol)"), V("It","it","u (narsa)"), V("We","wi","biz"),
+      V("They","zey","ular")
+    ],
+    examples: [
+      E("I am a student.", "Men o'quvchiman."),
+      E("She is my sister.", "U mening singlim."),
+      E("We are friends.", "Biz do'stmiz."),
+      E("They are teachers.", "Ular o'qituvchilar.")
+    ],
+    quiz: [
+      Q("'Biz' qaysi olmosh?", ["They","We","You","He"], 1, "We = biz."),
+      Q("Ayol kishi uchun qaysi olmosh ishlatiladi?", ["He","It","She","We"], 2, "She = u (ayol)."),
+      Q("Qaysi olmosh doim katta harf bilan yoziladi?", ["you","he","i","we"], 2, "I (men) doim katta harf bilan.")
+    ]
+  },
+  {
+    level: "A1 · Elementar",
+    title: "4-dars. 'To be' fe'li (am / is / are)",
+    goal: "'Men ...man', 'U ...' kabi gaplar tuzishni o'rganamiz.",
+    explain: `<code>to be</code> — eng muhim fe'l. O'zbekchada "...man, ...san, ...dir" qo'shimchalariga mos keladi.
+      U olmoshga qarab 3 xil shaklga ega:
+      <br><br>
+      <b>I am</b> (men ...man) &nbsp;→&nbsp; qisqa: <code>I'm</code><br>
+      <b>He / She / It is</b> (u ...) &nbsp;→&nbsp; qisqa: <code>He's</code><br>
+      <b>You / We / They are</b> (sen/biz/ular ...) &nbsp;→&nbsp; qisqa: <code>You're</code>
+      <span class="tip">💡 Esda tuting: <b>I → am</b>, <b>he/she/it → is</b>, <b>you/we/they → are</b>.</span>`,
+    vocab: [
+      V("I am","ay em","men ...man"), V("He is","hi iz","u ..."),
+      V("She is","shi iz","u (ayol) ..."), V("It is","it iz","u (narsa) ..."),
+      V("You are","yu ar","sen/siz ..."), V("We are","wi ar","biz ..."),
+      V("They are","zey ar","ular ...")
+    ],
+    examples: [
+      E("I am happy.", "Men baxtliman."),
+      E("He is a doctor.", "U shifokor."),
+      E("You are my friend.", "Sen mening do'stimsan."),
+      E("It is a cat.", "Bu mushuk.")
+    ],
+    quiz: [
+      Q("'I ___ a student' — qaysi to'g'ri?", ["is","are","am","be"], 2, "I am — doim 'am'."),
+      Q("'She ___ beautiful' — qaysi to'g'ri?", ["am","is","are","be"], 1, "He/She/It bilan 'is'."),
+      Q("'They ___ teachers' — qaysi to'g'ri?", ["is","am","are","be"], 2, "You/We/They bilan 'are'.")
+    ]
+  },
+  {
+    level: "A1 · Elementar",
+    title: "5-dars. Sanoq — 0 dan 20 gacha (Numbers)",
+    goal: "Ingliz tilida sonlarni sanashni o'rganamiz.",
+    explain: `Sonlar kundalik hayotda juda kerak — yosh, narx, vaqt, telefon raqami.
+      <br><br>0 dan 12 gacha har birining alohida nomi bor. 13 dan 19 gacha oxiriga <code>-teen</code> qo'shiladi
+      (masalan <b>four</b> → <b>fourteen</b>). O'nliklar esa <code>-ty</code> bilan tugaydi (twenty, thirty...).
+      <span class="tip">💡 13–19 oxiri "-tin" eshitiladi, 20,30 esa "-ti". Diqqat bilan tinglang!</span>`,
+    vocab: [
+      V("0 — zero","ziro",""), V("1 — one","wan",""), V("2 — two","tu",""),
+      V("3 — three","sri",""), V("4 — four","for",""), V("5 — five","fayv",""),
+      V("6 — six","siks",""), V("7 — seven","seven",""), V("8 — eight","eyt",""),
+      V("9 — nine","nayn",""), V("10 — ten","ten",""), V("11 — eleven","ileven",""),
+      V("12 — twelve","twelv",""), V("15 — fifteen","fiftin",""), V("20 — twenty","twenti","")
+    ],
+    examples: [
+      E("I am ten years old.", "Men o'n yoshdaman."),
+      E("Two plus three is five.", "Ikki qo'shuv uch — besh."),
+      E("I have five books.", "Mening beshta kitobim bor.")
+    ],
+    quiz: [
+      Q("'Seven' nechchi?", ["6","7","8","9"], 1, "Seven = 7."),
+      Q("12 inglizchada qanday?", ["twenty","twelve","twenteen","two"], 1, "Twelve = 12."),
+      Q("'Fifteen' nechchi?", ["5","14","15","50"], 2, "Fifteen = 15.")
+    ]
+  },
+  {
+    level: "A1 · Elementar",
+    title: "6-dars. Ranglar (Colors)",
+    goal: "Asosiy ranglarni o'rganamiz.",
+    explain: `Ranglar — gaplarni boyitadigan eng oson mavzulardan biri. Narsalarni tasvirlashda ishlatiladi.
+      <br><br>Gapda rang odatda otdan <b>oldin</b> keladi: <code>a red apple</code> (qizil olma),
+      <code>a blue car</code> (ko'k mashina).
+      <span class="tip">💡 "What colour is it?" — "Bu qanday rangda?" degan savol.</span>`,
+    vocab: [
+      V("Red","red","qizil"), V("Blue","blu","ko'k"), V("Green","grin","yashil"),
+      V("Yellow","yellou","sariq"), V("Black","blek","qora"), V("White","wayt","oq"),
+      V("Orange","orinj","to'q sariq"), V("Pink","pink","pushti"),
+      V("Brown","braun","jigarrang"), V("Grey","grey","kulrang")
+    ],
+    examples: [
+      E("The sky is blue.", "Osmon ko'k."),
+      E("I like red apples.", "Men qizil olmalarni yoqtiraman."),
+      E("Her dress is white.", "Uning ko'ylagi oq.")
+    ],
+    quiz: [
+      Q("'Green' qaysi rang?", ["qizil","ko'k","yashil","sariq"], 2, "Green = yashil."),
+      Q("'Qora' inglizchada?", ["white","black","brown","grey"], 1, "Black = qora."),
+      Q("'Yellow' qaysi rang?", ["pushti","sariq","ko'k","oq"], 1, "Yellow = sariq.")
+    ]
+  },
+  {
+    level: "A1 · Elementar",
+    title: "7-dars. Oila a'zolari (Family)",
+    goal: "Oila a'zolarini ataydigan so'zlarni o'rganamiz.",
+    explain: `Oila haqida gapirish — eng ko'p ishlatiladigan mavzulardan.
+      <br><br>Egalik bildirish uchun olmoshlar ishlatiladi: <b>my</b> (mening), <b>your</b> (sening),
+      <b>his</b> (uning — erkak), <b>her</b> (uning — ayol).
+      Masalan: <code>my mother</code> (mening onam), <code>his father</code> (uning otasi).
+      <span class="tip">💡 "parents" = ota-ona (ikkovi birga). "brother" = aka/uka, "sister" = opa/singil.</span>`,
+    vocab: [
+      V("Mother / Mom","mazer / mom","ona"), V("Father / Dad","fazer / ded","ota"),
+      V("Brother","brazer","aka / uka"), V("Sister","sister","opa / singil"),
+      V("Grandmother","grendmazer","buvi"), V("Grandfather","grendfazer","bobo"),
+      V("Son","san","o'g'il"), V("Daughter","doter","qiz"),
+      V("Family","femili","oila"), V("Parents","perents","ota-ona")
+    ],
+    examples: [
+      E("This is my mother.", "Bu mening onam."),
+      E("He has two brothers.", "Uning ikkita akasi bor."),
+      E("My family is big.", "Mening oilam katta.")
+    ],
+    quiz: [
+      Q("'Sister' kim?", ["aka","opa/singil","ona","bobo"], 1, "Sister = opa yoki singil."),
+      Q("'Ota' inglizchada?", ["mother","brother","father","son"], 2, "Father = ota."),
+      Q("'My' nima degani?", ["sening","mening","uning","bizning"], 1, "My = mening.")
+    ]
+  },
+  {
+    level: "A1 · Elementar",
+    title: "8-dars. Ko'plik son (Plural -s)",
+    goal: "Bir narsadan ko'p bo'lganda qanday yozilishini o'rganamiz.",
+    explain: `O'zbekchada ko'plik <b>-lar</b> bilan yasaladi (kitob → kitob<b>lar</b>).
+      Ingliz tilida esa otning oxiriga <code>-s</code> qo'shiladi.
+      <br><br><b>book → books</b> (kitoblar), <b>cat → cats</b> (mushuklar).
+      <br>Agar so'z <b>-s, -ss, -sh, -ch, -x</b> bilan tugasa, <code>-es</code> qo'shiladi:
+      <b>box → boxes</b>, <b>bus → buses</b>.
+      <span class="tip">⚠️ Ba'zi so'zlar qoidaga bo'ysunmaydi: man → <b>men</b>, woman → <b>women</b>, child → <b>children</b>.</span>`,
+    vocab: [
+      V("One book","wan buk","bitta kitob"), V("Two books","tu buks","ikkita kitob"),
+      V("A cat","e ket","mushuk"), V("Cats","kets","mushuklar"),
+      V("A box","e boks","quti"), V("Boxes","boksiz","qutilar"),
+      V("Man → Men","men","erkak → erkaklar"), V("Child → Children","children","bola → bolalar")
+    ],
+    examples: [
+      E("I have three apples.", "Mening uchta olmam bor."),
+      E("There are many cars.", "Ko'p mashinalar bor."),
+      E("The children are playing.", "Bolalar o'ynashyapti.")
+    ],
+    quiz: [
+      Q("'book' ko'pligi qanday?", ["bookes","books","bookies","book"], 1, "book → books."),
+      Q("'box' ko'pligi qanday?", ["boxs","boxies","boxes","box"], 2, "box → boxes (-es qo'shiladi)."),
+      Q("'child' ko'pligi qanday?", ["childs","childes","children","childrens"], 2, "child → children (istisno).")
+    ]
+  },
+  {
+    level: "A2 · Quyi o'rta",
+    title: "9-dars. Hozirgi zamon (Present Simple)",
+    goal: "Har kuni takrorlanadigan ishlar haqida gapirishni o'rganamiz.",
+    explain: `Present Simple — <b>odatdagi, muntazam</b> ishlar uchun ishlatiladi (har kuni, har hafta...).
+      <br><br>Oddiy gap tuzilishi: <b>Olmosh + fe'l</b>.
+      <br><code>I work.</code> (Men ishlayman.) &nbsp; <code>They play.</code> (Ular o'ynaydi.)
+      <br><br>⭐ Eng muhim qoida: agar ega <b>he / she / it</b> bo'lsa, fe'lga <code>-s</code> qo'shiladi!
+      <br><code>He work<b>s</b>.</code> (U ishlaydi.) &nbsp; <code>She read<b>s</b>.</code> (U o'qiydi.)
+      <span class="tip">💡 "I, you, we, they" → fe'l o'zgarmaydi. "He, she, it" → fe'l +s.</span>`,
+    vocab: [
+      V("work","work","ishlamoq"), V("read","riid","o'qimoq"),
+      V("play","pley","o'ynamoq"), V("eat","iit","yemoq"),
+      V("go","gou","bormoq"), V("like","layk","yoqtirmoq"),
+      V("live","liv","yashamoq"), V("study","stadi","o'qimoq (dars)")
+    ],
+    examples: [
+      E("I go to school every day.", "Men har kuni maktabga boraman."),
+      E("She reads books.", "U kitob o'qiydi."),
+      E("We play football.", "Biz futbol o'ynaymiz."),
+      E("He likes tea.", "U choyni yoqtiradi.")
+    ],
+    quiz: [
+      Q("'She ___ English' — to'g'risi qaysi?", ["study","studys","studies","studying"], 2, "study → studies (y → ies, he/she/it bilan)."),
+      Q("'I ___ football' — to'g'risi?", ["plays","play","playing","played"], 1, "I bilan fe'l o'zgarmaydi: play."),
+      Q("Qaysi ega bilan fe'lga -s qo'shiladi?", ["I","You","We","He"], 3, "He/She/It bilan -s qo'shiladi.")
+    ]
+  },
+  {
+    level: "A2 · Quyi o'rta",
+    title: "10-dars. Savol so'zlari (Questions)",
+    goal: "Savol berishni va asosiy savol so'zlarini o'rganamiz.",
+    explain: `Savol berish uchun maxsus so'zlar bor (Wh- questions):
+      <br><br>
+      <b>What?</b> — nima? &nbsp; <b>Who?</b> — kim? &nbsp; <b>Where?</b> — qayerda?<br>
+      <b>When?</b> — qachon? &nbsp; <b>Why?</b> — nega? &nbsp; <b>How?</b> — qanday?
+      <br><br>Masalan: <code>What is your name?</code> (Isming nima?),
+      <code>Where are you from?</code> (Qayerdansan?).
+      <span class="tip">💡 "How old are you?" — "Necha yoshdasan?" degan juda kerakli savol.</span>`,
+    vocab: [
+      V("What","wot","nima"), V("Who","hu","kim"), V("Where","weer","qayerda"),
+      V("When","wen","qachon"), V("Why","way","nega"), V("How","hau","qanday"),
+      V("Which","wich","qaysi"), V("How many","hau meni","nechta")
+    ],
+    examples: [
+      E("What is your name?", "Isming nima?"),
+      E("Where do you live?", "Qayerda yashaysan?"),
+      E("How are you?", "Qalaysan?"),
+      E("Why are you sad?", "Nega xafasan?")
+    ],
+    quiz: [
+      Q("'Where' nima degani?", ["kim","qachon","qayerda","nima"], 2, "Where = qayerda."),
+      Q("'Isming nima?' savoli qaysi?", ["Who are you?","What is your name?","Where are you?","How are you?"], 1, "What is your name? = Isming nima?"),
+      Q("'Nega' inglizchada?", ["How","Why","When","What"], 1, "Why = nega.")
+    ]
+  }
+];
+
+/* ===================== HOLAT ===================== */
+let current = 0;
+let done = loadDone();
+function loadDone(){ try{ const r=localStorage.getItem('eng_done'); if(r) return JSON.parse(r)||[]; }catch(e){} return []; }
+function saveDone(){ try{ localStorage.setItem('eng_done', JSON.stringify(done)); }catch(e){} }
+
+/* ===================== TALAFFUZ (speechSynthesis) ===================== */
+function speak(text){
+  if(!('speechSynthesis' in window)){ return; }
+  window.speechSynthesis.cancel();
+  // "1 — one" kabi matndan faqat inglizcha qismini olamiz
+  let t = text.includes('—') ? text.split('—').pop().trim() : text;
+  t = t.replace(/\(.*?\)/g,'').replace(/\//g,' or ').trim();
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  const voices = window.speechSynthesis.getVoices();
+  const en = voices.find(v => /en[-_]US/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang));
+  if(en) u.voice = en;
+  window.speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = () => {}; }
+
+/* ===================== SIDEBAR ===================== */
+function buildList(){
+  const box = document.getElementById('lesson-list');
+  box.innerHTML = '';
+  LESSONS.forEach((les,i) => {
+    const isDone = done.includes(i);
+    const short = les.title.replace(/^\d+-dars\.\s*/, '');
+    box.innerHTML += `
+      <div class="les-item ${i===current?'active':''} ${isDone?'done':''}" onclick="openLesson(${i})">
+        <div class="les-num">${isDone ? '✓' : (i+1)}</div>
+        <div class="les-label">${short}<div class="les-sub">${les.level}</div></div>
+      </div>`;
+  });
+}
+
+function updateProgress(){
+  const pct = Math.round(done.length / LESSONS.length * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-txt').textContent = pct + '%';
+}
+
+/* ===================== DARSNI OCHISH ===================== */
+function openLesson(i){
+  current = i;
+  const les = LESSONS[i];
+  const c = document.getElementById('content');
+  let html = `
+    <div class="lesson-head">
+      <span class="level-tag">${les.level}</span>
+      <h2>${les.title}</h2>
+      <div class="goal">🎯 ${les.goal}</div>
+    </div>
+    <div class="card"><h3>📖 Tushuntirish</h3><div class="explain">${les.explain}</div></div>`;
+
+  // Vocabulary
+  if(les.vocab && les.vocab.length){
+    html += `<div class="card"><h3>🔤 So'zlar <span style="font-size:12px;font-weight:500;color:var(--text3);">(🔊 bosib eshiting)</span></h3><div class="vocab">`;
+    les.vocab.forEach(w => {
+      html += `<div class="word">
+        <button class="play" onclick="speak('${w.en.replace(/'/g,"\\'")}')">🔊</button>
+        <div><div class="en">${w.en}</div>
+          ${w.ipa?`<div class="ipa">[${w.ipa}]</div>`:''}
+          ${w.uz?`<div class="uz">${w.uz}</div>`:''}
+        </div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Examples
+  if(les.examples && les.examples.length){
+    html += `<div class="card"><h3>💬 Misol gaplar</h3>`;
+    les.examples.forEach(ex => {
+      html += `<div class="ex">
+        <button class="play" onclick="speak('${ex.en.replace(/'/g,"\\'")}')">🔊</button>
+        <div><div class="en">${ex.en}</div><div class="uz">${ex.uz}</div></div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Quiz
+  if(les.quiz && les.quiz.length){
+    html += `<div class="card" id="quiz-card"><h3>✏️ Test — bilimingizni tekshiring</h3><div id="quiz-body"></div>
+      <div id="quiz-result" style="margin-top:16px;"></div></div>`;
+  }
+
+  // Nav
+  html += `<div class="lnav">
+      <button class="btn btn-out" onclick="openLesson(${i-1})" ${i===0?'disabled':''}>← Oldingi</button>
+      <button class="btn btn-primary" onclick="openLesson(${i+1})" ${i===LESSONS.length-1?'disabled':''}>Keyingi dars →</button>
+    </div>`;
+
+  c.innerHTML = html;
+  if(les.quiz && les.quiz.length) renderQuiz(les.quiz);
+  buildList();
+  window.scrollTo({top:0, behavior:'smooth'});
+  // mobil sidebar yopish
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('ovl').classList.remove('show');
+}
+
+/* ===================== TEST ===================== */
+let quizState = [];
+function renderQuiz(quiz){
+  quizState = quiz.map(()=>null);
+  const body = document.getElementById('quiz-body');
+  body.innerHTML = '';
+  quiz.forEach((item, qi) => {
+    const opts = item.options.map((o, oi) =>
+      `<button class="opt" id="q${qi}o${oi}" onclick="answer(${qi},${oi})">${o}</button>`
+    ).join('');
+    body.innerHTML += `
+      <div style="margin-bottom:22px;">
+        <div class="quiz-q"><span class="n">${qi+1}.</span> ${item.q}</div>
+        <div class="opts">${opts}</div>
+        <div class="quiz-fb" id="fb${qi}"></div>
+      </div>`;
+  });
+}
+
+function answer(qi, oi){
+  const les = LESSONS[current];
+  const item = les.quiz[qi];
+  if(quizState[qi] !== null) return; // allaqachon javob berilgan
+  quizState[qi] = oi;
+  const correct = item.answer;
+  // tugmalarni belgilash
+  item.options.forEach((_, k) => {
+    const b = document.getElementById(`q${qi}o${k}`);
+    b.disabled = true;
+    if(k === correct) b.classList.add('correct');
+    if(k === oi && oi !== correct) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('fb'+qi);
+  if(oi === correct){ fb.className = 'quiz-fb ok'; fb.textContent = '✓ To\'g\'ri! ' + item.uz; }
+  else { fb.className = 'quiz-fb no'; fb.textContent = '✗ Noto\'g\'ri. ' + item.uz; }
+  checkQuizDone();
+}
+
+function checkQuizDone(){
+  if(quizState.some(s => s === null)) return; // hammasi javob berilmagan
+  const les = LESSONS[current];
+  const score = quizState.filter((s,i) => s === les.quiz[i].answer).length;
+  const total = les.quiz.length;
+  const res = document.getElementById('quiz-result');
+  const passed = score >= Math.ceil(total*0.6);
+  res.innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 16px;border-radius:12px;background:${passed?'var(--ok-bg)':'var(--warn-bg)'};">
+      <div style="font-size:15px;font-weight:700;color:${passed?'var(--ok)':'var(--warn)'};">
+        Natija: ${score} / ${total} ${passed?'🎉':'💪'}
+      </div>
+      <div style="font-size:13px;color:var(--text2);">${passed?'Ajoyib! Darsni tugatdingiz.':'Yaxshi urinish — qayta ko\'rib chiqing.'}</div>
+    </div>`;
+  if(passed && !done.includes(current)){
+    done.push(current);
+    saveDone();
+    updateProgress();
+    buildList();
+  }
+}
+
+/* ===================== TEMA / SIDEBAR ===================== */
+function toggleTheme(){
+  const root = document.documentElement;
+  const dark = root.getAttribute('data-theme') === 'dark' ||
+    (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme:dark)').matches);
+  root.setAttribute('data-theme', dark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
+  try{ localStorage.setItem('eng_theme', dark ? 'light' : 'dark'); }catch(e){}
+}
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('ovl').classList.toggle('show');
+}
+
+/* ===================== INIT ===================== */
+(function init(){
+  try{
+    const t = localStorage.getItem('eng_theme');
+    if(t){ document.documentElement.setAttribute('data-theme', t);
+      document.getElementById('theme-btn').textContent = t === 'dark' ? '☀️' : '🌙'; }
+  }catch(e){}
+  buildList();
+  updateProgress();
+  openLesson(0);
+  // ovozlarni oldindan yuklash
+  if('speechSynthesis' in window){ window.speechSynthesis.getVoices(); }
+})();
+</script>
+</body>
+</html>
