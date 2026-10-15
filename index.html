@@ -593,7 +593,7 @@ body.dark #toast{background:#2a3a50;}
       <div id="page-classes" class="page">
         <div class="flex ic jb mb5">
           <div><h3 style="font-size:15px;font-weight:700;color:var(--text);" data-t="allClasses">Barcha sinflar (1–11)</h3><p class="tsm tgr" style="margin-top:3px;" data-t="clickClass">Sinf ma'lumotlarini ko'rish uchun bosing</p></div>
-          <button class="btn btn-blue" onclick="showModal('add-class-modal')">+ <span data-t="addClass">Sinf qo'shish</span></button>
+          <button class="btn btn-blue" onclick="openAddClass()">+ <span data-t="addClass">Sinf qo'shish</span></button>
         </div>
         <div class="cg" id="classes-grid"></div>
         <!-- Class detail (teacher first) -->
@@ -693,42 +693,11 @@ body.dark #toast{background:#2a3a50;}
         <div class="card mb5">
           <div class="ch"><h3>🗓️ <span data-t="weekSchedule">Haftalik dars jadvali</span></h3>
             <div class="flex gap2">
-              <select class="fs" id="sch-class-select" onchange="showToast(this.value+'-sinf jadvali ko\'rsatildi')" style="width:auto;padding:7px 12px;font-size:13px;"><option value="9">9-sinf</option><option value="10">10-sinf</option><option value="11">11-sinf</option></select>
+              <select class="fs" id="sch-class-select" onchange="renderSchedule(this.value)" style="width:auto;padding:7px 12px;font-size:13px;"><option value="9">9-sinf</option><option value="10">10-sinf</option><option value="11">11-sinf</option></select>
             </div>
           </div>
           <div class="cb">
-            <div class="sch-grid">
-              <div class="sch-day"><div class="sch-dh" data-t="monday">Dushanba</div><div class="sch-lessons">
-                <div class="li"><div class="lt">08:00–08:45</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
-                <div class="li" style="border-left-color:#0694a2"><div class="lt">09:00–09:45</div><div class="ln">Ingliz tili</div><div class="lte">Karimova M. · 105</div></div>
-                <div class="li" style="border-left-color:#7c3aed"><div class="lt">10:00–10:45</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
-                <div class="li missed-lesson"><div class="lt">11:00–11:45</div><div class="ln">❌ Kimyo</div><div class="lte">Sababsiz qoldirildi</div></div>
-                <div class="li" style="border-left-color:#059669"><div class="lt">12:00–12:45</div><div class="ln">Informatika</div><div class="lte">Yusupov J. · 115</div></div>
-              </div></div>
-              <div class="sch-day"><div class="sch-dh" data-t="tuesday">Seshanba</div><div class="sch-lessons">
-                <div class="li" style="border-left-color:#7c3aed"><div class="lt">08:00</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
-                <div class="li"><div class="lt">09:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
-                <div class="li" style="border-left-color:#d97706"><div class="lt">10:00</div><div class="ln">Tarix</div><div class="lte">Rahimov K. · 106</div></div>
-                <div class="li" style="border-left-color:#059669"><div class="lt">11:00</div><div class="ln">Biologiya</div><div class="lte">Xoliqova S. · 301</div></div>
-              </div></div>
-              <div class="sch-day"><div class="sch-dh" data-t="wednesday">Chorshanba</div><div class="sch-lessons">
-                <div class="li" style="border-left-color:#0694a2"><div class="lt">08:00</div><div class="ln">Ingliz tili</div><div class="lte">Karimova M. · 105</div></div>
-                <div class="li missed-lesson"><div class="lt">09:00</div><div class="ln">❌ Kimyo</div><div class="lte">Sababsiz qoldirildi</div></div>
-                <div class="li"><div class="lt">10:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
-                <div class="li" style="border-left-color:#059669"><div class="lt">11:00</div><div class="ln">Informatika</div><div class="lte">Yusupov J. · 115</div></div>
-              </div></div>
-              <div class="sch-day"><div class="sch-dh" data-t="thursday">Payshanba</div><div class="sch-lessons">
-                <div class="li"><div class="lt">08:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
-                <div class="li" style="border-left-color:#7c3aed"><div class="lt">09:00</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
-                <div class="li" style="border-left-color:#d97706"><div class="lt">10:00</div><div class="ln">Tarix</div><div class="lte">Rahimov K. · 106</div></div>
-                <div class="li" style="border-left-color:#0694a2"><div class="lt">11:00</div><div class="ln">Ingliz tili</div><div class="lte">Karimova M. · 105</div></div>
-              </div></div>
-              <div class="sch-day"><div class="sch-dh" data-t="friday">Juma</div><div class="sch-lessons">
-                <div class="li" style="border-left-color:#059669"><div class="lt">08:00</div><div class="ln">Biologiya</div><div class="lte">Xoliqova S. · 301</div></div>
-                <div class="li"><div class="lt">09:00</div><div class="ln">Matematika</div><div class="lte">Aliyev A. · 201</div></div>
-                <div class="li" style="border-left-color:#7c3aed"><div class="lt">10:00</div><div class="ln">Fizika</div><div class="lte">Toshmatov B. · 302</div></div>
-              </div></div>
-            </div>
+            <div class="sch-grid" id="sch-grid"></div>
           </div>
         </div>
       </div>
@@ -772,17 +741,11 @@ body.dark #toast{background:#2a3a50;}
       <div id="page-teachers" class="page">
         <div class="flex ic jb mb5">
           <h3 style="font-size:15px;font-weight:700;" data-t="teachersList">O'qituvchilar ro'yxati</h3>
-          <button class="btn btn-blue" onclick="showModal('add-teacher-modal')">+ <span data-t="addTeacher">O'qituvchi qo'shish</span></button>
+          <button class="btn btn-blue" onclick="openAddTeacher()">+ <span data-t="addTeacher">O'qituvchi qo'shish</span></button>
         </div>
         <div class="card"><div class="cb"><div class="tw"><table class="dt">
           <thead><tr><th>#</th><th data-t="fullName">Ism Familiya</th><th data-t="subject">Fan</th><th data-t="classTeacher">Sinf rahbar</th><th>Email</th><th data-t="actions">Amal</th></tr></thead>
-          <tbody id="teachers-body">
-            <tr><td>1</td><td><b>Aliyev Anvar</b></td><td>Matematika</td><td>11-sinf</td><td>aliyev@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
-            <tr><td>2</td><td><b>Karimova Mohira</b></td><td>Ingliz tili</td><td>10-sinf</td><td>karimova@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
-            <tr><td>3</td><td><b>Toshmatov Bahodir</b></td><td>Fizika</td><td>9-sinf</td><td>toshmatov@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
-            <tr><td>4</td><td><b>Nazarova Zulfiya</b></td><td>Kimyo</td><td>8-sinf</td><td>nazarova@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
-            <tr><td>5</td><td><b>Yusupov Jamshid</b></td><td>Informatika</td><td>7-sinf</td><td>yusupov@maktab.uz</td><td><button class="btn btn-out" style="padding:4px 10px;font-size:12px;" data-t="edit">Tahrir</button></td></tr>
-          </tbody>
+          <tbody id="teachers-body"></tbody>
         </table></div></div></div>
       </div>
 
@@ -1067,19 +1030,19 @@ body.dark #toast{background:#2a3a50;}
 <!-- Add Teacher -->
 <div class="mo" id="add-teacher-modal">
   <div class="md">
-    <div class="mh"><h3 data-t="addTeacher">O'qituvchi qo'shish</h3><button class="close-x" onclick="closeModal('add-teacher-modal')">✕</button></div>
+    <div class="mh"><h3 id="teacher-modal-title" data-t="addTeacher">O'qituvchi qo'shish</h3><button class="close-x" onclick="closeModal('add-teacher-modal')">✕</button></div>
     <div class="mb2">
       <div class="fr mb3">
-        <div class="fg2"><label data-t="lastName">Familiya</label><input type="text" class="fi" /></div>
-        <div class="fg2"><label data-t="firstName">Ism</label><input type="text" class="fi" /></div>
+        <div class="fg2"><label data-t="lastName">Familiya</label><input type="text" class="fi" id="t-last" /></div>
+        <div class="fg2"><label data-t="firstName">Ism</label><input type="text" class="fi" id="t-first" /></div>
       </div>
-      <div class="fg2"><label data-t="subject">Fan</label><select class="fs"><option>Matematika</option><option>Ingliz tili</option><option>Fizika</option><option>Kimyo</option><option>Biologiya</option><option>Informatika</option></select></div>
-      <div class="fg2"><label data-t="classTeacher">Sinf rahbar (sinf)</label><select class="fs"><option>—</option><option>7-sinf</option><option>8-sinf</option><option>9-sinf</option><option>10-sinf</option><option>11-sinf</option></select></div>
-      <div class="fg2"><label>📷 <span data-t="photo">Rasm</span></label><input type="text" class="fi" placeholder="https://... yoki bo'sh qoldiring" /></div>
+      <div class="fg2"><label data-t="subject">Fan</label><select class="fs" id="t-subject"><option>Matematika</option><option>Ingliz tili</option><option>Fizika</option><option>Kimyo</option><option>Biologiya</option><option>Informatika</option><option>Tarix</option></select></div>
+      <div class="fg2"><label data-t="classTeacher">Sinf rahbar (sinf)</label><select class="fs" id="t-classteacher"><option value="—">—</option><option>7-sinf</option><option>8-sinf</option><option>9-sinf</option><option>10-sinf</option><option>11-sinf</option></select></div>
+      <div class="fg2"><label>📧 Email</label><input type="email" class="fi" id="t-email" placeholder="familiya@maktab.uz (ixtiyoriy)" /></div>
     </div>
     <div class="mf">
       <button class="btn btn-out" onclick="closeModal('add-teacher-modal')" data-t="cancel">Bekor</button>
-      <button class="btn btn-blue" onclick="closeModal('add-teacher-modal');showToast('O\'qituvchi qo\'shildi ✓')" data-t="save">Saqlash</button>
+      <button class="btn btn-blue" onclick="saveTeacher()" data-t="save">Saqlash</button>
     </div>
   </div>
 </div>
@@ -1090,20 +1053,16 @@ body.dark #toast{background:#2a3a50;}
     <div class="mh"><h3 data-t="addClass">Sinf qo'shish</h3><button class="close-x" onclick="closeModal('add-class-modal')">✕</button></div>
     <div class="mb2">
       <div class="fr mb3">
-        <div class="fg2"><label data-t="classNumber">Sinf raqami</label><select class="fs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select></div>
-        <div class="fg2"><label data-t="classLetter">Harf</label><select class="fs"><option>A</option><option>B</option><option>V</option></select></div>
+        <div class="fg2"><label data-t="classNumber">Sinf raqami</label><select class="fs" id="cl-number"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select></div>
+        <div class="fg2"><label data-t="classLetter">Harf</label><select class="fs" id="cl-letter"><option>A</option><option>B</option><option>V</option></select></div>
       </div>
       <div class="fg2"><label data-t="classTeacher">Sinf rahbar</label>
-        <select class="fs">
-          <option>Aliyev Anvar (Matematika)</option>
-          <option>Karimova Mohira (Ingliz tili)</option>
-          <option>Toshmatov Bahodir (Fizika)</option>
-        </select>
+        <select class="fs" id="cl-teacher"></select>
       </div>
     </div>
     <div class="mf">
       <button class="btn btn-out" onclick="closeModal('add-class-modal')" data-t="cancel">Bekor</button>
-      <button class="btn btn-blue" onclick="closeModal('add-class-modal');showToast('Sinf qo\'shildi ✓')" data-t="save">Saqlash</button>
+      <button class="btn btn-blue" onclick="saveClass()" data-t="save">Saqlash</button>
     </div>
   </div>
 </div>
@@ -1119,19 +1078,32 @@ const USERS = {
   'parent@maktab.uz':  { password:'parent123',  role:'parent',  name:'Demo Ota-ona',         initials:'DO', ad:'PAR-001', childName:'Demo O\'quvchi', childAd:'UZ-2025-007' }
 };
 
-const CLASS_DATA = {
-  1:  { teacher:'Hamidova N.',   color:'#1557a0', count:38, boys:21, girls:17, subject:'Boshlang\'ich' },
-  2:  { teacher:'Karimov S.',    color:'#1d9950', count:35, boys:18, girls:17, subject:'Boshlang\'ich' },
-  3:  { teacher:'Tosheva D.',    color:'#7c3aed', count:40, boys:22, girls:18, subject:'Boshlang\'ich' },
-  4:  { teacher:'Umarov F.',     color:'#0694a2', count:37, boys:20, girls:17, subject:'Boshlang\'ich' },
-  5:  { teacher:'Nazarov B.',    color:'#d97706', count:42, boys:23, girls:19, subject:'Tarix' },
-  6:  { teacher:'Sobirov X.',    color:'#e53e3e', count:39, boys:21, girls:18, subject:'Matematika' },
-  7:  { teacher:'Yusupov J.',    color:'#059669', count:44, boys:24, girls:20, subject:'Informatika' },
-  8:  { teacher:'Nazarova Z.',   color:'#9333ea', count:41, boys:22, girls:19, subject:'Kimyo' },
-  9:  { teacher:'Toshmatov B.',  color:'#1557a0', count:38, boys:20, girls:18, subject:'Fizika' },
-  10: { teacher:'Karimova M.',   color:'#0694a2', count:36, boys:19, girls:17, subject:'Ingliz tili' },
-  11: { teacher:'Aliyev A.',     color:'#1d9950', count:30, boys:16, girls:14, subject:'Matematika' }
+const DEFAULT_CLASSES = {
+  '1':  { label:'1',  teacher:'Hamidova N.',   color:'#1557a0', count:38, boys:21, girls:17, subject:'Boshlang\'ich' },
+  '2':  { label:'2',  teacher:'Karimov S.',    color:'#1d9950', count:35, boys:18, girls:17, subject:'Boshlang\'ich' },
+  '3':  { label:'3',  teacher:'Tosheva D.',    color:'#7c3aed', count:40, boys:22, girls:18, subject:'Boshlang\'ich' },
+  '4':  { label:'4',  teacher:'Umarov F.',     color:'#0694a2', count:37, boys:20, girls:17, subject:'Boshlang\'ich' },
+  '5':  { label:'5',  teacher:'Nazarov B.',    color:'#d97706', count:42, boys:23, girls:19, subject:'Tarix' },
+  '6':  { label:'6',  teacher:'Sobirov X.',    color:'#e53e3e', count:39, boys:21, girls:18, subject:'Matematika' },
+  '7':  { label:'7',  teacher:'Yusupov J.',    color:'#059669', count:44, boys:24, girls:20, subject:'Informatika' },
+  '8':  { label:'8',  teacher:'Nazarova Z.',   color:'#9333ea', count:41, boys:22, girls:19, subject:'Kimyo' },
+  '9':  { label:'9',  teacher:'Toshmatov B.',  color:'#1557a0', count:38, boys:20, girls:18, subject:'Fizika' },
+  '10': { label:'10', teacher:'Karimova M.',   color:'#0694a2', count:36, boys:19, girls:17, subject:'Ingliz tili' },
+  '11': { label:'11', teacher:'Aliyev A.',     color:'#1d9950', count:30, boys:16, girls:14, subject:'Matematika' }
 };
+
+let CLASS_DATA = loadClasses();
+function loadClasses(){
+  try{
+    const raw = localStorage.getItem('emaktab_classes');
+    if(raw){ const o = JSON.parse(raw); if(o && Object.keys(o).length) return o; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_CLASSES));
+}
+function saveClasses(){
+  try{ localStorage.setItem('emaktab_classes', JSON.stringify(CLASS_DATA)); }catch(e){}
+}
+const CLASS_COLORS = ['#1557a0','#1d9950','#7c3aed','#0694a2','#d97706','#e53e3e','#059669','#9333ea'];
 
 const DEFAULT_STUDENTS = [
   {id:1, ad:'UZ-2025-001', name:'Zulfiya Nazarova',  gender:'♀', cls:'9', avg:4.8, att:'98%'},
@@ -1160,6 +1132,27 @@ function loadStudents(){
 }
 function saveStudents(){
   try{ localStorage.setItem('emaktab_students', JSON.stringify(STUDENTS)); }catch(e){}
+}
+
+/* ===== TEACHERS ===== */
+const DEFAULT_TEACHERS = [
+  {id:1, name:'Aliyev Anvar',     subject:'Matematika', cls:'11-sinf', email:'aliyev@maktab.uz'},
+  {id:2, name:'Karimova Mohira',  subject:'Ingliz tili',cls:'10-sinf', email:'karimova@maktab.uz'},
+  {id:3, name:'Toshmatov Bahodir',subject:'Fizika',     cls:'9-sinf',  email:'toshmatov@maktab.uz'},
+  {id:4, name:'Nazarova Zulfiya', subject:'Kimyo',      cls:'8-sinf',  email:'nazarova@maktab.uz'},
+  {id:5, name:'Yusupov Jamshid',  subject:'Informatika',cls:'7-sinf',  email:'yusupov@maktab.uz'},
+];
+let TEACHERS = loadTeachers();
+let editingTeacherId = null;
+function loadTeachers(){
+  try{
+    const raw = localStorage.getItem('emaktab_teachers');
+    if(raw){ const a = JSON.parse(raw); if(Array.isArray(a) && a.length) return a; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_TEACHERS));
+}
+function saveTeachers(){
+  try{ localStorage.setItem('emaktab_teachers', JSON.stringify(TEACHERS)); }catch(e){}
 }
 
 /* ===== TRANSLATIONS ===== */
@@ -1436,6 +1429,9 @@ function doLogin() {
   buildAttendanceTables();
   buildClassesGrid();
   buildStudentTables();
+  buildTeachers();
+  fillClassTeacherOptions();
+  renderSchedule('9');
   // Apply language
   setLang(currentLang);
 }
@@ -1487,6 +1483,12 @@ function showPage(pageId, navItem) {
     navItem.classList.add('active');
   }
 
+  // Dars jadvali sahifasi — tanlangan sinf bo'yicha chizish
+  if(pageId === 'schedule'){
+    const scs = document.getElementById('sch-class-select');
+    renderSchedule(scs ? scs.value : '9');
+  }
+
   // Qidiruvni tozalash
   const si = document.getElementById('search-input');
   if(si && si.value){ si.value = ''; }
@@ -1499,43 +1501,54 @@ function buildClassesGrid() {
   const grid = document.getElementById('classes-grid');
   if(!grid) return;
   grid.innerHTML = '';
-  for(let n = 1; n <= 11; n++) {
-    const d = CLASS_DATA[n];
+  const keys = Object.keys(CLASS_DATA).sort((a,b)=>{
+    const na=parseFloat(a), nb=parseFloat(b);
+    if(na!==nb) return na-nb;
+    return a.localeCompare(b);
+  });
+  keys.forEach(k => {
+    const d = CLASS_DATA[k];
+    const label = d.label || k;
     const initials = d.teacher.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    const realCount = STUDENTS.filter(s => s.cls == n).length;
+    const realCount = STUDENTS.filter(s => s.cls == k).length;
     const count = realCount > 0 ? realCount : d.count;
     grid.innerHTML += `
-      <div class="cc" onclick="openClass(${n})">
-        <div class="cnum">${n}</div>
+      <div class="cc" onclick="openClass('${k}')">
+        <div class="cnum">${label}</div>
         <div class="clbl">${T[currentLang].class || 'Sinf'}</div>
         <div class="t-mini" style="background:${d.color};">${initials}</div>
         <div class="cmeta">${d.teacher}</div>
         <div class="cmeta">${count} ta o'quvchi</div>
       </div>`;
-  }
+  });
 }
 
 function openClass(num) {
+  num = String(num);
   currentOpenClass = num;
   const d = CLASS_DATA[num];
+  if(!d) return;
+  const label = d.label || num;
   const detail = document.getElementById('class-detail');
   detail.classList.remove('hidden');
 
   // Teacher banner
   const bannerArea = document.getElementById('class-teacher-banner-area');
   const initials = d.teacher.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const realCount = STUDENTS.filter(s => s.cls == num).length;
+  const shownCount = realCount > 0 ? realCount : d.count;
   bannerArea.innerHTML = `
     <div class="class-teacher-banner" style="background:linear-gradient(135deg,${d.color}cc,${d.color});">
       <div class="ct-photo" style="font-size:20px;">${initials}</div>
       <div class="ct-info">
         <h3>${d.teacher}</h3>
-        <div class="meta">${num}-sinf rahbari · ${d.subject} o'qituvchisi</div>
-        <div class="meta" style="margin-top:4px;">👨‍🎓 ${d.count} ta o'quvchi · ${d.boys} ♂  ${d.girls} ♀</div>
+        <div class="meta">${label}-sinf rahbari · ${d.subject} o'qituvchisi</div>
+        <div class="meta" style="margin-top:4px;">👨‍🎓 ${shownCount} ta o'quvchi · ${d.boys} ♂  ${d.girls} ♀</div>
       </div>
-      <div class="ct-badge">${num}-sinf</div>
+      <div class="ct-badge">${label}-sinf</div>
     </div>`;
 
-  document.getElementById('class-detail-title').textContent = `${num}-sinf o'quvchilari`;
+  document.getElementById('class-detail-title').textContent = `${label}-sinf o'quvchilari`;
   document.getElementById('class-detail-sub').textContent = `Sinf rahbar: ${d.teacher}`;
 
   const body = document.getElementById('class-students-body');
@@ -1543,7 +1556,8 @@ function openClass(num) {
   // Filter students by class
   const classStudents = STUDENTS.filter(s => s.cls == num);
   const isReal = classStudents.length > 0;
-  const allStudents = isReal ? classStudents : genDemoStudents(num, Math.min(d.count, 6));
+  const demoN = parseInt(num, 10) || 1;
+  const allStudents = isReal ? classStudents : genDemoStudents(demoN, Math.min(d.count, 6));
   if(allStudents.length === 0){
     body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:24px;">Bu sinfda hali o'quvchi qo'shilmagan</td></tr>`;
   }
@@ -1786,6 +1800,7 @@ function deleteStudent(id){
 /* Barcha ko'rinishlarni yangilash */
 function refreshAll(){
   buildStudentTables();
+  buildTeachers();
   buildClassesGrid();
   buildAttendanceTables();
   if(currentOpenClass != null){
@@ -1793,6 +1808,189 @@ function refreshAll(){
     if(detail && !detail.classList.contains('hidden')) openClass(currentOpenClass);
   }
   setLang(currentLang);
+}
+
+/* ===== TEACHERS CRUD ===== */
+function buildTeachers(){
+  const tb = document.getElementById('teachers-body');
+  if(!tb) return;
+  tb.innerHTML = '';
+  if(TEACHERS.length === 0){
+    tb.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:24px;">O'qituvchi yo'q</td></tr>`;
+    return;
+  }
+  TEACHERS.forEach((t,i) => {
+    tb.innerHTML += `<tr>
+      <td>${i+1}</td>
+      <td><b>${t.name}</b></td>
+      <td>${t.subject}</td>
+      <td>${t.cls || '—'}</td>
+      <td>${t.email || '—'}</td>
+      <td><div class="flex gap2">
+        <button class="btn btn-out" style="padding:4px 10px;font-size:12px;" onclick="editTeacher(${t.id})" data-t="edit">Tahrir</button>
+        <button class="btn btn-red" style="padding:4px 10px;font-size:12px;" onclick="deleteTeacher(${t.id})">🗑️</button>
+      </div></td>
+    </tr>`;
+  });
+}
+
+function genEmail(name){
+  const last = name.trim().split(' ')[0] || 'teacher';
+  const translit = last.toLowerCase()
+    .replace(/[’'`]/g,'').replace(/o‘|o'/g,'o').replace(/g‘|g'/g,'g')
+    .replace(/[^a-z]/g,'');
+  return (translit || 'oqituvchi') + '@maktab.uz';
+}
+
+function openAddTeacher(){
+  editingTeacherId = null;
+  document.getElementById('teacher-modal-title').textContent = T[currentLang].addTeacher || "O'qituvchi qo'shish";
+  document.getElementById('t-last').value = '';
+  document.getElementById('t-first').value = '';
+  document.getElementById('t-subject').selectedIndex = 0;
+  document.getElementById('t-classteacher').value = '—';
+  document.getElementById('t-email').value = '';
+  showModal('add-teacher-modal');
+}
+
+function editTeacher(id){
+  const t = TEACHERS.find(x => x.id === id);
+  if(!t) return;
+  editingTeacherId = id;
+  document.getElementById('teacher-modal-title').textContent = (T[currentLang].edit || 'Tahrir') + " — " + t.name;
+  const parts = t.name.trim().split(' ');
+  document.getElementById('t-last').value = parts[0] || '';
+  document.getElementById('t-first').value = parts.slice(1).join(' ') || '';
+  document.getElementById('t-subject').value = t.subject;
+  document.getElementById('t-classteacher').value = t.cls || '—';
+  document.getElementById('t-email').value = t.email || '';
+  showModal('add-teacher-modal');
+}
+
+function saveTeacher(){
+  const last = document.getElementById('t-last').value.trim();
+  const first = document.getElementById('t-first').value.trim();
+  const subject = document.getElementById('t-subject').value;
+  const cls = document.getElementById('t-classteacher').value;
+  let email = document.getElementById('t-email').value.trim();
+  if(!last && !first){ showToast('⚠️ Ism va familiyani kiriting'); return; }
+  const name = (last + ' ' + first).trim();
+  if(!email) email = genEmail(name);
+
+  if(editingTeacherId){
+    const t = TEACHERS.find(x => x.id === editingTeacherId);
+    if(t){ t.name = name; t.subject = subject; t.cls = cls === '—' ? '' : cls; t.email = email; }
+    showToast(`✓ ${name} ma'lumotlari yangilandi`);
+  } else {
+    const newId = TEACHERS.reduce((m,t)=>Math.max(m,t.id),0) + 1;
+    TEACHERS.push({ id:newId, name, subject, cls: cls === '—' ? '' : cls, email });
+    showToast(`✓ ${name} qo'shildi`);
+  }
+  editingTeacherId = null;
+  saveTeachers();
+  closeModal('add-teacher-modal');
+  buildTeachers();
+  fillClassTeacherOptions();
+  setLang(currentLang);
+}
+
+function deleteTeacher(id){
+  const t = TEACHERS.find(x => x.id === id);
+  if(!t) return;
+  if(!confirm(`"${t.name}" o'qituvchini o'chirishni tasdiqlaysizmi?`)) return;
+  TEACHERS = TEACHERS.filter(x => x.id !== id);
+  saveTeachers();
+  buildTeachers();
+  fillClassTeacherOptions();
+  setLang(currentLang);
+  showToast(`🗑️ ${t.name} o'chirildi`);
+}
+
+/* ===== ADD CLASS ===== */
+function fillClassTeacherOptions(){
+  const sel = document.getElementById('cl-teacher');
+  if(!sel) return;
+  sel.innerHTML = TEACHERS.map(t => `<option value="${t.name}">${t.name} (${t.subject})</option>`).join('');
+}
+
+function saveClass(){
+  const num = document.getElementById('cl-number').value;
+  const letter = document.getElementById('cl-letter').value;
+  const teacher = document.getElementById('cl-teacher').value || 'Tayinlanmagan';
+  // kalit: 9-A ko'rinishida
+  const key = `${num}-${letter}`;
+  if(CLASS_DATA[key]){ showToast(`⚠️ ${key} sinfi allaqachon mavjud`); return; }
+  // o'qituvchi faniga qarab subject
+  const tObj = TEACHERS.find(t => t.name === teacher);
+  const subject = tObj ? tObj.subject : '—';
+  const color = CLASS_COLORS[Object.keys(CLASS_DATA).length % CLASS_COLORS.length];
+  CLASS_DATA[key] = { label:key, teacher, color, count:0, boys:0, girls:0, subject };
+  saveClasses();
+  closeModal('add-class-modal');
+  buildClassesGrid();
+  showToast(`✓ ${key}-sinf qo'shildi`);
+}
+
+function openAddClass(){
+  fillClassTeacherOptions();
+  showModal('add-class-modal');
+}
+
+/* ===== SCHEDULE (sinf bo'yicha) ===== */
+const DAYS = [
+  {key:'monday',   label:'Dushanba'},
+  {key:'tuesday',  label:'Seshanba'},
+  {key:'wednesday',label:'Chorshanba'},
+  {key:'thursday', label:'Payshanba'},
+  {key:'friday',   label:'Juma'},
+];
+const SUBJ_COLOR = {
+  'Matematika':'#1557a0','Ingliz tili':'#0694a2','Fizika':'#7c3aed',
+  'Kimyo':'#9333ea','Biologiya':'#059669','Informatika':'#d97706',
+  'Tarix':'#e53e3e','Ona tili':'#0d9488','Geografiya':'#ca8a04'
+};
+const L = (subj, teacher, room, time, missed) => ({subj, teacher, room, time, missed:!!missed});
+const SCHEDULE = {
+  '9': [
+    [L('Matematika','Aliyev A.','201','08:00'), L('Ingliz tili','Karimova M.','105','09:00'), L('Fizika','Toshmatov B.','302','10:00'), L('Kimyo','Nazarova Z.','204','11:00',true), L('Informatika','Yusupov J.','115','12:00')],
+    [L('Fizika','Toshmatov B.','302','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Tarix','Rahimov K.','106','10:00'), L('Biologiya','Xoliqova S.','301','11:00')],
+    [L('Ingliz tili','Karimova M.','105','08:00'), L('Kimyo','Nazarova Z.','204','09:00',true), L('Matematika','Aliyev A.','201','10:00'), L('Informatika','Yusupov J.','115','11:00')],
+    [L('Matematika','Aliyev A.','201','08:00'), L('Fizika','Toshmatov B.','302','09:00'), L('Tarix','Rahimov K.','106','10:00'), L('Ingliz tili','Karimova M.','105','11:00')],
+    [L('Biologiya','Xoliqova S.','301','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Fizika','Toshmatov B.','302','10:00')],
+  ],
+  '10': [
+    [L('Ingliz tili','Karimova M.','105','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Biologiya','Xoliqova S.','301','10:00'), L('Fizika','Toshmatov B.','302','11:00')],
+    [L('Matematika','Aliyev A.','201','08:00'), L('Tarix','Rahimov K.','106','09:00'), L('Ingliz tili','Karimova M.','105','10:00'), L('Informatika','Yusupov J.','115','11:00')],
+    [L('Fizika','Toshmatov B.','302','08:00'), L('Ingliz tili','Karimova M.','105','09:00'), L('Matematika','Aliyev A.','201','10:00'), L('Kimyo','Nazarova Z.','204','11:00')],
+    [L('Biologiya','Xoliqova S.','301','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Ingliz tili','Karimova M.','105','10:00'), L('Tarix','Rahimov K.','106','11:00')],
+    [L('Ingliz tili','Karimova M.','105','08:00'), L('Fizika','Toshmatov B.','302','09:00'), L('Matematika','Aliyev A.','201','10:00')],
+  ],
+  '11': [
+    [L('Matematika','Aliyev A.','201','08:00'), L('Fizika','Toshmatov B.','302','09:00'), L('Ingliz tili','Karimova M.','105','10:00'), L('Tarix','Rahimov K.','106','11:00')],
+    [L('Fizika','Toshmatov B.','302','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Kimyo','Nazarova Z.','204','10:00'), L('Biologiya','Xoliqova S.','301','11:00')],
+    [L('Matematika','Aliyev A.','201','08:00'), L('Informatika','Yusupov J.','115','09:00'), L('Fizika','Toshmatov B.','302','10:00'), L('Ingliz tili','Karimova M.','105','11:00')],
+    [L('Ingliz tili','Karimova M.','105','08:00'), L('Matematika','Aliyev A.','201','09:00'), L('Fizika','Toshmatov B.','302','10:00'), L('Tarix','Rahimov K.','106','11:00')],
+    [L('Matematika','Aliyev A.','201','08:00'), L('Fizika','Toshmatov B.','302','09:00'), L('Biologiya','Xoliqova S.','301','10:00')],
+  ],
+};
+
+function renderSchedule(cls){
+  const grid = document.getElementById('sch-grid');
+  if(!grid) return;
+  cls = String(cls || '9');
+  // Mavjud bo'lmagan sinf uchun 9-sinf namunasini ko'rsatamiz
+  const week = SCHEDULE[cls] || SCHEDULE['9'];
+  grid.innerHTML = '';
+  DAYS.forEach((day,di) => {
+    const lessons = (week[di] || []).map(ls => {
+      if(ls.missed){
+        return `<div class="li missed-lesson"><div class="lt">${ls.time}</div><div class="ln">❌ ${ls.subj}</div><div class="lte">Sababsiz qoldirildi</div></div>`;
+      }
+      const c = SUBJ_COLOR[ls.subj] || '#1557a0';
+      return `<div class="li" style="border-left-color:${c}"><div class="lt">${ls.time}</div><div class="ln">${ls.subj}</div><div class="lte">${ls.teacher} · ${ls.room}</div></div>`;
+    }).join('');
+    grid.innerHTML += `<div class="sch-day"><div class="sch-dh" data-t="${day.key}">${T[currentLang][day.key] || day.label}</div><div class="sch-lessons">${lessons}</div></div>`;
+  });
 }
 
 /* ===== MODALS ===== */
