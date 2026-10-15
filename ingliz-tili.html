@@ -208,432 +208,689 @@ const E = (en, uz) => ({en, uz});
 const Q = (q, options, answer, uz) => ({q, options, answer, uz});
 
 const LESSONS = [
+  /* ===================== A0 — BOSHLANG'ICH ===================== */
   {
-    level: "A0 · Boshlang'ich",
-    title: "1-dars. Ingliz alifbosi (Alphabet)",
-    goal: "Ingliz alifbosidagi 26 ta harf va ularning o'qilishi bilan tanishamiz.",
-    explain: `Ingliz tilida <b>26 ta harf</b> bor. Ular lotin alifbosiga asoslangan, xuddi o'zbek lotin alifbosiga o'xshaydi, lekin <b>o'qilishi (talaffuzi)</b> boshqacha.
-      <br><br>Harflar <b>unli (vowel)</b> va <b>undosh (consonant)</b>ga bo'linadi. Unlilar: <code>A, E, I, O, U</code> (ba'zan Y ham). Qolganlari undosh.
-      <span class="tip">💡 Maslahat: har bir harf nomini 🔊 tugmasini bosib eshiting va ovoz chiqarib takrorlang. Bu talaffuzni rivojlantiradi.</span>`,
-    vocab: [
-      V("A a","ey","birinchi harf"), V("B b","bi",""), V("C c","si",""), V("D d","di",""),
-      V("E e","i",""), V("F f","ef",""), V("G g","ji",""), V("H h","eych",""),
-      V("I i","ay",""), V("J j","jey",""), V("K k","key",""), V("L l","el",""),
-      V("M m","em",""), V("N n","en",""), V("O o","ou",""), V("P p","pi",""),
-      V("Q q","kyu",""), V("R r","ar",""), V("S s","es",""), V("T t","ti",""),
-      V("U u","yu",""), V("V v","vi",""), V("W w","dabl-yu",""), V("X x","eks",""),
-      V("Y y","way",""), V("Z z","zed / zi","")
+    cat:"A0 · Boshlang'ich", level:"A0 · Boshlang'ich",
+    title:"1-dars. Ingliz alifbosi (Alphabet)",
+    goal:"Ingliz alifbosidagi 26 ta harf va ularning o'qilishi bilan tanishamiz.",
+    explain:`Ingliz tilida <b>26 ta harf</b> bor. Ular lotin alifbosiga asoslangan, lekin <b>o'qilishi (talaffuzi)</b> boshqacha.
+      <br><br>Harflar <b>unli (vowel)</b> va <b>undosh (consonant)</b>ga bo'linadi. Unlilar: <code>A, E, I, O, U</code>.
+      <span class="tip">💡 Har bir harf nomini 🔊 bosib eshiting va ovoz chiqarib takrorlang.</span>`,
+    vocab:[
+      V("A a","ey",""),V("B b","bi",""),V("C c","si",""),V("D d","di",""),V("E e","i",""),
+      V("F f","ef",""),V("G g","ji",""),V("H h","eych",""),V("I i","ay",""),V("J j","jey",""),
+      V("K k","key",""),V("L l","el",""),V("M m","em",""),V("N n","en",""),V("O o","ou",""),
+      V("P p","pi",""),V("Q q","kyu",""),V("R r","ar",""),V("S s","es",""),V("T t","ti",""),
+      V("U u","yu",""),V("V v","vi",""),V("W w","dabl-yu",""),V("X x","eks",""),V("Y y","way",""),V("Z z","zed","")
     ],
-    examples: [],
-    quiz: [
-      Q("Ingliz alifbosida nechta harf bor?", ["24","25","26","28"], 2, "To'g'ri — 26 ta harf."),
-      Q("Qaysi harf UNLI (vowel)?", ["B","K","E","T"], 2, "E — unli harf. Unlilar: A, E, I, O, U."),
-      Q("'G' harfi qanday o'qiladi?", ["gi","ji","ge","ga"], 1, "G harfi 'ji' deb o'qiladi.")
+    examples:[],
+    quiz:[
+      Q("Ingliz alifbosida nechta harf bor?",["24","25","26","28"],2,"26 ta harf."),
+      Q("Qaysi harf UNLI (vowel)?",["B","K","E","T"],2,"E — unli. Unlilar: A,E,I,O,U."),
+      Q("'G' harfi qanday o'qiladi?",["gi","ji","ge","ga"],1,"G = 'ji'.")
     ]
   },
   {
-    level: "A0 · Boshlang'ich",
-    title: "2-dars. Salomlashish (Greetings)",
-    goal: "Odamlar bilan salomlashish va xayrlashishni o'rganamiz.",
-    explain: `Ingliz tilida salomlashishning eng keng tarqalgan so'zi — <code>Hello</code> (salom).
-      Do'stona vaziyatda <code>Hi</code> ham ishlatiladi.
-      <br><br>Kun davomiga qarab salomlashish ham bor:
-      <b>Good morning</b> (xayrli tong), <b>Good afternoon</b> (xayrli kun), <b>Good evening</b> (xayrli kech).
-      Xayrlashganda esa <code>Goodbye</code> yoki qisqa <code>Bye</code> deyiladi.
-      <span class="tip">💡 "How are you?" — "Qalaysiz?" degani. Javobi: "I'm fine, thank you" (Yaxshiman, rahmat).</span>`,
-    vocab: [
-      V("Hello","hellou","Salom"), V("Hi","hay","Salom (do'stona)"),
-      V("Good morning","gud morning","Xayrli tong"), V("Good evening","gud ivning","Xayrli kech"),
-      V("Goodbye","gudbay","Xayr"), V("Bye","bay","Xayr (qisqa)"),
-      V("Please","pliiz","Iltimos"), V("Thank you","senk yu","Rahmat"),
-      V("Sorry","sorri","Kechirasiz"), V("Yes","yes","Ha"), V("No","nou","Yo'q")
+    cat:"A0 · Boshlang'ich", level:"A0 · O'qish",
+    title:"2-dars. O'qish mashqi — 1-qism (1–50)",
+    goal:"Oddiy so'zlarni o'qishni (phonics) mashq qilamiz.",
+    explain:`Ingliz tilida so'zlar yozilishi va o'qilishi har xil bo'ladi. Bu darsdagi so'zlarni
+      🔊 bosib eshiting va ovoz chiqarib o'qing — bu o'qish ko'nikmasini shakllantiradi.
+      <span class="tip">💡 Bir kunda 10–15 ta so'z yodlang. Qaytarish — eng muhim qoida.</span>`,
+    vocab:[
+      V("plate","pleyt","tarelka"),V("name","neym","ism; nomlamoq"),V("place","pleys","joy; joylamoq"),
+      V("table","teybl","stol; jadval"),V("face","feys","yuz"),V("late","leyt","kech"),
+      V("lake","leyk","ko'l"),V("make","meyk","yasamoq"),V("take","teyk","olmoq"),
+      V("date","deyt","sana; uchrashuv"),V("gate","geyt","darvoza"),V("save","seyv","tejamoq; qutqarmoq"),
+      V("game","geym","o'yin"),V("cake","keyk","tort, keks"),V("mane","meyn","yol (ot yoli)"),
+      V("tree","trii","daraxt"),V("street","striit","ko'cha"),V("me","mii","men(i), menga"),
+      V("we","wii","biz"),V("she","shii","u (ayol)"),V("he","hii","u (erkak)"),
+      V("green","griin","yashil"),V("see","sii","ko'rmoq"),V("sleep","sliip","uxlamoq; uyqu"),
+      V("need","niid","kerak; ehtiyoj"),V("meet","miit","uchrashmoq"),V("seed","siid","urug'"),
+      V("steel","stiil","po'lat"),V("these","ziiz","bular"),V("nine","nayn","to'qqiz"),
+      V("five","fayv","besh"),V("nice","nays","yoqimli"),V("tie","tay","galstuk; bog'lamoq"),
+      V("my","may","mening"),V("fly","flay","pashsha; uchmoq"),V("time","taym","vaqt"),
+      V("pipe","payp","quvur"),V("rice","rays","guruch"),V("type","tayp","tur; chop etmoq"),
+      V("mine","mayn","meniki; kon"),V("kite","kayt","varrak"),V("line","layn","chiziq; navbat"),
+      V("white","wayt","oq"),V("rose","rouz","atirgul"),V("nose","nouz","burun"),
+      V("no","nou","yo'q"),V("stone","stoun","tosh"),V("go","gou","bormoq"),
+      V("hope","houp","umid; umid qilmoq"),V("pole","poul","qutb; ustun")
     ],
-    examples: [
-      E("Hello! How are you?", "Salom! Qalaysiz?"),
-      E("I'm fine, thank you.", "Yaxshiman, rahmat."),
-      E("Good morning, teacher!", "Xayrli tong, o'qituvchi!"),
-      E("Goodbye! See you tomorrow.", "Xayr! Ertaga ko'rishamiz.")
+    examples:[
+      E("Take this cake.","Bu tortni ol."),
+      E("I can see a green tree.","Men yashil daraxtni ko'ryapman."),
+      E("We need five plates.","Bizga beshta tarelka kerak.")
     ],
-    quiz: [
-      Q("'Thank you' nima degani?", ["Salom","Rahmat","Xayr","Iltimos"], 1, "Thank you = Rahmat."),
-      Q("Ertalab qanday salomlashamiz?", ["Good evening","Good night","Good morning","Goodbye"], 2, "Good morning = Xayrli tong."),
-      Q("'Xayr' qanday aytiladi?", ["Hello","Please","Sorry","Goodbye"], 3, "Goodbye = Xayr.")
+    quiz:[
+      Q("'lake' nima degani?",["ko'l","joy","kech","yuz"],0,"lake = ko'l."),
+      Q("'white' qaysi rang?",["qora","oq","yashil","qizil"],1,"white = oq."),
+      Q("'time' nima degani?",["tosh","vaqt","umid","chiziq"],1,"time = vaqt.")
     ]
   },
   {
-    level: "A1 · Elementar",
-    title: "3-dars. Kishilik olmoshlari (Pronouns)",
-    goal: "I, you, he, she, it, we, they olmoshlarini o'rganamiz.",
-    explain: `Olmosh — bu ism o'rniga ishlatiladigan so'z. Ingliz tilida asosiy olmoshlar:
-      <br><br>
-      <b>I</b> — men &nbsp;|&nbsp; <b>you</b> — sen/siz &nbsp;|&nbsp; <b>he</b> — u (erkak)<br>
-      <b>she</b> — u (ayol) &nbsp;|&nbsp; <b>it</b> — u (narsa/hayvon)<br>
-      <b>we</b> — biz &nbsp;|&nbsp; <b>they</b> — ular
-      <span class="tip">⚠️ Muhim: <code>I</code> (men) har doim <b>katta harf</b> bilan yoziladi, gap o'rtasida bo'lsa ham!</span>`,
-    vocab: [
-      V("I","ay","men"), V("You","yu","sen / siz"), V("He","hi","u (erkak)"),
-      V("She","shi","u (ayol)"), V("It","it","u (narsa)"), V("We","wi","biz"),
-      V("They","zey","ular")
+    cat:"A0 · Boshlang'ich", level:"A0 · O'qish",
+    title:"3-dars. O'qish mashqi — 2-qism (51–100)",
+    goal:"Yangi so'zlar bilan o'qishni davom ettiramiz.",
+    explain:`Davom etamiz! Har bir so'zni eshitib, ovoz chiqarib o'qing.
+      <span class="tip">💡 Yangi so'zni gap ichida ishlatib ko'ring — shunda tezroq esda qoladi.</span>`,
+    vocab:[
+      V("so","sou","shunday; shunday qilib"),V("tone","toun","ohang; tovush"),V("home","houm","uy"),
+      V("note","nout","eslatma"),V("spoke","spouk","gapirdi (speak-past)"),V("those","zouz","ana ular"),
+      V("pupil","pyupil","o'quvchi; ko'z qorachig'i"),V("student","styudent","talaba"),V("blue","blu","moviy"),
+      V("tulip","tyulip","lola"),V("mute","myut","soqov"),V("tube","tyub","trubka; metro"),
+      V("cube","kyub","kub"),V("six","siks","olti"),V("sit","sit","o'tirmoq"),
+      V("big","big","katta"),V("lip","lip","lab"),V("ill","il","kasal"),
+      V("in","in","ichida"),V("it","it","u (narsa)"),V("pin","pin","to'g'nog'ich"),
+      V("kill","kil","o'ldirmoq"),V("milk","milk","sut"),V("silk","silk","ipak"),
+      V("still","stil","hanuz; sokin"),V("thin","sin","ingichka; ozg'in"),V("thick","sik","qalin; yo'g'on"),
+      V("this","zis","bu"),V("pick","pik","termoq; tanlamoq"),V("pen","pen","ruchka"),
+      V("ten","ten","o'n"),V("red","red","qizil"),V("bed","bed","krovat"),
+      V("leg","leg","oyoq"),V("left","left","chap"),V("desk","desk","parta"),
+      V("dress","dres","ko'ylak"),V("pencil","pensil","qalam"),V("net","net","to'r"),
+      V("set","set","to'plam; o'rnatmoq"),V("hen","hen","tovuq"),V("tell","tel","aytmoq"),
+      V("text","tekst","matn"),V("what","wot","nima"),V("bag","beg","sumka"),
+      V("man","men","erkak"),V("map","mep","xarita"),V("flag","fleg","bayroq"),
+      V("lamp","lemp","chiroq"),V("bad","bed","yomon")
     ],
-    examples: [
-      E("I am a student.", "Men o'quvchiman."),
-      E("She is my sister.", "U mening singlim."),
-      E("We are friends.", "Biz do'stmiz."),
-      E("They are teachers.", "Ular o'qituvchilar.")
+    examples:[
+      E("This is my home.","Bu mening uyim."),
+      E("The student has a red pen.","Talabada qizil ruchka bor."),
+      E("I drink milk every day.","Men har kuni sut ichaman.")
     ],
-    quiz: [
-      Q("'Biz' qaysi olmosh?", ["They","We","You","He"], 1, "We = biz."),
-      Q("Ayol kishi uchun qaysi olmosh ishlatiladi?", ["He","It","She","We"], 2, "She = u (ayol)."),
-      Q("Qaysi olmosh doim katta harf bilan yoziladi?", ["you","he","i","we"], 2, "I (men) doim katta harf bilan.")
+    quiz:[
+      Q("'home' nima degani?",["uy","lab","sut","sumka"],0,"home = uy."),
+      Q("'thick' nima degani?",["ingichka","qalin","kasal","katta"],1,"thick = qalin."),
+      Q("'what' nima degani?",["qayerda","nima","kim","qachon"],1,"what = nima.")
     ]
   },
   {
-    level: "A1 · Elementar",
-    title: "4-dars. 'To be' fe'li (am / is / are)",
-    goal: "'Men ...man', 'U ...' kabi gaplar tuzishni o'rganamiz.",
-    explain: `<code>to be</code> — eng muhim fe'l. O'zbekchada "...man, ...san, ...dir" qo'shimchalariga mos keladi.
-      U olmoshga qarab 3 xil shaklga ega:
-      <br><br>
-      <b>I am</b> (men ...man) &nbsp;→&nbsp; qisqa: <code>I'm</code><br>
-      <b>He / She / It is</b> (u ...) &nbsp;→&nbsp; qisqa: <code>He's</code><br>
-      <b>You / We / They are</b> (sen/biz/ular ...) &nbsp;→&nbsp; qisqa: <code>You're</code>
-      <span class="tip">💡 Esda tuting: <b>I → am</b>, <b>he/she/it → is</b>, <b>you/we/they → are</b>.</span>`,
-    vocab: [
-      V("I am","ay em","men ...man"), V("He is","hi iz","u ..."),
-      V("She is","shi iz","u (ayol) ..."), V("It is","it iz","u (narsa) ..."),
-      V("You are","yu ar","sen/siz ..."), V("We are","wi ar","biz ..."),
-      V("They are","zey ar","ular ...")
+    cat:"A0 · Boshlang'ich", level:"A0 · O'qish",
+    title:"4-dars. O'qish mashqi — 3-qism (101–150)",
+    goal:"O'qish mashqining yakuniy qismi.",
+    explain:`Oxirgi qism! Ushbu so'zlarni ham o'zlashtirsangiz, 150 ta asosiy so'zni bilib olasiz.
+      <span class="tip">🎯 Barcha 150 so'zni bilsangiz — oddiy gaplarni o'qiy olasiz!</span>`,
+    vocab:[
+      V("hat","het","shlyapa"),V("hand","hend","qo'l"),V("stand","stend","tik turmoq"),
+      V("that","zet","ana u"),V("apple","epl","olma"),V("fat","fet","yog'; semiz"),
+      V("flat","flet","kvartira; tekis"),V("plan","plen","reja"),V("tram","trem","tramvay"),
+      V("cap","kep","kepka; qopqoq"),V("cat","ket","mushuk"),V("back","bek","orqa"),
+      V("black","blek","qora"),V("and","end","va"),V("cock","kok","xo'roz"),
+      V("dog","dog","it"),V("not","not","emas"),V("box","boks","quti"),
+      V("on","on","ustida"),V("stop","stop","to'xtatmoq"),V("clock","klok","soat"),
+      V("hot","hot","issiq"),V("fox","foks","tulki"),V("sock","sok","paypoq"),
+      V("bottle","botl","shisha"),V("kind","kaynd","mehribon; tur"),V("book","buk","kitob"),
+      V("look","luk","qaramoq"),V("good","gud","yaxshi"),V("foot","fut","oyoq (panja)"),
+      V("too","tu","o'ta; ham"),V("boot","but","etik"),V("room","rum","xona"),
+      V("spoon","spun","qoshiq"),V("cook","kuk","oshpaz; pishirmoq"),V("food","fud","ovqat"),
+      V("soon","sun","tez orada"),V("cool","kul","salqin"),V("fool","ful","ahmoq"),
+      V("bus","bas","avtobus"),V("plus","plas","plyus"),V("cup","kap","chashka"),
+      V("up","ap","tepaga"),V("cut","kat","kesmoq"),V("rub","rab","ishqalamoq"),
+      V("hut","hat","kulba"),V("hunt","hant","ov; ovlamoq"),V("sun","san","quyosh"),
+      V("that kind of","zet kaynd ov","o'sha turdagi"),V("what kind of","wot kaynd ov","qanday")
     ],
-    examples: [
-      E("I am happy.", "Men baxtliman."),
-      E("He is a doctor.", "U shifokor."),
-      E("You are my friend.", "Sen mening do'stimsan."),
-      E("It is a cat.", "Bu mushuk.")
+    examples:[
+      E("The cat is on the box.","Mushuk qutining ustida."),
+      E("I have a good book.","Menda yaxshi kitob bor."),
+      E("The sun is hot.","Quyosh issiq.")
     ],
-    quiz: [
-      Q("'I ___ a student' — qaysi to'g'ri?", ["is","are","am","be"], 2, "I am — doim 'am'."),
-      Q("'She ___ beautiful' — qaysi to'g'ri?", ["am","is","are","be"], 1, "He/She/It bilan 'is'."),
-      Q("'They ___ teachers' — qaysi to'g'ri?", ["is","am","are","be"], 2, "You/We/They bilan 'are'.")
+    quiz:[
+      Q("'black' qaysi rang?",["oq","qora","qizil","ko'k"],1,"black = qora."),
+      Q("'book' nima degani?",["kitob","quti","it","olma"],0,"book = kitob."),
+      Q("'sun' nima degani?",["oy","quyosh","issiq","xona"],1,"sun = quyosh.")
     ]
   },
   {
-    level: "A1 · Elementar",
-    title: "5-dars. Sanoq — 0 dan 20 gacha (Numbers)",
-    goal: "Ingliz tilida sonlarni sanashni o'rganamiz.",
-    explain: `Sonlar kundalik hayotda juda kerak — yosh, narx, vaqt, telefon raqami.
-      <br><br>0 dan 12 gacha har birining alohida nomi bor. 13 dan 19 gacha oxiriga <code>-teen</code> qo'shiladi
-      (masalan <b>four</b> → <b>fourteen</b>). O'nliklar esa <code>-ty</code> bilan tugaydi (twenty, thirty...).
-      <span class="tip">💡 13–19 oxiri "-tin" eshitiladi, 20,30 esa "-ti". Diqqat bilan tinglang!</span>`,
-    vocab: [
-      V("0 — zero","ziro",""), V("1 — one","wan",""), V("2 — two","tu",""),
-      V("3 — three","sri",""), V("4 — four","for",""), V("5 — five","fayv",""),
-      V("6 — six","siks",""), V("7 — seven","seven",""), V("8 — eight","eyt",""),
-      V("9 — nine","nayn",""), V("10 — ten","ten",""), V("11 — eleven","ileven",""),
-      V("12 — twelve","twelv",""), V("15 — fifteen","fiftin",""), V("20 — twenty","twenti","")
+    cat:"A0 · Boshlang'ich", level:"A0 · Muloqot",
+    title:"5-dars. Salomlashish va tanishish (Greetings)",
+    goal:"Salomlashish, tanishish va o'zini tanishtirish.",
+    explain:`Salom — <code>Hello</code> yoki <code>Hi</code>. Kun davriga qarab: <b>Good morning</b> (xayrli tong),
+      <b>Good afternoon</b> (xayrli kun), <b>Good evening</b> (xayrli kech), <b>Good night</b> (xayrli tun).
+      <br><br><b>Tanishish suhbati:</b><br>
+      — What is your name? (Isming nima?) → My name is Aziz. (Mening ismim Aziz.)<br>
+      — How are you? (Qalaysan?) → I'm fine, thank you.<br>
+      — How old are you? (Necha yoshdasan?) → I'm 20 years old.<br>
+      — Where are you from? (Qayerdansan?) → I'm from Uzbekistan.
+      <span class="tip">💡 "Nice to meet you" — "Tanishganimdan xursandman".</span>`,
+    vocab:[
+      V("Hello","hellou","Salom"),V("Hi","hay","Salom (do'stona)"),
+      V("Good morning","gud morning","Xayrli tong"),V("Good afternoon","gud afternun","Xayrli kun"),
+      V("Good evening","gud ivning","Xayrli kech"),V("Good night","gud nayt","Xayrli tun"),
+      V("Goodbye","gudbay","Xayr"),V("Nice to meet you","nays tu miit yu","Tanishganimdan xursandman"),
+      V("Please","pliiz","Iltimos"),V("Thank you","senk yu","Rahmat"),V("Sorry","sorri","Kechirasiz"),
+      V("Yes","yes","Ha"),V("No","nou","Yo'q")
     ],
-    examples: [
-      E("I am ten years old.", "Men o'n yoshdaman."),
-      E("Two plus three is five.", "Ikki qo'shuv uch — besh."),
-      E("I have five books.", "Mening beshta kitobim bor.")
+    examples:[
+      E("Hello! What is your name?","Salom! Isming nima?"),
+      E("My name is Lola. And you?","Mening ismim Lola. Sizchi?"),
+      E("How old are you?","Necha yoshdasan?"),
+      E("Where are you from? — I'm from Uzbekistan.","Qayerdansan? — Men O'zbekistondanman.")
     ],
-    quiz: [
-      Q("'Seven' nechchi?", ["6","7","8","9"], 1, "Seven = 7."),
-      Q("12 inglizchada qanday?", ["twenty","twelve","twenteen","two"], 1, "Twelve = 12."),
-      Q("'Fifteen' nechchi?", ["5","14","15","50"], 2, "Fifteen = 15.")
+    quiz:[
+      Q("'Isming nima?' qaysi?",["How are you?","What is your name?","How old are you?","Where are you?"],1,"What is your name?"),
+      Q("'Thank you' nima degani?",["Salom","Rahmat","Xayr","Iltimos"],1,"Thank you = Rahmat."),
+      Q("Kechqurun qanday salomlashamiz?",["Good morning","Good evening","Good night","Goodbye"],1,"Good evening = Xayrli kech.")
     ]
   },
   {
-    level: "A1 · Elementar",
-    title: "6-dars. Ranglar (Colors)",
-    goal: "Asosiy ranglarni o'rganamiz.",
-    explain: `Ranglar — gaplarni boyitadigan eng oson mavzulardan biri. Narsalarni tasvirlashda ishlatiladi.
-      <br><br>Gapda rang odatda otdan <b>oldin</b> keladi: <code>a red apple</code> (qizil olma),
-      <code>a blue car</code> (ko'k mashina).
-      <span class="tip">💡 "What colour is it?" — "Bu qanday rangda?" degan savol.</span>`,
-    vocab: [
-      V("Red","red","qizil"), V("Blue","blu","ko'k"), V("Green","grin","yashil"),
-      V("Yellow","yellou","sariq"), V("Black","blek","qora"), V("White","wayt","oq"),
-      V("Orange","orinj","to'q sariq"), V("Pink","pink","pushti"),
-      V("Brown","braun","jigarrang"), V("Grey","grey","kulrang")
+    cat:"A0 · Boshlang'ich", level:"A0 · Sanoq",
+    title:"6-dars. Sonlar 0–20 (Numbers)",
+    goal:"Sonlarni sanashni o'rganamiz.",
+    explain:`0–12 har birining alohida nomi bor. 13–19 oxiriga <code>-teen</code>, o'nliklar <code>-ty</code> qo'shiladi.
+      <span class="tip">💡 13–19 "-tin", 20/30 "-ti" eshitiladi.</span>`,
+    vocab:[
+      V("0 — zero","ziro",""),V("1 — one","wan",""),V("2 — two","tu",""),V("3 — three","sri",""),
+      V("4 — four","for",""),V("5 — five","fayv",""),V("6 — six","siks",""),V("7 — seven","seven",""),
+      V("8 — eight","eyt",""),V("9 — nine","nayn",""),V("10 — ten","ten",""),V("11 — eleven","ileven",""),
+      V("12 — twelve","twelv",""),V("13 — thirteen","sörtin",""),V("15 — fifteen","fiftin",""),
+      V("20 — twenty","twenti",""),V("30 — thirty","sörti",""),V("100 — hundred","handred","")
     ],
-    examples: [
-      E("The sky is blue.", "Osmon ko'k."),
-      E("I like red apples.", "Men qizil olmalarni yoqtiraman."),
-      E("Her dress is white.", "Uning ko'ylagi oq.")
+    examples:[
+      E("I am ten years old.","Men o'n yoshdaman."),
+      E("Two plus three is five.","Ikki qo'shuv uch — besh.")
     ],
-    quiz: [
-      Q("'Green' qaysi rang?", ["qizil","ko'k","yashil","sariq"], 2, "Green = yashil."),
-      Q("'Qora' inglizchada?", ["white","black","brown","grey"], 1, "Black = qora."),
-      Q("'Yellow' qaysi rang?", ["pushti","sariq","ko'k","oq"], 1, "Yellow = sariq.")
+    quiz:[
+      Q("'Seven' nechchi?",["6","7","8","9"],1,"Seven = 7."),
+      Q("12 inglizchada?",["twenty","twelve","twenteen","two"],1,"Twelve = 12."),
+      Q("'Fifteen' nechchi?",["5","14","15","50"],2,"Fifteen = 15.")
+    ]
+  },
+
+  /* ===================== A1 — ELEMENTAR ===================== */
+  {
+    cat:"A1 · Elementar", level:"A1 · Elementar",
+    title:"7-dars. Kishilik olmoshlari (Pronouns)",
+    goal:"I, you, he, she, it, we, they.",
+    explain:`<b>I</b> — men, <b>you</b> — sen/siz, <b>he</b> — u (erkak), <b>she</b> — u (ayol),
+      <b>it</b> — u (narsa), <b>we</b> — biz, <b>they</b> — ular.
+      <span class="tip">⚠️ <code>I</code> (men) doim katta harf bilan yoziladi!</span>`,
+    vocab:[
+      V("I","ay","men"),V("You","yu","sen / siz"),V("He","hi","u (erkak)"),V("She","shi","u (ayol)"),
+      V("It","it","u (narsa)"),V("We","wi","biz"),V("They","zey","ular")
+    ],
+    examples:[E("I am a student.","Men o'quvchiman."),E("She is my sister.","U mening singlim."),E("We are friends.","Biz do'stmiz.")],
+    quiz:[
+      Q("'Biz' qaysi?",["They","We","You","He"],1,"We = biz."),
+      Q("Ayol uchun qaysi?",["He","It","She","We"],2,"She = u (ayol)."),
+      Q("Qaysi doim katta harf?",["you","he","i","we"],2,"I doim katta harf.")
     ]
   },
   {
-    level: "A1 · Elementar",
-    title: "7-dars. Oila a'zolari (Family)",
-    goal: "Oila a'zolarini ataydigan so'zlarni o'rganamiz.",
-    explain: `Oila haqida gapirish — eng ko'p ishlatiladigan mavzulardan.
-      <br><br>Egalik bildirish uchun olmoshlar ishlatiladi: <b>my</b> (mening), <b>your</b> (sening),
-      <b>his</b> (uning — erkak), <b>her</b> (uning — ayol).
-      Masalan: <code>my mother</code> (mening onam), <code>his father</code> (uning otasi).
-      <span class="tip">💡 "parents" = ota-ona (ikkovi birga). "brother" = aka/uka, "sister" = opa/singil.</span>`,
-    vocab: [
-      V("Mother / Mom","mazer / mom","ona"), V("Father / Dad","fazer / ded","ota"),
-      V("Brother","brazer","aka / uka"), V("Sister","sister","opa / singil"),
-      V("Grandmother","grendmazer","buvi"), V("Grandfather","grendfazer","bobo"),
-      V("Son","san","o'g'il"), V("Daughter","doter","qiz"),
-      V("Family","femili","oila"), V("Parents","perents","ota-ona")
+    cat:"A1 · Elementar", level:"A1 · Grammatika",
+    title:"8-dars. 'To be' fe'li (am / is / are)",
+    goal:"'Men ...man', 'U ...' gaplar.",
+    explain:`<b>I am</b> (I'm), <b>He/She/It is</b> (He's), <b>You/We/They are</b> (You're).
+      <span class="tip">💡 I→am, he/she/it→is, you/we/they→are.</span>`,
+    vocab:[
+      V("I am","ay em","men ...man"),V("He is","hi iz","u ..."),V("She is","shi iz","u (ayol) ..."),
+      V("It is","it iz","u (narsa) ..."),V("You are","yu ar","sen/siz ..."),V("We are","wi ar","biz ..."),V("They are","zey ar","ular ...")
     ],
-    examples: [
-      E("This is my mother.", "Bu mening onam."),
-      E("He has two brothers.", "Uning ikkita akasi bor."),
-      E("My family is big.", "Mening oilam katta.")
-    ],
-    quiz: [
-      Q("'Sister' kim?", ["aka","opa/singil","ona","bobo"], 1, "Sister = opa yoki singil."),
-      Q("'Ota' inglizchada?", ["mother","brother","father","son"], 2, "Father = ota."),
-      Q("'My' nima degani?", ["sening","mening","uning","bizning"], 1, "My = mening.")
+    examples:[E("I am happy.","Men baxtliman."),E("He is a doctor.","U shifokor."),E("You are my friend.","Sen do'stimsan.")],
+    quiz:[
+      Q("'I ___ a student'",["is","are","am","be"],2,"I am."),
+      Q("'She ___ beautiful'",["am","is","are","be"],1,"He/She/It → is."),
+      Q("'They ___ teachers'",["is","am","are","be"],2,"You/We/They → are.")
     ]
   },
   {
-    level: "A1 · Elementar",
-    title: "8-dars. Ko'plik son (Plural -s)",
-    goal: "Bir narsadan ko'p bo'lganda qanday yozilishini o'rganamiz.",
-    explain: `O'zbekchada ko'plik <b>-lar</b> bilan yasaladi (kitob → kitob<b>lar</b>).
-      Ingliz tilida esa otning oxiriga <code>-s</code> qo'shiladi.
-      <br><br><b>book → books</b> (kitoblar), <b>cat → cats</b> (mushuklar).
-      <br>Agar so'z <b>-s, -ss, -sh, -ch, -x</b> bilan tugasa, <code>-es</code> qo'shiladi:
-      <b>box → boxes</b>, <b>bus → buses</b>.
-      <span class="tip">⚠️ Ba'zi so'zlar qoidaga bo'ysunmaydi: man → <b>men</b>, woman → <b>women</b>, child → <b>children</b>.</span>`,
-    vocab: [
-      V("One book","wan buk","bitta kitob"), V("Two books","tu buks","ikkita kitob"),
-      V("A cat","e ket","mushuk"), V("Cats","kets","mushuklar"),
-      V("A box","e boks","quti"), V("Boxes","boksiz","qutilar"),
-      V("Man → Men","men","erkak → erkaklar"), V("Child → Children","children","bola → bolalar")
+    cat:"A1 · Elementar", level:"A1 · Lug'at",
+    title:"9-dars. Ranglar (Colors)",
+    goal:"Asosiy ranglar.",
+    explain:`Rang otdan oldin keladi: <code>a red apple</code> (qizil olma).
+      <span class="tip">💡 "What colour is it?" — "Bu qanday rangda?"</span>`,
+    vocab:[
+      V("Red","red","qizil"),V("Blue","blu","ko'k"),V("Green","grin","yashil"),V("Yellow","yellou","sariq"),
+      V("Black","blek","qora"),V("White","wayt","oq"),V("Orange","orinj","to'q sariq"),V("Pink","pink","pushti"),
+      V("Brown","braun","jigarrang"),V("Grey","grey","kulrang"),V("Purple","pörpl","siyohrang"),V("Violet","vayolet","binafsha")
     ],
-    examples: [
-      E("I have three apples.", "Mening uchta olmam bor."),
-      E("There are many cars.", "Ko'p mashinalar bor."),
-      E("The children are playing.", "Bolalar o'ynashyapti.")
-    ],
-    quiz: [
-      Q("'book' ko'pligi qanday?", ["bookes","books","bookies","book"], 1, "book → books."),
-      Q("'box' ko'pligi qanday?", ["boxs","boxies","boxes","box"], 2, "box → boxes (-es qo'shiladi)."),
-      Q("'child' ko'pligi qanday?", ["childs","childes","children","childrens"], 2, "child → children (istisno).")
+    examples:[E("The sky is blue.","Osmon ko'k."),E("I like red apples.","Men qizil olmalarni yoqtiraman.")],
+    quiz:[
+      Q("'Green' qaysi rang?",["qizil","ko'k","yashil","sariq"],2,"Green = yashil."),
+      Q("'Qora' inglizchada?",["white","black","brown","grey"],1,"Black = qora."),
+      Q("'Purple' qaysi rang?",["pushti","siyohrang","sariq","oq"],1,"Purple = siyohrang.")
     ]
   },
   {
-    level: "A2 · Quyi o'rta",
-    title: "9-dars. Hozirgi zamon (Present Simple)",
-    goal: "Har kuni takrorlanadigan ishlar haqida gapirishni o'rganamiz.",
-    explain: `Present Simple — <b>odatdagi, muntazam</b> ishlar uchun ishlatiladi (har kuni, har hafta...).
-      <br><br>Oddiy gap tuzilishi: <b>Olmosh + fe'l</b>.
-      <br><code>I work.</code> (Men ishlayman.) &nbsp; <code>They play.</code> (Ular o'ynaydi.)
-      <br><br>⭐ Eng muhim qoida: agar ega <b>he / she / it</b> bo'lsa, fe'lga <code>-s</code> qo'shiladi!
-      <br><code>He work<b>s</b>.</code> (U ishlaydi.) &nbsp; <code>She read<b>s</b>.</code> (U o'qiydi.)
-      <span class="tip">💡 "I, you, we, they" → fe'l o'zgarmaydi. "He, she, it" → fe'l +s.</span>`,
-    vocab: [
-      V("work","work","ishlamoq"), V("read","riid","o'qimoq"),
-      V("play","pley","o'ynamoq"), V("eat","iit","yemoq"),
-      V("go","gou","bormoq"), V("like","layk","yoqtirmoq"),
-      V("live","liv","yashamoq"), V("study","stadi","o'qimoq (dars)")
+    cat:"A1 · Elementar", level:"A1 · Lug'at",
+    title:"10-dars. Tananing qismlari (Body)",
+    goal:"Tana a'zolarini ataydigan so'zlar.",
+    explain:`Tana qismlari — kundalik va tibbiy suhbatlarda kerak.
+      <span class="tip">💡 Ko'plik: one foot → two <b>feet</b>, one tooth → two <b>teeth</b>.</span>`,
+    vocab:[
+      V("hair","heer","soch"),V("head","hed","bosh"),V("face","feys","yuz"),V("eye","ay","ko'z"),
+      V("ear","ir","quloq"),V("nose","nouz","burun"),V("mouth","maus","og'iz"),V("tooth","tus","tish"),
+      V("neck","nek","bo'yin"),V("shoulder","shoulder","yelka"),V("chest","chest","ko'krak"),V("stomach","stamak","oshqozon"),
+      V("elbow","elbou","tirsak"),V("finger","finger","barmoq"),V("arm","arm","bilak"),V("hand","hend","qo'l"),
+      V("knee","nii","tizza"),V("leg","leg","oyoq"),V("lips","lips","lablar"),V("heart","hart","yurak")
     ],
-    examples: [
-      E("I go to school every day.", "Men har kuni maktabga boraman."),
-      E("She reads books.", "U kitob o'qiydi."),
-      E("We play football.", "Biz futbol o'ynaymiz."),
-      E("He likes tea.", "U choyni yoqtiradi.")
-    ],
-    quiz: [
-      Q("'She ___ English' — to'g'risi qaysi?", ["study","studys","studies","studying"], 2, "study → studies (y → ies, he/she/it bilan)."),
-      Q("'I ___ football' — to'g'risi?", ["plays","play","playing","played"], 1, "I bilan fe'l o'zgarmaydi: play."),
-      Q("Qaysi ega bilan fe'lga -s qo'shiladi?", ["I","You","We","He"], 3, "He/She/It bilan -s qo'shiladi.")
+    examples:[E("I have two eyes.","Mening ikkita ko'zim bor."),E("My head hurts.","Boshim og'riyapti.")],
+    quiz:[
+      Q("'eye' nima?",["quloq","ko'z","burun","og'iz"],1,"eye = ko'z."),
+      Q("'qo'l' inglizchada?",["leg","hand","head","neck"],1,"hand = qo'l."),
+      Q("'heart' nima?",["yurak","tizza","yelka","tish"],0,"heart = yurak.")
     ]
   },
   {
-    level: "A2 · Quyi o'rta",
-    title: "10-dars. Savol so'zlari (Questions)",
-    goal: "Savol berishni va asosiy savol so'zlarini o'rganamiz.",
-    explain: `Savol berish uchun maxsus so'zlar bor (Wh- questions):
-      <br><br>
-      <b>What?</b> — nima? &nbsp; <b>Who?</b> — kim? &nbsp; <b>Where?</b> — qayerda?<br>
-      <b>When?</b> — qachon? &nbsp; <b>Why?</b> — nega? &nbsp; <b>How?</b> — qanday?
-      <br><br>Masalan: <code>What is your name?</code> (Isming nima?),
-      <code>Where are you from?</code> (Qayerdansan?).
-      <span class="tip">💡 "How old are you?" — "Necha yoshdasan?" degan juda kerakli savol.</span>`,
-    vocab: [
-      V("What","wot","nima"), V("Who","hu","kim"), V("Where","weer","qayerda"),
-      V("When","wen","qachon"), V("Why","way","nega"), V("How","hau","qanday"),
-      V("Which","wich","qaysi"), V("How many","hau meni","nechta")
+    cat:"A1 · Elementar", level:"A1 · Lug'at",
+    title:"11-dars. Oila a'zolari (Family)",
+    goal:"Oila va qarindoshlik so'zlari — gaplar bilan.",
+    explain:`Egalik: <b>my</b> (mening), <b>your</b> (sening), <b>his/her</b> (uning).
+      <span class="tip">💡 "siblings" = aka-uka/opa-singillar. "in-law" — qaynota/qaynona tomondan qarindoshlar.</span>`,
+    vocab:[
+      V("Family","femili","oila"),V("Parents","perents","ota-ona"),V("Father","fazer","ota"),V("Mother","mazer","ona"),
+      V("Children","children","bolalar"),V("Son","san","o'g'il"),V("Daughter","doter","qiz"),
+      V("Sister","sister","opa/singil"),V("Brother","brazer","aka/uka"),V("Siblings","siblingz","tug'ishganlar"),
+      V("Grandfather","grendfazer","bobo"),V("Grandmother","grendmazer","buvi"),V("Grandchildren","grendchildren","nabiralar"),
+      V("Uncle","ankl","amaki/tog'a"),V("Aunt","ant","amma/xola"),V("Cousin","kazn","amakivachcha/xolavachcha"),
+      V("Niece","niis","jiyan (qiz)"),V("Nephew","nefyu","jiyan (o'g'il)"),V("Husband","hazbend","er"),V("Wife","wayf","xotin/rafiqa"),
+      V("Mother-in-law","mazer-in-lo","qaynona"),V("Father-in-law","fazer-in-lo","qaynota"),
+      V("Sister-in-law","sister-in-lo","ovsin/qaynsingil"),V("Brother-in-law","brazer-in-lo","boja/pochcha")
     ],
-    examples: [
-      E("What is your name?", "Isming nima?"),
-      E("Where do you live?", "Qayerda yashaysan?"),
-      E("How are you?", "Qalaysan?"),
-      E("Why are you sad?", "Nega xafasan?")
+    examples:[
+      E("They are my parents.","Ular mening ota-onam."),
+      E("Lola is my sister.","Lola mening singlim."),
+      E("This is my uncle.","Bu mening amakim."),
+      E("She is my mother-in-law.","U mening qaynonam.")
     ],
-    quiz: [
-      Q("'Where' nima degani?", ["kim","qachon","qayerda","nima"], 2, "Where = qayerda."),
-      Q("'Isming nima?' savoli qaysi?", ["Who are you?","What is your name?","Where are you?","How are you?"], 1, "What is your name? = Isming nima?"),
-      Q("'Nega' inglizchada?", ["How","Why","When","What"], 1, "Why = nega.")
+    quiz:[
+      Q("'Cousin' kim?",["amaki","amakivachcha","jiyan","bobo"],1,"Cousin = amaki/xola vachcha."),
+      Q("'Qaynona' inglizchada?",["sister-in-law","mother-in-law","aunt","wife"],1,"Mother-in-law = qaynona."),
+      Q("'Siblings' nima?",["ota-ona","tug'ishganlar","nabiralar","bolalar"],1,"Siblings = tug'ishganlar.")
     ]
   },
   {
-    level: "A2 · Lug'at",
-    title: "11-dars. Oila va qarindoshlik (to'liq)",
-    goal: "Oila va qarindosh-urug'chilik bilan bog'liq barcha so'zlarni o'rganamiz.",
-    explain: `Bu darsda oila va qarindoshlikka oid <b>keng lug'at</b> keltirilgan.
-      So'zlarni guruhlab yodlang: avval yaqin oila (ota, ona, aka...), keyin uzoqroq qarindoshlar
-      (amaki, xola, jiyan...), so'ngra oilaviy tushunchalar (to'y, avlod, meros...).
-      <span class="tip">💡 Har bir so'zni 🔊 bosib eshiting va 2-3 marta ovoz chiqarib takrorlang.</span>`,
-    vocab: [
-      V("Family","femili","oila"), V("Parents","perents","ota-ona"),
-      V("Father","fazer","ota"), V("Mother","mazer","ona"),
-      V("Sister","sister","opa, singil"), V("Brother","brazer","aka, uka"),
-      V("Son","san","o'g'il"), V("Daughter","doter","qiz"),
-      V("Grandfather","grendfazer","bobo"), V("Grandmother","grendmazer","buvi"),
-      V("Grandchildren","grendchildren","nabiralar"), V("Grandson","grendsan","nabira (o'g'il)"),
-      V("Granddaughter","grenddoter","nabira (qiz)"), V("Uncle","ankl","amaki, tog'a"),
-      V("Aunt","ant","xola, amma"), V("Nephew","nefyu","jiyan (o'g'il)"),
-      V("Niece","niis","jiyan (qiz)"), V("Bridegroom","braydgrum","kuyov"),
-      V("Bride","brayd","kelin"), V("Husband","hazbend","er"),
-      V("Wife","wayf","xotin"), V("To adopt","tu edopt","o'g'il qilib olmoq"),
-      V("Adopted child","edoptid chayld","asrandi bola"), V("Aged","eyjd","keksa"),
-      V("Ancestor","ensestor","ota-bobo, ajdod"), V("Baby","beybi","chaqaloq"),
-      V("Birth","börs","tug'ilish"), V("To bring up","tu bring ap","tarbiyalamoq"),
-      V("Childhood","chayldhud","bolalik"), V("Domestic","domestik","oilaviy"),
-      V("First-born","först-born","to'ng'ich"), V("Generation","jenereyshn","avlod"),
-      V("To give birth to","giv börs","tug'moq"), V("Guardian","gardian","vasiy"),
-      V("Heir","eer","merosxo'r"), V("Honeymoon","hanimun","asal oyi"),
-      V("Host","houst","uy egasi"), V("Hostess","houstes","uy bekasi"),
-      V("Orphan","orfan","yetim"), V("Pet","pet","erka"),
-      V("Relative","relativ","qarindosh"), V("Stepdaughter","stepdoter","o'gay qiz"),
-      V("Stepson","stepsan","o'gay o'g'il"), V("Stepfather","stepfazer","o'gay ota"),
-      V("Stepmother","stepmazer","o'gay ona"), V("Twins","twinz","egizaklar"),
-      V("Wedding","weding","to'y")
+    cat:"A1 · Elementar", level:"A1 · Lug'at",
+    title:"12-dars. Vaqt so'zlari (Time)",
+    goal:"Vaqt birliklari va kunlar.",
+    explain:`Vaqt birliklari va bugun/ertaga kabi so'zlar har kuni ishlatiladi.
+      <span class="tip">💡 "yesterday" (kecha), "today" (bugun), "tomorrow" (ertaga).</span>`,
+    vocab:[
+      V("Second","sekond","sekund"),V("Minute","minit","daqiqa"),V("Hour","aur","soat"),V("Day","dey","kun"),
+      V("Week","wiik","hafta"),V("Month","mans","oy"),V("Year","yir","yil"),V("Century","senchuri","asr"),
+      V("Today","tudey","bugun"),V("Tonight","tunayt","bugun kechqurun"),V("Yesterday","yesterdey","kecha"),
+      V("Last night","last nayt","o'tgan tun"),V("Tomorrow","tumorrou","ertaga"),V("The day after tomorrow","...","indinga")
     ],
-    examples: [
-      E("I have one sister and two brothers.", "Mening bitta opam va ikkita akam bor."),
-      E("My grandfather is very old.", "Mening bobom juda keksa."),
-      E("They have a big wedding.", "Ularning katta to'yi bor."),
-      E("She is my aunt.", "U mening xolam.")
-    ],
-    quiz: [
-      Q("'Uncle' kim?", ["xola","amaki/tog'a","jiyan","nabira"], 1, "Uncle = amaki yoki tog'a."),
-      Q("'Nabira (qiz)' inglizchada?", ["Grandson","Granddaughter","Niece","Daughter"], 1, "Granddaughter = nabira (qiz)."),
-      Q("'Twins' nima degani?", ["egizaklar","nabiralar","ota-bobo","yetim"], 0, "Twins = egizaklar."),
-      Q("'To'y' inglizchada?", ["Birth","Honeymoon","Wedding","Family"], 2, "Wedding = to'y.")
+    examples:[E("I will see you tomorrow.","Ertaga ko'rishamiz."),E("There are seven days in a week.","Bir haftada yetti kun bor.")],
+    quiz:[
+      Q("'Week' nima?",["kun","hafta","oy","yil"],1,"Week = hafta."),
+      Q("'Kecha' inglizchada?",["today","tomorrow","yesterday","tonight"],2,"Yesterday = kecha."),
+      Q("'Hour' nima?",["daqiqa","soat","sekund","asr"],1,"Hour = soat.")
     ]
   },
   {
-    level: "A2 · Lug'at",
-    title: "12-dars. Muhim so'zlar (Essential Words)",
-    goal: "Kundalik hayotda ko'p uchraydigan muhim so'zlar (4000 Essential Words).",
-    explain: `Bu so'zlar matnlarda va suhbatda juda tez-tez uchraydi. Ularni yodlab olsangiz,
-      kitob o'qish va gapirish ancha osonlashadi.
-      <span class="tip">💡 Har kuni 5 tadan so'z yodlang — bir haftada 35 ta so'z bo'ladi!</span>`,
-    vocab: [
-      V("benefit","benifit","foyda, ustun jihat"), V("certain","sörtin","ishonchi komil"),
-      V("chance","chens","imkoniyat"), V("effect","ifekt","ta'sir, samara"),
-      V("essential","isenshl","juda muhim, zarur"), V("far","far","uzoq, olis"),
-      V("focus","foukus","diqqatini qaratmoq"), V("function","fankshn","funksiya, vazifa"),
-      V("grass","gras","maysa, o't"), V("guard","gard","qo'riqlamoq"),
-      V("image","imij","rasm, ko'rinish"), V("immediate","imidiet","tezkor"),
-      V("primary","praymeri","asosiy, birinchi darajali"), V("proud","praud","faxrlanmoq"),
-      V("remain","rimeyn","qolmoq"), V("rest","rest","dam olmoq"),
-      V("separate","seperet","alohida, ajralgan"), V("site","sayt","joy"),
-      V("tail","teyl","dum"), V("trouble","trabl","muammo, qiyinchilik")
+    cat:"A1 · Elementar", level:"A1 · Grammatika",
+    title:"13-dars. Predloglar (Prepositions)",
+    goal:"Joy predloglarini o'rganamiz.",
+    explain:`Predloglar narsaning qayerda ekanini bildiradi.
+      <span class="tip">💡 "The cat is on the box" (mushuk qutining ustida).</span>`,
+    vocab:[
+      V("in","in","ichida"),V("on","on","ustida"),V("under","ander","ostida"),V("behind","bihaynd","orqasida"),
+      V("near","nir","yaqinida"),V("in front of","in frant ov","oldida"),V("next to","nekst tu","yonida"),
+      V("between","bitwiin","orasida"),V("at","et","da (nuqtada)")
     ],
-    examples: [
-      E("This book is essential for students.", "Bu kitob o'quvchilar uchun juda muhim."),
-      E("I am proud of you.", "Men sendan faxrlanaman."),
-      E("Let's take a rest.", "Keling, dam olaylik."),
-      E("He had a chance to win.", "Uning yutish imkoniyati bor edi.")
-    ],
-    quiz: [
-      Q("'benefit' nima degani?", ["muammo","foyda","imkoniyat","joy"], 1, "benefit = foyda, ustun jihat."),
-      Q("'essential' nima degani?", ["uzoq","alohida","juda muhim","tezkor"], 2, "essential = juda muhim, zarur."),
-      Q("'proud' nima degani?", ["qolmoq","faxrlanmoq","dam olmoq","qo'riqlamoq"], 1, "proud = faxrlanmoq.")
+    examples:[E("The book is on the table.","Kitob stol ustida."),E("The ball is under the bed.","To'p krovat ostida."),E("I am in the room.","Men xonadaman.")],
+    quiz:[
+      Q("'under' nima?",["ustida","ostida","yonida","ichida"],1,"under = ostida."),
+      Q("'orasida' inglizchada?",["near","between","behind","on"],1,"between = orasida."),
+      Q("'on' nima?",["ichida","ustida","ostida","oldida"],1,"on = ustida.")
     ]
   },
   {
-    level: "A2 · Grammatika",
-    title: "13-dars. Noto'g'ri fe'llar (Irregular Verbs)",
-    goal: "O'tgan zamonda qoidaga bo'ysunmaydigan fe'llarni o'rganamiz.",
-    customType: "verbs",
-    explain: `Ko'p fe'llar o'tgan zamonda oxiriga <code>-ed</code> oladi (work → worked).
-      Lekin ba'zi fe'llar <b>butunlay o'zgaradi</b> — bular <b>noto'g'ri fe'llar</b> (irregular verbs).
-      Ularni yodlab olish shart, chunki qoida yo'q.
-      <br><br>Jadvalda 3 shakl bor:
-      <b>1-shakl</b> (hozirgi) → <b>2-shakl</b> (o'tgan, Past Simple) → <b>3-shakl</b> (Past Participle, "have" bilan).
-      <span class="tip">💡 🔊 tugmasini bosib har uchala shaklni eshitishingiz mumkin. Masalan: go → went → gone.</span>`,
-    verbs: [
-      ["be","was/were","been","bo'lmoq"],["become","became","become","aylanmoq"],
-      ["begin","began","begun","boshlamoq"],["bite","bit","bitten","tishlamoq"],
-      ["blow","blew","blown","puflamoq"],["break","broke","broken","sindirmoq"],
-      ["bring","brought","brought","olib kelmoq"],["build","built","built","qurmoq"],
-      ["buy","bought","bought","sotib olmoq"],["catch","caught","caught","ushlamoq"],
-      ["choose","chose","chosen","tanlamoq"],["come","came","come","kelmoq"],
-      ["cost","cost","cost","turmoq (narx)"],["cut","cut","cut","kesmoq"],
-      ["do","did","done","qilmoq"],["draw","drew","drawn","chizmoq"],
-      ["drink","drank","drunk","ichmoq"],["drive","drove","driven","haydamoq"],
-      ["eat","ate","eaten","yemoq"],["fall","fell","fallen","yiqilmoq"],
-      ["feel","felt","felt","his qilmoq"],["fight","fought","fought","urushmoq"],
-      ["find","found","found","topmoq"],["fly","flew","flown","uchmoq"],
-      ["forget","forgot","forgotten","unutmoq"],["get","got","got","olmoq"],
-      ["give","gave","given","bermoq"],["go","went","gone","bormoq"],
-      ["grow","grew","grown","o'smoq"],["hang","hung","hung","osmoq"],
-      ["have","had","had","ega bo'lmoq"],["hear","heard","heard","eshitmoq"],
-      ["hit","hit","hit","urmoq"],["hold","held","held","ushlab turmoq"],
-      ["hurt","hurt","hurt","og'ritmoq"],["keep","kept","kept","saqlamoq"],
-      ["know","knew","known","bilmoq"],["leave","left","left","ketmoq"],
-      ["lend","lent","lent","qarz bermoq"],["let","let","let","ruxsat bermoq"],
-      ["lie","lay","lain","yotmoq"],["lose","lost","lost","yo'qotmoq"],
-      ["make","made","made","yasamoq"],["mean","meant","meant","anglatmoq"],
-      ["meet","met","met","uchrashmoq"],["pay","paid","paid","to'lamoq"],
-      ["put","put","put","qo'ymoq"],["read","read","read","o'qimoq"],
-      ["ride","rode","ridden","minmoq"],["ring","rang","rung","jiringlamoq"],
-      ["rise","rose","risen","ko'tarilmoq"],["run","ran","run","yugurmoq"],
-      ["say","said","said","aytmoq"],["see","saw","seen","ko'rmoq"],
-      ["sell","sold","sold","sotmoq"],["send","sent","sent","jo'natmoq"],
-      ["shine","shone","shone","porlamoq"],["shoot","shot","shot","otmoq"],
-      ["show","showed","shown","ko'rsatmoq"],["shut","shut","shut","yopmoq"],
-      ["sing","sang","sung","kuylamoq"],["sit","sat","sat","o'tirmoq"],
-      ["sleep","slept","slept","uxlamoq"],["speak","spoke","spoken","gapirmoq"],
-      ["spend","spent","spent","sarflamoq"],["stand","stood","stood","turmoq"],
-      ["steal","stole","stolen","o'g'irlamoq"],["swim","swam","swum","suzmoq"],
-      ["take","took","taken","olmoq"],["teach","taught","taught","o'rgatmoq"],
-      ["tell","told","told","aytmoq"],["think","thought","thought","o'ylamoq"],
+    cat:"A1 · Elementar", level:"A1 · Grammatika",
+    title:"14-dars. Ko'plik son (Plural -s)",
+    goal:"Bir narsadan ko'p bo'lganda.",
+    explain:`Otga <code>-s</code> qo'shiladi: book → books. -s,-ss,-sh,-ch,-x bilan tugasa <code>-es</code>: box → boxes.
+      <span class="tip">⚠️ Istisnolar: man→men, woman→women, child→children, foot→feet, tooth→teeth.</span>`,
+    vocab:[
+      V("book → books","buks","kitob → kitoblar"),V("cat → cats","kets","mushuk → mushuklar"),
+      V("box → boxes","boksiz","quti → qutilar"),V("bus → buses","basiz","avtobus → avtobuslar"),
+      V("man → men","men","erkak → erkaklar"),V("child → children","children","bola → bolalar"),
+      V("foot → feet","fiit","oyoq → oyoqlar"),V("tooth → teeth","tiis","tish → tishlar")
+    ],
+    examples:[E("I have three apples.","Mening uchta olmam bor."),E("The children are playing.","Bolalar o'ynashyapti.")],
+    quiz:[
+      Q("'box' ko'pligi?",["boxs","boxies","boxes","box"],2,"box → boxes."),
+      Q("'child' ko'pligi?",["childs","children","childes","childrens"],1,"child → children."),
+      Q("'foot' ko'pligi?",["foots","feet","feets","foes"],1,"foot → feet.")
+    ]
+  },
+
+  /* ===================== A2 — O'RTA-PAST ===================== */
+  {
+    cat:"A2 · O'rta-past", level:"A2 · Grammatika",
+    title:"15-dars. Hozirgi zamon (Present Simple)",
+    goal:"Har kuni takrorlanadigan ishlar.",
+    explain:`Odatdagi ishlar uchun. <b>He/She/It</b> bilan fe'lga <code>-s</code> qo'shiladi!
+      <br><code>He works.</code> (U ishlaydi.) &nbsp; <code>She reads.</code> (U o'qiydi.)
+      <span class="tip">💡 I/you/we/they → fe'l o'zgarmaydi. He/she/it → fe'l +s.</span>`,
+    vocab:[
+      V("work","work","ishlamoq"),V("read","riid","o'qimoq"),V("play","pley","o'ynamoq"),V("eat","iit","yemoq"),
+      V("go","gou","bormoq"),V("like","layk","yoqtirmoq"),V("live","liv","yashamoq"),V("study","stadi","o'qimoq (dars)")
+    ],
+    examples:[E("I go to school every day.","Men har kuni maktabga boraman."),E("She reads books.","U kitob o'qiydi."),E("He likes tea.","U choyni yoqtiradi.")],
+    quiz:[
+      Q("'She ___ English'",["study","studys","studies","studying"],2,"study → studies."),
+      Q("'I ___ football'",["plays","play","playing","played"],1,"I → play."),
+      Q("Qaysi ega bilan -s?",["I","You","We","He"],3,"He/She/It → -s.")
+    ]
+  },
+  {
+    cat:"A2 · O'rta-past", level:"A2 · Grammatika",
+    title:"16-dars. Savol so'zlari (Questions)",
+    goal:"Savol berishni o'rganamiz.",
+    explain:`<b>What?</b> nima, <b>Who?</b> kim, <b>Where?</b> qayerda, <b>When?</b> qachon, <b>Why?</b> nega, <b>How?</b> qanday.
+      <span class="tip">💡 "How old are you?" — "Necha yoshdasan?"</span>`,
+    vocab:[
+      V("What","wot","nima"),V("Who","hu","kim"),V("Where","weer","qayerda"),V("When","wen","qachon"),
+      V("Why","way","nega"),V("How","hau","qanday"),V("Which","wich","qaysi"),V("How many","hau meni","nechta")
+    ],
+    examples:[E("What is your name?","Isming nima?"),E("Where do you live?","Qayerda yashaysan?"),E("Why are you sad?","Nega xafasan?")],
+    quiz:[
+      Q("'Where' nima?",["kim","qachon","qayerda","nima"],2,"Where = qayerda."),
+      Q("'Isming nima?'",["Who are you?","What is your name?","Where are you?","How are you?"],1,"What is your name?"),
+      Q("'Nega' inglizchada?",["How","Why","When","What"],1,"Why = nega.")
+    ]
+  },
+  {
+    cat:"A2 · O'rta-past", level:"A2 · 4000 Words",
+    title:"17-dars. 4000 Words — Book 1, Unit 1",
+    goal:"4000 Essential English Words — 1-bo'lim.",
+    explain:`Bu mashhur "4000 Essential English Words" kitobidagi so'zlar. Ularni bilish IELTS uchun ham foydali.
+      <span class="tip">💡 Har bir so'zga o'zingiz gap tuzib ko'ring.</span>`,
+    vocab:[
+      V("afraid","efreyd","qo'rqmoq"),V("agree","egrii","rozi bo'lmoq"),V("angry","engri","jahlda"),
+      V("arrive","arayv","yetib kelmoq"),V("attack","etek","hujum qilmoq"),V("bottom","botom","tag, ost"),
+      V("clever","klever","aqlli"),V("cruel","kruel","shafqatsiz"),V("finally","faynali","nihoyat"),
+      V("hide","hayd","yashirmoq"),V("hunt","hant","ovlamoq"),V("lot","lot","ko'p"),
+      V("middle","midl","o'rta"),V("moment","moument","lahza"),V("pleased","pliizd","mamnun"),
+      V("promise","promis","va'da bermoq"),V("reply","riplay","javob bermoq"),V("safe","seyf","xavfsiz"),
+      V("trick","trik","hiyla"),V("well","wel","yaxshi")
+    ],
+    examples:[E("I agree with you.","Men senga qo'shilaman."),E("She was pleased with the gift.","U sovg'adan mamnun bo'ldi.")],
+    quiz:[
+      Q("'afraid' nima?",["aqlli","qo'rqmoq","mamnun","xavfsiz"],1,"afraid = qo'rqmoq."),
+      Q("'cruel' nima?",["shafqatsiz","aqlli","nihoyat","hiyla"],0,"cruel = shafqatsiz."),
+      Q("'reply' nima?",["yashirmoq","va'da bermoq","javob bermoq","ovlamoq"],2,"reply = javob bermoq.")
+    ]
+  },
+  {
+    cat:"A2 · O'rta-past", level:"A2 · 4000 Words",
+    title:"18-dars. 4000 Words — Book 1, Unit 2",
+    goal:"4000 Essential English Words — 2-bo'lim.",
+    explain:`Davom etamiz — ikkinchi bo'lim so'zlari.
+      <span class="tip">💡 Kuniga 5 tadan — bir haftada bo'lim tugaydi.</span>`,
+    vocab:[
+      V("adventure","edvencher","sarguzasht"),V("approach","eprouch","yaqinlashmoq"),V("carefully","keerfuli","ehtiyotkorlik bilan"),
+      V("chemical","kemikal","kimyoviy"),V("create","krieyt","yaratmoq"),V("evil","iivl","yomonlik"),
+      V("experiment","eksperiment","tajriba"),V("kill","kil","o'ldirmoq"),V("laboratory","leborotri","laboratoriya"),
+      V("laugh","laf","kulmoq"),V("loud","laud","baland ovozda"),V("nervous","nörvas","asabiy"),
+      V("noise","noyz","shovqin"),V("project","projekt","loyiha"),V("scare","skeer","qo'rqitmoq"),
+      V("secret","siikret","sir"),V("shout","shaut","baqirmoq"),V("smell","smel","hid"),
+      V("terrible","teribl","qo'rqinchli"),V("worse","wörs","yomonroq")
+    ],
+    examples:[E("They did an experiment.","Ular tajriba o'tkazdi."),E("Don't shout!","Baqirma!")],
+    quiz:[
+      Q("'create' nima?",["yo'q qilmoq","yaratmoq","qo'rqitmoq","kulmoq"],1,"create = yaratmoq."),
+      Q("'secret' nima?",["shovqin","sir","hid","loyiha"],1,"secret = sir."),
+      Q("'terrible' nima?",["ajoyib","qo'rqinchli","sokin","aqlli"],1,"terrible = qo'rqinchli.")
+    ]
+  },
+  {
+    cat:"A2 · O'rta-past", level:"A2 · Lug'at",
+    title:"19-dars. Ta'lim lug'ati (Education)",
+    goal:"Maktab va ta'limga oid so'zlar (so'zlashuv uchun).",
+    explain:`Ta'lim mavzusi IELTS Speaking va Writing'da tez-tez uchraydi.
+      <span class="tip">💡 Bu so'zlar bilan ta'lim haqida gapirish oson bo'ladi.</span>`,
+    vocab:[
+      V("educational system","...","ta'lim tizimi"),V("elementary school","...","boshlang'ich maktab"),
+      V("private school","...","xususiy maktab"),V("secondary school","...","o'rta maktab"),
+      V("teach","tiich","o'qitmoq"),V("teacher","tiicher","o'qituvchi"),V("theory","siiori","nazariya"),
+      V("fee","fii","o'qish to'lovi"),V("include","inklud","o'z ichiga olmoq"),V("preschool","priiskul","maktabgacha"),
+      V("attend","etend","qatnamoq"),V("curriculum","kurikyulum","o'quv rejasi"),V("classroom","klasrum","sinfxona"),
+      V("tutor","tyutor","sinf rahbari / repetitor"),V("boarding school","...","internat maktab"),
+      V("study guide","...","o'quv qo'llanmasi"),V("tax","teks","soliq"),V("religion","rilijn","din"),
+      V("pattern","petern","namuna, model"),V("progressive","progresiv","ilg'or")
+    ],
+    examples:[E("I attend a private school.","Men xususiy maktabga qatnayman."),E("The teacher explains the theory.","O'qituvchi nazariyani tushuntiradi.")],
+    quiz:[
+      Q("'teacher' kim?",["talaba","o'qituvchi","direktor","ota"],1,"teacher = o'qituvchi."),
+      Q("'fee' nima?",["soliq","o'qish to'lovi","namuna","din"],1,"fee = o'qish to'lovi."),
+      Q("'attend' nima?",["qatnamoq","o'qitmoq","yaratmoq","kulmoq"],0,"attend = qatnamoq.")
+    ]
+  },
+  {
+    cat:"A2 · O'rta-past", level:"A2 · Grammatika",
+    title:"20-dars. Noto'g'ri fe'llar (Irregular Verbs)",
+    goal:"O'tgan zamonda qoidaga bo'ysunmaydigan fe'llar.",
+    customType:"verbs",
+    explain:`Ba'zi fe'llar o'tgan zamonda <b>butunlay o'zgaradi</b>. 3 shakl: <b>1-shakl</b> → <b>2-shakl</b> (Past) → <b>3-shakl</b> (V3, "have" bilan).
+      <span class="tip">💡 🔊 uchala shaklni o'qib beradi. Masalan: go → went → gone.</span>`,
+    verbs:[
+      ["be","was/were","been","bo'lmoq"],["become","became","become","aylanmoq"],["begin","began","begun","boshlamoq"],
+      ["bite","bit","bitten","tishlamoq"],["blow","blew","blown","puflamoq"],["break","broke","broken","sindirmoq"],
+      ["bring","brought","brought","olib kelmoq"],["build","built","built","qurmoq"],["buy","bought","bought","sotib olmoq"],
+      ["catch","caught","caught","ushlamoq"],["choose","chose","chosen","tanlamoq"],["come","came","come","kelmoq"],
+      ["cost","cost","cost","turmoq (narx)"],["cut","cut","cut","kesmoq"],["do","did","done","qilmoq"],
+      ["draw","drew","drawn","chizmoq"],["drink","drank","drunk","ichmoq"],["drive","drove","driven","haydamoq"],
+      ["eat","ate","eaten","yemoq"],["fall","fell","fallen","yiqilmoq"],["feel","felt","felt","his qilmoq"],
+      ["fight","fought","fought","urushmoq"],["find","found","found","topmoq"],["fly","flew","flown","uchmoq"],
+      ["forget","forgot","forgotten","unutmoq"],["get","got","got","olmoq"],["give","gave","given","bermoq"],
+      ["go","went","gone","bormoq"],["grow","grew","grown","o'smoq"],["hang","hung","hung","osmoq"],
+      ["have","had","had","ega bo'lmoq"],["hear","heard","heard","eshitmoq"],["hit","hit","hit","urmoq"],
+      ["hold","held","held","ushlab turmoq"],["hurt","hurt","hurt","og'ritmoq"],["keep","kept","kept","saqlamoq"],
+      ["know","knew","known","bilmoq"],["leave","left","left","ketmoq"],["lend","lent","lent","qarz bermoq"],
+      ["let","let","let","ruxsat bermoq"],["lie","lay","lain","yotmoq"],["lose","lost","lost","yo'qotmoq"],
+      ["make","made","made","yasamoq"],["mean","meant","meant","anglatmoq"],["meet","met","met","uchrashmoq"],
+      ["pay","paid","paid","to'lamoq"],["put","put","put","qo'ymoq"],["read","read","read","o'qimoq"],
+      ["ride","rode","ridden","minmoq"],["ring","rang","rung","jiringlamoq"],["rise","rose","risen","ko'tarilmoq"],
+      ["run","ran","run","yugurmoq"],["say","said","said","aytmoq"],["see","saw","seen","ko'rmoq"],
+      ["sell","sold","sold","sotmoq"],["send","sent","sent","jo'natmoq"],["shine","shone","shone","porlamoq"],
+      ["shoot","shot","shot","otmoq"],["show","showed","shown","ko'rsatmoq"],["shut","shut","shut","yopmoq"],
+      ["sing","sang","sung","kuylamoq"],["sit","sat","sat","o'tirmoq"],["sleep","slept","slept","uxlamoq"],
+      ["speak","spoke","spoken","gapirmoq"],["spend","spent","spent","sarflamoq"],["stand","stood","stood","turmoq"],
+      ["steal","stole","stolen","o'g'irlamoq"],["swim","swam","swum","suzmoq"],["take","took","taken","olmoq"],
+      ["teach","taught","taught","o'rgatmoq"],["tell","told","told","aytmoq"],["think","thought","thought","o'ylamoq"],
       ["throw","threw","thrown","uloqtirmoq"],["understand","understood","understood","tushunmoq"],
-      ["wake","woke","woken","uyg'onmoq"],["wear","wore","worn","kiymoq"],
-      ["win","won","won","yutmoq"],["write","wrote","written","yozmoq"]
+      ["wake","woke","woken","uyg'onmoq"],["wear","wore","worn","kiymoq"],["win","won","won","yutmoq"],["write","wrote","written","yozmoq"]
     ],
-    quiz: [
-      Q("'go' fe'lining 2-shakli (o'tgan zamon)?", ["goed","went","gone","goes"], 1, "go → went → gone."),
-      Q("'eat' fe'lining 3-shakli (Past Participle)?", ["eated","ate","eaten","eating"], 2, "eat → ate → eaten."),
-      Q("'buy' fe'lining o'tgan zamoni?", ["buyed","bought","buy","buys"], 1, "buy → bought → bought."),
-      Q("'write' fe'lining 3-shakli?", ["writed","wrote","written","writing"], 2, "write → wrote → written.")
+    quiz:[
+      Q("'go' 2-shakli?",["goed","went","gone","goes"],1,"go → went → gone."),
+      Q("'eat' 3-shakli?",["eated","ate","eaten","eating"],2,"eat → ate → eaten."),
+      Q("'buy' o'tgan zamoni?",["buyed","bought","buy","buys"],1,"buy → bought."),
+      Q("'write' 3-shakli?",["writed","wrote","written","writing"],2,"write → wrote → written.")
+    ]
+  },
+
+  /* ===================== B1-B2 — O'RTA ===================== */
+  {
+    cat:"B1-B2 · O'rta", level:"B1-B2 · Grammatika",
+    title:"21-dars. 12 ta zamon (All Tenses)",
+    goal:"Ingliz tilidagi barcha 12 zamon — formulalar va misollar.",
+    customType:"tenses",
+    explain:`Ingliz tilida 3 asosiy vaqt (Hozirgi, O'tgan, Kelasi), har biri 4 ko'rinishda — jami <b>12 zamon</b>.
+      <br><br><b>Belgilar:</b> S=ega, V1=boshlang'ich fe'l, V2=o'tgan shakl, V3=sifatdosh, V-ing=-ing shakli.
+      <span class="tip">💡 Jadvalni yodlab oling — bu grammatikaning asosi. 🔊 misolni o'qib beradi.</span>`,
+    tenses:[
+      ["Present Simple","S + V1 / V(s/es)","I read books every day.","Takrorlanuvchi, odatdagi ishlar"],
+      ["Present Continuous","S + am/is/are + V-ing","I am reading now.","Ayni paytda davom etayotgan"],
+      ["Present Perfect","S + have/has + V3","I have read this book.","Natijasi bor, hozirgacha bajarilgan"],
+      ["Present Perfect Cont.","S + have/has been + V-ing","I have been reading for 2 hours.","O'tmishda boshlanib, hozir ham davom"],
+      ["Past Simple","S + V2 / V-ed","I read a book yesterday.","O'tmishda tugallangan"],
+      ["Past Continuous","S + was/were + V-ing","I was reading when you called.","O'tmishda ma'lum vaqtda davom etgan"],
+      ["Past Perfect","S + had + V3","I had read it before the movie.","Boshqa o'tmish ishdan oldin tugagan"],
+      ["Past Perfect Cont.","S + had been + V-ing","I had been reading for an hour.","O'tmishdagi vaqtgacha davom etgan"],
+      ["Future Simple","S + will + V1","I will read it tomorrow.","Kelajakdagi oddiy ish/qaror"],
+      ["Future Continuous","S + will be + V-ing","I will be reading at 5 PM.","Kelajakda ma'lum vaqtda davom etadigan"],
+      ["Future Perfect","S + will have + V3","I will have read it by Friday.","Kelajakdagi vaqtgacha tugaydigan"],
+      ["Future Perfect Cont.","S + will have been + V-ing","By next year I will have been reading for 3 years.","Kelajakdagi vaqtgacha qancha davom etgani"]
+    ],
+    quiz:[
+      Q("Present Perfect formulasi?",["S+V1","S+have/has+V3","S+will+V1","S+was+V-ing"],1,"S + have/has + V3."),
+      Q("'I am reading now' — qaysi zamon?",["Present Simple","Present Continuous","Past Simple","Future"],1,"Present Continuous."),
+      Q("Past Simple formulasi?",["S+V2","S+will+V1","S+had+V3","S+have+V3"],0,"S + V2 / V-ed.")
     ]
   },
   {
-    level: "📚 Kutubxona",
-    title: "14-dars. Kutubxona — Kitoblar (Books)",
-    goal: "Ingliz tilini kitob o'qib mustahkamlang. Kitoblarni oching va o'qing.",
-    customType: "books",
-    explain: `O'qish — so'z boyligini oshirishning eng yaxshi yo'li. Quyidagi kitoblarni
-      oching (yoki yuklab oling) va darajangizga mos birini tanlab o'qing.
-      <br><br>Avval oson kitobni (adaptatsiya qilingan "graded reader") tanlang,
-      notanish so'zlarni lug'atdan qarab boring.
-      <span class="tip">💡 Har bir kitobdagi yangi so'zlarni daftaringizga yozib boring.</span>`,
-    books: [
-      {title:"4000 Essential English Words 2", author:"Answer Key", file:"books/4000_Essential_English_Words_2.pdf", desc:"Muhim so'zlarni o'rganish uchun mashqlar javoblari.", level:"A1–A2", emoji:"📗"},
-      {title:"The Red Badge of Courage", author:"Stephen Crane", file:"books/The_Red_Badge_of_Courage.pdf", desc:"Yosh askar haqidagi klassik roman (soddalashtirilgan).", level:"A2–B1", emoji:"📕"},
-      {title:"The Horse Whisperer", author:"Nicholas Evans", file:"books/The_Horse_Whisperer.pdf", desc:"Ot va insonlar haqidagi ta'sirli hikoya.", level:"B1", emoji:"📙"},
-      {title:"Hamlet", author:"William Shakespeare", file:"books/Hamlet.pdf", desc:"Shekspirning mashhur tragediyasi.", level:"B1–B2", emoji:"📘"},
-      {title:"Wisdom Dictionary (ilova)", author:"Online", file:"http://onelink.to/wisdomdictionary", desc:"Ko'proq kitoblar uchun ilovani yuklab oling.", level:"—", emoji:"🔗", external:true}
+    cat:"B1-B2 · O'rta", level:"B1-B2 · Iboralar",
+    title:"22-dars. Muhim iboralar va idiomalar (Phrases)",
+    goal:"Kundalik 50 ta ibora va mashhur idiomalar.",
+    explain:`Bu iboralar jonli so'zlashuvda juda ko'p ishlatiladi. Ularni bilsangiz, nutqingiz tabiiyroq bo'ladi.
+      <span class="tip">💡 Idiomani so'zma-so'z tarjima qilmang — ma'nosini yodlang.</span>`,
+    vocab:[
+      V("How's it going?","","Ishlar qalay?"),V("Long time no see!","","Ko'rishmaganimizga ancha bo'ldi!"),
+      V("Take care!","","O'zingni ehtiyot qil!"),V("I really appreciate it.","","Juda minnatdorman."),
+      V("No worries!","","Hechqisi yo'q."),V("Don't mention it.","","Arzimaydi."),
+      V("My bad!","","Mening aybim."),V("I owe you one.","","Sendan qarzdorman."),
+      V("I couldn't agree more.","","Butunlay qo'shilaman."),V("Fair enough.","","To'g'ri, mantiqli."),
+      V("It's up to you.","","O'zing bilasan."),V("I have no idea.","","Bilmayman."),
+      V("Never mind.","","E'tibor berma."),V("Are you kidding me?","","Hazillashyapsanmi?"),
+      V("What a relief!","","Xayriyat!"),V("Good for you!","","Qoyil, omading chopibdi!"),
+      V("By the way...","","Aytgancha..."),V("To be honest...","","Ochig'ini aytganda..."),
+      V("As far as I know...","","Bilishimcha..."),V("In a nutshell...","","Qisqacha aytganda..."),
+      V("Keep in touch!","","Aloqada bo'lib turaylik!"),V("Let me know.","","Menga xabar ber."),
+      V("Take your time.","","Shoshilmang."),V("Give me a hand.","","Menga yordamlash."),
+      V("Let's call it a day.","","Bugunga yetadi."),V("I'm looking forward to it.","","Sabrsizlik bilan kutyapman."),
+      V("Piece of cake.","","Juda oson ish."),V("Break a leg!","","Omad yor bo'lsin!"),
+      V("Once in a blue moon.","","Juda kamdan-kam."),V("Under the weather.","","Biroz betob."),
+      V("So far, so good.","","Hozircha hammasi yaxshi."),V("Cost an arm and a leg.","","Juda qimmat turadi."),
+      V("See eye to eye.","","Fikri bir joydan chiqmoq."),V("Better late than never.","","Hechdan ko'ra kech yaxshi."),
+      V("Bite the bullet.","","Qiyinchilikka chidamoq."),V("Hit the sack.","","Uxlashga yotmoq.")
     ],
-    quiz: []
+    examples:[
+      E("Long time no see! How's it going?","Ko'rishmaganimizga ancha bo'ldi! Ishlar qalay?"),
+      E("Don't worry, it's a piece of cake.","Xavotir olma, bu juda oson."),
+      E("I'm feeling under the weather today.","Bugun o'zimni betob his qilyapman.")
+    ],
+    quiz:[
+      Q("'Piece of cake' nima degani?",["qiyin ish","juda oson ish","tort","qimmat"],1,"Piece of cake = juda oson ish."),
+      Q("'By the way' nima?",["albatta","aytgancha","afsus","rahmat"],1,"By the way = aytgancha."),
+      Q("'Better late than never' ma'nosi?",["Hech qachon kech emas","Hechdan ko'ra kech yaxshi","Kech qolma","Tez bo'l"],1,"Hechdan ko'ra kech yaxshi.")
+    ]
+  },
+  {
+    cat:"B1-B2 · O'rta", level:"B1-B2 · Iboralar",
+    title:"23-dars. Kirish so'zlar (Linking words)",
+    goal:"Gaplarni bog'laydigan kirish so'z va iboralar (Writing uchun muhim).",
+    explain:`Kirish so'zlar fikrni tartibli ifodalashga yordam beradi — IELTS Writing'da baho oshiradi.
+      <span class="tip">💡 Essega "However", "Moreover", "In conclusion" qo'shilsa, ancha professional ko'rinadi.</span>`,
+    vocab:[
+      V("In a word","","bir so'z bilan aytganda"),V("If I'm not mistaken","","adashmasam"),
+      V("By the way","","aytgancha"),V("On the other hand","","boshqa tomondan"),
+      V("In short","","qisqasi"),V("To tell the truth","","to'g'risi"),
+      V("Indeed","","albatta, haqiqatan"),V("In other words","","boshqacha aytganda"),
+      V("However","","shu bilan birga, biroq"),V("Besides / Moreover","","bundan tashqari"),
+      V("Of course / Certainly","","albatta"),V("In any case / Anyway","","baribir"),
+      V("Therefore","","shuning uchun"),V("Although / Though","","-ga qaramay"),
+      V("Meanwhile","","shu bilan birga, bu orada"),V("Nevertheless","","shunga qaramay"),
+      V("Perhaps / Probably","","ehtimol"),V("For example","","masalan"),
+      V("In conclusion","","xulosa qilib"),V("First of all","","avvalo")
+    ],
+    examples:[
+      E("However, there are some problems.","Biroq, ba'zi muammolar bor."),
+      E("In conclusion, I agree with this idea.","Xulosa qilib, men bu fikrga qo'shilaman."),
+      E("For example, exercise improves health.","Masalan, mashq sog'liqni yaxshilaydi.")
+    ],
+    quiz:[
+      Q("'However' nima?",["masalan","biroq","albatta","qisqasi"],1,"However = biroq."),
+      Q("'For example' nima?",["masalan","shuning uchun","ehtimol","avvalo"],0,"For example = masalan."),
+      Q("'In conclusion' nima?",["avvalo","xulosa qilib","aytgancha","to'g'risi"],1,"In conclusion = xulosa qilib.")
+    ]
+  },
+
+  /* ===================== C1 — YUQORI ===================== */
+  {
+    cat:"C1 · Yuqori", level:"C1 · Iboralar",
+    title:"24-dars. C1 iboralar (Advanced phrases)",
+    goal:"Yuqori daraja uchun ilg'or iboralar.",
+    explain:`Bu iboralar C1 darajasida nutqni boyitadi va IELTS'da yuqori baho olishga yordam beradi.
+      <span class="tip">💡 Har bir iborani misol gap bilan yodlang — ishlatish osonlashadi.</span>`,
+    vocab:[
+      V("to buy into","","g'oyaga ishonib qo'shilmoq"),V("to tap into","","imkoniyat/resursdan foydalanmoq"),
+      V("I couldn't help but","","o'zini tutolmay qilib yubormoq"),V("to be fair","","adolat yuzasidan"),
+      V("unpopular","anpopyular","ko'pchilikka yoqmaydigan"),V("high-profile","hay-proufayl","e'tibor markazidagi, mashhur"),
+      V("to come into play","","ta'sir ko'rsata boshlamoq"),V("to make headlines","","yangiliklarda asosiy mavzuga aylanmoq")
+    ],
+    examples:[
+      E("I never bought into his promises.","Men hech qachon uning va'dalariga ishonmaganman."),
+      E("He tapped into his creativity.","U o'z ijodkorligidan foydalandi."),
+      E("I couldn't help but laugh.","Kulmasdan turolmadim."),
+      E("His discovery made headlines.","Uning kashfiyoti yangiliklarga chiqdi.")
+    ],
+    quiz:[
+      Q("'to be fair' ma'nosi?",["tez","adolat yuzasidan","ehtimol","albatta"],1,"to be fair = adolat yuzasidan."),
+      Q("'high-profile' nima?",["arzon","mashhur, e'tibor markazidagi","yopiq","oson"],1,"high-profile = mashhur."),
+      Q("'make headlines' ma'nosi?",["sarlavha yozmoq","yangiliklarda asosiy mavzu bo'lmoq","gazeta sotmoq","e'lon bermoq"],1,"Yangiliklarda asosiy mavzuga aylanmoq.")
+    ]
+  },
+  {
+    cat:"C1 · Yuqori", level:"C1 · Rasmiy",
+    title:"25-dars. Rasmiy iboralar (Formal phrases)",
+    goal:"Akademik va rasmiy yozuv uchun iboralar.",
+    explain:`Bu iboralar IELTS Writing va rasmiy xatlarda ishlatiladi — nutqqa jiddiylik beradi.
+      <span class="tip">💡 Essega "give rise to", "shed light on" kabi iboralar yuqori baho keltiradi.</span>`,
+    vocab:[
+      V("give rise to","","sabab bo'lmoq, yuzaga keltirmoq"),V("shed light on","","tushunarli qilib bermoq"),
+      V("dispatch","dispech","yubormoq, jo'natmoq (rasmiy)"),V("testify","testifay","isbotlamoq, guvohlik bermoq"),
+      V("in terms of","","nuqtai nazaridan"),V("with regard to","","-ga nisbatan"),
+      V("as a result of","","natijasida"),V("take into account","","hisobga olmoq")
+    ],
+    examples:[
+      E("Poor planning gives rise to problems.","Yomon rejalashtirish muammolarni keltirib chiqaradi."),
+      E("This study sheds light on the issue.","Bu tadqiqot masalaga oydinlik kiritadi."),
+      E("Emergency teams were dispatched.","Favqulodda guruhlar jo'natildi.")
+    ],
+    quiz:[
+      Q("'give rise to' ma'nosi?",["to'xtatmoq","sabab bo'lmoq","yashirmoq","tezlashtirmoq"],1,"give rise to = sabab bo'lmoq."),
+      Q("'shed light on' ma'nosi?",["yoritmoq, tushuntirmoq","o'chirmoq","yubormoq","isbotlamoq"],0,"shed light on = tushunarli qilib bermoq."),
+      Q("'take into account' ma'nosi?",["unutmoq","hisobga olmoq","sanamoq","yopmoq"],1,"take into account = hisobga olmoq.")
+    ]
+  },
+  {
+    cat:"IELTS · 8+", level:"IELTS · Yo'l xaritasi",
+    title:"26-dars. IELTS 8+ yo'l xaritasi (Roadmap)",
+    goal:"IELTS'da 8+ ball olish uchun strategiya va maslahatlar.",
+    explain:`IELTS'da <b>8+</b> olish uchun 4 ko'nikma kerak: <b>Listening, Reading, Writing, Speaking</b>.
+      <br><br>
+      <b>🎧 Listening:</b> Har kuni podcast/film ko'ring (BBC, TED). Avval subtitr bilan, keyin subtitrsiz.<br>
+      <b>📖 Reading:</b> Kuniga 1 maqola o'qing, yangi so'zlarni daftaringizga yozing. Kutubxonadagi kitoblarni o'qing.<br>
+      <b>✍️ Writing:</b> Har hafta 2 ta esse yozing. "Linking words" (23-dars) va "formal phrases" (25-dars) ishlating.<br>
+      <b>🗣️ Speaking:</b> Har kuni 10 daqiqa ovoz chiqarib gapiring, o'zingizni yozib eshiting.
+      <span class="tip">🎯 Reja: 1) 1–16-darslar bilan asosni mustahkamlang. 2) 17–20 bilan so'z boyligini oshiring. 3) 21–23 grammatikani puxtalang. 4) 24–25 bilan ilg'or iboralarни o'rganing. 5) Har kuni amaliyot!</span>`,
+    vocab:[
+      V("fluency","fluensi","ravonlik"),V("accuracy","ekyurasi","aniqlik"),V("vocabulary","vokebyulari","so'z boyligi"),
+      V("pronunciation","prononsieyshn","talaffuz"),V("paraphrase","perafreyz","boshqacha ifodalamoq"),
+      V("coherence","kouhirens","mantiqiy bog'liqlik"),V("band score","bend skor","IELTS bali"),V("mock test","mok test","sinov imtihoni")
+    ],
+    examples:[
+      E("Practice makes perfect.","Mashq mukammallikka olib keladi."),
+      E("I take a mock test every week.","Men har hafta sinov imtihoni topshiraman."),
+      E("Expanding vocabulary improves my band score.","So'z boyligini oshirish balimni ko'taradi.")
+    ],
+    quiz:[
+      Q("IELTS'da nechta ko'nikma baholanadi?",["2","3","4","5"],2,"4 ta: Listening, Reading, Writing, Speaking."),
+      Q("'vocabulary' nima?",["talaffuz","so'z boyligi","ravonlik","aniqlik"],1,"vocabulary = so'z boyligi."),
+      Q("Writing'da nimani ishlatish baho oshiradi?",["qisqa gaplar","linking words va formal phrases","faqat oddiy so'zlar","emoji"],1,"Linking words va formal phrases.")
+    ]
+  },
+
+  /* ===================== KUTUBXONA ===================== */
+  {
+    cat:"📚 Kutubxona", level:"📚 Kutubxona",
+    title:"27-dars. Kutubxona — Kitoblar (Books)",
+    goal:"Ingliz tilini kitob o'qib mustahkamlang.",
+    customType:"books",
+    explain:`O'qish — so'z boyligini oshirishning eng yaxshi yo'li. Darajangizga mos kitobni tanlang.
+      <span class="tip">💡 Avval oson kitobni tanlang, notanish so'zlarni lug'atdan qarab boring.</span>`,
+    books:[
+      {title:"4000 Essential English Words 2",author:"Answer Key",file:"books/4000_Essential_English_Words_2.pdf",desc:"Muhim so'zlar mashqlari javoblari.",level:"A1–A2",emoji:"📗"},
+      {title:"The Red Badge of Courage",author:"Stephen Crane",file:"books/The_Red_Badge_of_Courage.pdf",desc:"Yosh askar haqidagi klassik roman (soddalashtirilgan).",level:"A2–B1",emoji:"📕"},
+      {title:"The Horse Whisperer",author:"Nicholas Evans",file:"books/The_Horse_Whisperer.pdf",desc:"Ot va insonlar haqidagi ta'sirli hikoya.",level:"B1",emoji:"📙"},
+      {title:"Hamlet",author:"William Shakespeare",file:"books/Hamlet.pdf",desc:"Shekspirning mashhur tragediyasi.",level:"B1–B2",emoji:"📘"},
+      {title:"Wisdom Dictionary (ilova)",author:"Online",file:"http://onelink.to/wisdomdictionary",desc:"Ko'proq kitoblar uchun ilovani yuklab oling.",level:"—",emoji:"🔗",external:true}
+    ],
+    quiz:[]
   }
 ];
+
 
 /* ===================== HOLAT ===================== */
 let current = 0;
@@ -662,7 +919,13 @@ if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = () => 
 function buildList(){
   const box = document.getElementById('lesson-list');
   box.innerHTML = '';
+  let lastCat = null;
   LESSONS.forEach((les,i) => {
+    const cat = les.cat || les.level;
+    if(cat !== lastCat){
+      box.innerHTML += `<div class="sb-title" style="margin-top:${lastCat?'14px':'0'};">${cat}</div>`;
+      lastCat = cat;
+    }
     const isDone = done.includes(i);
     const short = les.title.replace(/^\d+-dars\.\s*/, '');
     box.innerHTML += `
@@ -703,6 +966,23 @@ function openLesson(i){
       const say = `${v[0]}, ${v[1]}, ${v[2]}`.replace(/'/g,"\\'");
       html += `<tr><td><button class="vplay" onclick="speak('${say}')">🔊</button></td>
         <td class="base">${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td><td class="uzc">${v[3]||''}</td></tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+
+  // Tenses table (12 ta zamon)
+  if(les.customType === 'tenses' && les.tenses){
+    html += `<div class="card"><h3>⏳ 12 ta zamon</h3>
+      <div class="tw" style="overflow-x:auto;"><table class="vtable">
+        <thead><tr><th>🔊</th><th>Zamon</th><th>Formula</th><th>Misol</th><th>Qachon</th></tr></thead><tbody>`;
+    les.tenses.forEach(t => {
+      const say = t[2].replace(/'/g,"\\'");
+      html += `<tr>
+        <td><button class="vplay" onclick="speak('${say}')">🔊</button></td>
+        <td class="base">${t[0]}</td>
+        <td><code style="font-size:12px;">${t[1]}</code></td>
+        <td>${t[2]}</td>
+        <td class="uzc">${t[3]}</td></tr>`;
     });
     html += `</tbody></table></div></div>`;
   }
